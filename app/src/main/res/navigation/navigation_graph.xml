@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/navigation_graph">
+
+    <fragment
+        android:id="@+id/mainFragment"
+        android:name="com.example.themovies.screens.list.MainFragment"
+        android:label="Blank" >
+        <action
+            android:id="@+id/action_mainFragment_to_detailsFragment"
+            app:destination="@id/detailsFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/detailsFragment"
+        android:name="com.example.themovies.screens.detail.DetailsFragment"
+        android:label="Blank" />
+
+</navigation>
