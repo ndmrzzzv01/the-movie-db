@@ -1,9 +1,10 @@
 <resources>
-    <string name="app_name">The Movies</string>
+    <string name="app_name">Movie DB</string>
     <string name="open">Open</string>
     <string name="close">Close</string>
     <string name="title">title</string>
     <string name="bad_internet_connection">Bad internet connection!</string>
     <string name="retry">Retry</string>
     <string name="sorry_your_device_didn_t_connected_to_internet">Sorry, your device didn\'t connected to internet</string>
+    <string name="moviedb">MovieDB</string>
 </resources>

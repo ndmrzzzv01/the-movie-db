@@ -4,6 +4,7 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Projects/TheMovies/app/src/main/res/layout/activity_main.xml" value="0.13958333333333334" />
+        <entry key="..\:/Projects/TheMovies/app/src/main/res/layout/activity_splash.xml" value="0.2786458333333333" />
         <entry key="..\:/Projects/TheMovies/app/src/main/res/layout/fragment_details.xml" value="0.2015625" />
         <entry key="..\:/Projects/TheMovies/app/src/main/res/layout/fragment_main.xml" value="0.4173913181932306" />
         <entry key="..\:/Projects/TheMovies/app/src/main/res/layout/list_item_movie.xml" value="0.2786458333333333" />

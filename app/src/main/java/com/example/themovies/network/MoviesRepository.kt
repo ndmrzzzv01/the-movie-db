@@ -36,7 +36,9 @@ class MoviesRepository {
     }
 
     suspend fun getMovies(page: Int = 1): List<Movie> = withContext(Dispatchers.IO) {
-        delay(2000L)
+        if (page >= 2) {
+            delay(2000L)
+        }
         movieApi.getPopularMovies(page)?.results ?: mutableListOf()
     }
 
