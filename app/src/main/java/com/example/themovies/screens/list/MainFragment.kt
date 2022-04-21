@@ -11,7 +11,6 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.ConcatAdapter
 import androidx.recyclerview.widget.GridLayoutManager
-import com.example.themovies.data.Movie
 import com.example.themovies.data.adapters.MovieAdapter
 import com.example.themovies.data.paging.ListLoadStateAdapter
 import com.example.themovies.databinding.FragmentMainBinding
@@ -28,7 +27,6 @@ class MainFragment : Fragment() {
     private lateinit var binding: FragmentMainBinding
     private lateinit var movieAdapter: MovieAdapter
     private lateinit var concatAdapter: ConcatAdapter
-    private var movies = mutableListOf<Movie>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -87,7 +85,7 @@ class MainFragment : Fragment() {
                 }
             }
         }
-        movieAdapter = MovieAdapter(movies)
+        movieAdapter = MovieAdapter()
         concatAdapter = movieAdapter.withLoadStateFooter(ListLoadStateAdapter())
         binding.rvMovies.adapter = concatAdapter
 
