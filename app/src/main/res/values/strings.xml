@@ -8,4 +8,6 @@
     <string name="sorry_your_device_didn_t_connected_to_internet">Sorry, your device didn\'t connected to internet</string>
     <string name="moviedb">MovieDB</string>
     <string name="your_advertisement_could_be_here">Your advertisement could be here!</string>
+    <string name="revenue">Revenue: </string>
+    <string name="budget">Budget: </string>
 </resources>

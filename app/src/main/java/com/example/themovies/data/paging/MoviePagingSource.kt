@@ -4,18 +4,17 @@ import android.util.Log
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
 import com.example.themovies.data.FakeAd
-import com.example.themovies.data.Movie
-import com.example.themovies.network.MoviesRepository
+import com.example.themovies.network.MovieRepository
 
-class MoviesPagingSource(
-    private val moviesRepository: MoviesRepository
+class MoviePagingSource(
+    private val movieRepository: MovieRepository
 ) : PagingSource<Int, Any>() {
 
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, Any> {
         val nextPageNumber = params.key ?: 1
 
         return try {
-            val movies = moviesRepository.getMovies(nextPageNumber)
+            val movies = movieRepository.getMovies(nextPageNumber)
             val fullList = movies.toMutableList<Any>()
             fullList.add(13, FakeAd("Your ad could be here №$nextPageNumber!"))
 

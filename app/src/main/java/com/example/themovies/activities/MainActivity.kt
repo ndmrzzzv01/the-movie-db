@@ -8,10 +8,12 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import com.example.themovies.R
 import com.example.themovies.databinding.ActivityMainBinding
+import com.example.themovies.screens.detail.DetailsFragment
 import com.example.themovies.screens.list.MainFragment
 import com.google.android.material.navigation.NavigationView
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(),
+    MainFragment.OnMovieItemClickListener {
 
     private lateinit var binding: ActivityMainBinding
     private lateinit var actionBarDrawerToggle: ActionBarDrawerToggle
@@ -35,6 +37,14 @@ class MainActivity : AppCompatActivity() {
                 .add(binding.fragmentContainer.id, MainFragment())
                 .commit()
         }
+    }
+
+    override fun onMovieClick(id: Int) {
+        supportFragmentManager
+            .beginTransaction()
+            .replace(binding.fragmentContainer.id, DetailsFragment.newInstance(id))
+            .addToBackStack(null)
+            .commit()
     }
 
     private fun showDrawerMenu() {

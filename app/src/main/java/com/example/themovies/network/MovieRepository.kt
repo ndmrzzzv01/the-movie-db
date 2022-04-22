@@ -1,7 +1,7 @@
 package com.example.themovies.network
 
 import com.example.themovies.api.ConfigurationApi
-import com.example.themovies.api.MoviesApi
+import com.example.themovies.api.MovieApi
 import com.example.themovies.data.Movie
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
@@ -10,14 +10,14 @@ import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
-class MoviesRepository {
+class MovieRepository {
 
     companion object {
         const val URL = "https://image.tmdb.org/t/p/"
         const val TAG = "MoviesRepository"
     }
 
-    private val movieApi: MoviesApi
+    private val movieApi: MovieApi
     private val configurationApi: ConfigurationApi
 
     init {
@@ -31,7 +31,7 @@ class MoviesRepository {
             .client(client)
             .build()
 
-        movieApi = retrofit.create(MoviesApi::class.java)
+        movieApi = retrofit.create(MovieApi::class.java)
         configurationApi = retrofit.create(ConfigurationApi::class.java)
     }
 
@@ -44,6 +44,10 @@ class MoviesRepository {
 
     suspend fun getConfiguration(): List<String> = withContext(Dispatchers.IO) {
         configurationApi.getConfiguration()?.imagesSize?.posterSizes ?: emptyList()
+    }
+
+    suspend fun getMovie(movieId: Int?): Movie? = withContext(Dispatchers.IO) {
+        movieApi.getMovie(movieId)
     }
 
 }

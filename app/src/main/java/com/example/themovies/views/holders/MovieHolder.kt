@@ -2,9 +2,9 @@ package com.example.themovies.views.holders
 
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.example.themovies.network.MoviesRepository
 import com.example.themovies.data.Movie
 import com.example.themovies.databinding.ListItemMovieBinding
+import com.example.themovies.network.MovieRepository
 import com.example.themovies.screens.list.MainFragment
 
 class MovieHolder(private val binding: ListItemMovieBinding) :
@@ -13,7 +13,7 @@ class MovieHolder(private val binding: ListItemMovieBinding) :
         binding.tvTitleOfTheMovie.text = movie.title
         Glide
             .with(itemView.context)
-            .load("${MoviesRepository.URL}${MainFragment.sizeOfPoster}${movie.posterPath}")
+            .load("${MovieRepository.URL}${MainFragment.sizeOfPoster}${movie.posterPath}")
             .into(binding.imageMovie)
     }
 }

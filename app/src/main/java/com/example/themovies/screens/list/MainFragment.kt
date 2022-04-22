@@ -19,18 +19,28 @@ import kotlinx.coroutines.launch
 
 class MainFragment : Fragment() {
 
+    interface OnMovieItemClickListener {
+        fun onMovieClick(id: Int)
+    }
+
     companion object {
         var sizeOfPoster: String = ""
     }
 
-    private lateinit var viewModel: MoviesViewModel
+    var onMovieItemClickListener: OnMovieItemClickListener? = null
+    private lateinit var viewModel: MovieViewModel
     private lateinit var binding: FragmentMainBinding
     private lateinit var movieAdapter: MovieAdapter
     private lateinit var concatAdapter: ConcatAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        viewModel = ViewModelProvider(this)[MoviesViewModel::class.java]
+        viewModel = ViewModelProvider(this)[MovieViewModel::class.java]
+    }
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        onMovieItemClickListener = context as OnMovieItemClickListener
     }
 
     override fun onCreateView(
@@ -66,6 +76,11 @@ class MainFragment : Fragment() {
 
     }
 
+    override fun onDetach() {
+        super.onDetach()
+        onMovieItemClickListener = null
+    }
+
     private fun isNetworkConnected(): Boolean {
         val connect: ConnectivityManager =
             requireContext().getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
@@ -85,7 +100,11 @@ class MainFragment : Fragment() {
                 }
             }
         }
-        movieAdapter = MovieAdapter()
+        movieAdapter = MovieAdapter(object : OnMovieItemClickListener {
+            override fun onMovieClick(id: Int) {
+                onMovieItemClickListener?.onMovieClick(id)
+            }
+        })
         concatAdapter = movieAdapter.withLoadStateFooter(ListLoadStateAdapter())
         binding.rvMovies.adapter = concatAdapter
 
