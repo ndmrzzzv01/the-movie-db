@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
-
-    <item
-        android:id="@+id/account"
-        android:title="My Account" />
-    <item
-        android:id="@+id/settings"
-        android:title="Settings" />
-    <item
-        android:id="@+id/mycart"
-        android:title="My Cart" />
-
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/popularMovie"
+            android:title="@string/popular_movie" />
+        <item
+            android:id="@+id/popularTV"
+            android:title="@string/popular_tv" />
+        <item
+            android:id="@+id/popularPeople"
+            android:title="@string/popular_people" />
+    </group>
 </menu>

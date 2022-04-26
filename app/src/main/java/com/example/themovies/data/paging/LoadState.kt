@@ -25,7 +25,7 @@ class ListLoadStateAdapter : LoadStateAdapter<LoadStateViewHolder>() {
 }
 
 class LoadStateViewHolder(
-    val binding: ViewHolderLoadStateBinding
+    private val binding: ViewHolderLoadStateBinding
 ) : RecyclerView.ViewHolder(binding.root) {
 
     fun bind(loadState: LoadState) {

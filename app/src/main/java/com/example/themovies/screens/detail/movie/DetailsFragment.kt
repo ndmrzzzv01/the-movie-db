@@ -1,15 +1,15 @@
-package com.example.themovies.screens.detail
+package com.example.themovies.screens.detail.movie
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
+import androidx.fragment.app.viewModels
 import com.bumptech.glide.Glide
 import com.example.themovies.databinding.FragmentDetailsBinding
-import com.example.themovies.network.MovieRepository
-import com.example.themovies.screens.list.MainFragment
+import com.example.themovies.network.ConfigurationRepository
+import com.example.themovies.screens.movie.MovieRepository
 
 class DetailsFragment : Fragment() {
 
@@ -26,11 +26,10 @@ class DetailsFragment : Fragment() {
 
     private var id: Int? = null
     private lateinit var binding: FragmentDetailsBinding
-    private lateinit var viewModel: DetailsViewModel
+    private val viewModel by viewModels<DetailsViewModel>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        viewModel = ViewModelProvider(this)[DetailsViewModel::class.java]
         id = arguments?.getInt(MOVIE_ID)
     }
 
@@ -53,7 +52,7 @@ class DetailsFragment : Fragment() {
                 tvOriginalTitle.text = movie.originalTitle
                 Glide
                     .with(requireContext())
-                    .load("${MovieRepository.URL}${MainFragment.sizeOfPoster}${movie.backdropPath}")
+                    .load("${MovieRepository.URL}${ConfigurationRepository.sizeOfPoster}${movie.backdropPath}")
                     .into(image)
                 when {
                     movie.budget.toString() == "0" && movie.revenue.toString() == "0" -> {

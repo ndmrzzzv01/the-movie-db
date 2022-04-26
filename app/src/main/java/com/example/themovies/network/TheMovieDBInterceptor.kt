@@ -4,7 +4,7 @@ import okhttp3.HttpUrl
 import okhttp3.Interceptor
 import okhttp3.Response
 
-class MovieInterceptor : Interceptor {
+class TheMovieDBInterceptor : Interceptor {
 
     companion object {
         const val API_KEY = "d906252ac4f180bbf851fd1bf9e97f9b"

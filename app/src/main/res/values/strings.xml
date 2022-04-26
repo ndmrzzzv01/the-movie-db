@@ -10,4 +10,7 @@
     <string name="your_advertisement_could_be_here">Your advertisement could be here!</string>
     <string name="revenue">Revenue: </string>
     <string name="budget">Budget: </string>
+    <string name="popular_movie">Popular Movie</string>
+    <string name="popular_tv">Popular TV</string>
+    <string name="popular_people">Popular people</string>
 </resources>

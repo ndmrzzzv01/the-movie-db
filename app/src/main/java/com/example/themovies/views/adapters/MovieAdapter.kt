@@ -1,4 +1,4 @@
-package com.example.themovies.data.adapters
+package com.example.themovies.views.adapters
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -7,33 +7,33 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.example.themovies.data.FakeAd
 import com.example.themovies.data.Movie
-import com.example.themovies.databinding.ListItemMovieBinding
+import com.example.themovies.databinding.ListItemBinding
 import com.example.themovies.databinding.ViewFakeItemBinding
-import com.example.themovies.screens.list.MainFragment
+import com.example.themovies.screens.movie.MainFragment
 import com.example.themovies.views.holders.FakeAdHolder
 import com.example.themovies.views.holders.MovieHolder
+
+enum class ItemType(val number: Int) {
+    TYPE_MOVIE_ITEM(0),
+    TYPE_FAKE_ITEM(1)
+}
 
 class MovieAdapter(
     private val onMovieItemClickListener: MainFragment.OnMovieItemClickListener
 ) : PagingDataAdapter<Any, RecyclerView.ViewHolder>(AnyDiffUtil()) {
 
-    companion object {
-        private const val TYPE_MOVIE_ITEM = 0
-        private const val TYPE_FAKE_ITEM = 1
-    }
-
     override fun getItemViewType(position: Int): Int {
         val item = getItem(position)
         return if (item is FakeAd) {
-            TYPE_FAKE_ITEM;
+            ItemType.TYPE_FAKE_ITEM.number
         } else {
-            TYPE_MOVIE_ITEM
+            ItemType.TYPE_MOVIE_ITEM.number
         }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         when (viewType) {
-            TYPE_FAKE_ITEM -> {
+            ItemType.TYPE_FAKE_ITEM.number -> {
                 return FakeAdHolder(
                     ViewFakeItemBinding.inflate(
                         LayoutInflater.from(parent.context),
@@ -44,7 +44,7 @@ class MovieAdapter(
             }
             else -> {
                 return MovieHolder(
-                    ListItemMovieBinding.inflate(
+                    ListItemBinding.inflate(
                         LayoutInflater.from(parent.context),
                         parent,
                         false

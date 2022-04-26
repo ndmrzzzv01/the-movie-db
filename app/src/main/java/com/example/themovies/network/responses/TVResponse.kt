@@ -1,9 +1,9 @@
 package com.example.themovies.network.responses
 
-import com.example.themovies.data.Movie
+import com.example.themovies.data.TV
 import com.google.gson.annotations.SerializedName
 
-class MovieResponse {
+class TVResponse {
     @SerializedName("results")
-    var results: List<Movie>? = null
+    var results: List<TV>? = null
 }
