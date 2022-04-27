@@ -4,7 +4,7 @@ import com.example.themovies.network.responses.TVResponse
 import retrofit2.http.GET
 import retrofit2.http.Query
 
-interface TVApi {
+interface TvApi {
 
     @GET("tv/popular")
     suspend fun getPopularTV(

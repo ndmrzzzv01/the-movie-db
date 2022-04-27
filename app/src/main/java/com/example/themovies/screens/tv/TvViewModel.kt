@@ -6,10 +6,13 @@ import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.cachedIn
 import com.example.themovies.data.paging.TvPagingSource
+import dagger.hilt.android.lifecycle.HiltViewModel
+import javax.inject.Inject
 
-class TvViewModel : ViewModel() {
-
-    private val tvRepository = TVRepository()
+@HiltViewModel
+class TvViewModel @Inject constructor(
+    private val tvRepository: TVRepository
+) : ViewModel() {
 
     val flow = Pager(PagingConfig(20)) {
         TvPagingSource(tvRepository)

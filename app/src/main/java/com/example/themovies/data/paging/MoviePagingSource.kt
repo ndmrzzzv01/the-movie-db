@@ -5,8 +5,9 @@ import androidx.paging.PagingSource
 import androidx.paging.PagingState
 import com.example.themovies.data.FakeAd
 import com.example.themovies.screens.movie.MovieRepository
+import javax.inject.Inject
 
-class MoviePagingSource(
+class MoviePagingSource @Inject constructor(
     private val movieRepository: MovieRepository
 ) : PagingSource<Int, Any>() {
 

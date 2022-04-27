@@ -10,7 +10,9 @@ import com.bumptech.glide.Glide
 import com.example.themovies.databinding.FragmentDetailsBinding
 import com.example.themovies.network.ConfigurationRepository
 import com.example.themovies.screens.movie.MovieRepository
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class DetailsFragment : Fragment() {
 
     companion object {

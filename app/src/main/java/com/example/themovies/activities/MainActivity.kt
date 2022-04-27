@@ -14,7 +14,9 @@ import com.example.themovies.screens.detail.movie.DetailsFragment
 import com.example.themovies.screens.movie.MainFragment
 import com.example.themovies.screens.tv.TvFragment
 import com.google.android.material.navigation.NavigationView
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : AppCompatActivity(),
     MainFragment.OnMovieItemClickListener,
     TvFragment.OnTvItemClickListener {
@@ -71,12 +73,8 @@ class MainActivity : AppCompatActivity(),
         binding.navigationView.apply {
             setNavigationItemSelectedListener(NavigationView.OnNavigationItemSelectedListener { item ->
                 when (item.itemId) {
-                    R.id.popularMovie -> {
-                        fragment = MainFragment()
-                    }
-                    R.id.popularTV -> {
-                        fragment = TvFragment()
-                    }
+                    R.id.popularMovie -> fragment = MainFragment()
+                    R.id.popularTV -> fragment = TvFragment()
                     R.id.popularPeople -> Toast.makeText(
                         this@MainActivity,
                         "Popular people",

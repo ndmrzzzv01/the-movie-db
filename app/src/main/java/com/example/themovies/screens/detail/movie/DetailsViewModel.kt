@@ -5,11 +5,15 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.themovies.data.Movie
 import com.example.themovies.screens.movie.MovieRepository
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class DetailsViewModel : ViewModel() {
+@HiltViewModel
+class DetailsViewModel@Inject constructor(
+    private val movieRepository: MovieRepository
+) : ViewModel() {
 
-    private val movieRepository = MovieRepository()
     val movie = MutableLiveData<Movie>()
 
     fun getMovie(movieId: Int?) {
@@ -18,4 +22,5 @@ class DetailsViewModel : ViewModel() {
             movie.value = itemMovie!!
         }
     }
+
 }

@@ -1,14 +1,11 @@
 package com.example.themovies.network
 
+import com.example.themovies.utils.NetworkUtils.API_KEY
 import okhttp3.HttpUrl
 import okhttp3.Interceptor
 import okhttp3.Response
 
 class TheMovieDBInterceptor : Interceptor {
-
-    companion object {
-        const val API_KEY = "d906252ac4f180bbf851fd1bf9e97f9b"
-    }
 
     override fun intercept(chain: Interceptor.Chain): Response {
         val request = chain.request()

@@ -14,9 +14,11 @@ import com.example.themovies.data.paging.ListLoadStateAdapter
 import com.example.themovies.databinding.FragmentMainBinding
 import com.example.themovies.utils.NetworkUtils
 import com.example.themovies.views.adapters.MovieAdapter
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
+@AndroidEntryPoint
 class MainFragment : Fragment() {
 
     interface OnMovieItemClickListener {

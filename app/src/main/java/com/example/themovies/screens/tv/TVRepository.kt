@@ -1,18 +1,20 @@
 package com.example.themovies.screens.tv
 
 import com.example.themovies.api.ConfigurationApi
-import com.example.themovies.api.TVApi
+import com.example.themovies.api.TvApi
 import com.example.themovies.data.TV
 import com.example.themovies.network.ConfigurationRepository
-import com.example.themovies.utils.NetworkUtils
+import dagger.hilt.android.scopes.ViewModelScoped
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.withContext
+import javax.inject.Inject
 
-class TVRepository {
-
-    private val tvApi = NetworkUtils.createRetrofit().create(TVApi::class.java)
-    private val configurationApi = NetworkUtils.createRetrofit().create(ConfigurationApi::class.java)
+@ViewModelScoped
+class TVRepository @Inject constructor(
+    private val configurationApi: ConfigurationApi,
+    private val tvApi: TvApi
+) {
 
     suspend fun getPopularTV(page: Int = 1): List<TV> = withContext(Dispatchers.IO) {
         checkConfiguration()
