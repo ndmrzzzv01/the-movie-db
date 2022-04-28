@@ -9,7 +9,7 @@ import com.example.themovies.screens.movie.MovieRepository
 
 class TvHolder(private val binding: ListItemBinding) : RecyclerView.ViewHolder(binding.root) {
     fun bind(tv: TV) {
-        binding.tvTitleOfTheMovie.text = tv.name
+        binding.tvTitle.text = tv.name
         Glide
             .with(itemView.context)
             .load("${MovieRepository.URL}${ConfigurationRepository.sizeOfPoster}${tv.posterPath}")

@@ -22,4 +22,16 @@ object NetworkUtils {
         return connect.activeNetworkInfo != null && connect.activeNetworkInfo!!.isConnected
     }
 
+    fun createRetrofit(): Retrofit {
+        val client = OkHttpClient.Builder()
+            .addInterceptor(TheMovieDBInterceptor())
+            .build()
+
+        return Retrofit.Builder()
+            .baseUrl("https://api.themoviedb.org/3/")
+            .addConverterFactory(GsonConverterFactory.create())
+            .client(client)
+            .build()
+    }
+
 }

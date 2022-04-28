@@ -12,6 +12,7 @@ import com.example.themovies.R
 import com.example.themovies.databinding.ActivityMainBinding
 import com.example.themovies.screens.detail.movie.DetailsFragment
 import com.example.themovies.screens.movie.MainFragment
+import com.example.themovies.screens.people.PeopleFragment
 import com.example.themovies.screens.tv.TvFragment
 import com.google.android.material.navigation.NavigationView
 import dagger.hilt.android.AndroidEntryPoint
@@ -39,6 +40,7 @@ class MainActivity : AppCompatActivity(),
     }
 
     private fun showMainList() {
+        supportActionBar?.title = "Popular Movie"
         supportFragmentManager
             .beginTransaction()
             .replace(binding.fragmentContainer.id, MainFragment())
@@ -72,14 +74,19 @@ class MainActivity : AppCompatActivity(),
 
         binding.navigationView.apply {
             setNavigationItemSelectedListener(NavigationView.OnNavigationItemSelectedListener { item ->
-                when (item.itemId) {
-                    R.id.popularMovie -> fragment = MainFragment()
-                    R.id.popularTV -> fragment = TvFragment()
-                    R.id.popularPeople -> Toast.makeText(
-                        this@MainActivity,
-                        "Popular people",
-                        Toast.LENGTH_SHORT
-                    ).show()
+                fragment = when (item.itemId) {
+                    R.id.popularMovie -> {
+                        supportActionBar?.title = "Popular Movie"
+                        MainFragment()
+                    }
+                    R.id.popularTV -> {
+                        supportActionBar?.title = "Popular TV Show"
+                        TvFragment()
+                    }
+                    R.id.popularPeople -> {
+                        supportActionBar?.title = "Popular People"
+                        PeopleFragment()
+                    }
                     else -> return@OnNavigationItemSelectedListener true
                 }
 

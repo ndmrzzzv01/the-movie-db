@@ -50,7 +50,7 @@ class DetailsFragment : Fragment() {
     private fun showDetailsAboutMovie() {
         viewModel.movie.observe(viewLifecycleOwner) { movie ->
             binding.apply {
-                tvTitleOfTheMovie.text = movie.title
+                tvTitle.text = movie.title
                 tvOriginalTitle.text = movie.originalTitle
                 Glide
                     .with(requireContext())

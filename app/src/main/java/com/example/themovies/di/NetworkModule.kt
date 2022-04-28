@@ -2,6 +2,7 @@ package com.example.themovies.di
 
 import com.example.themovies.api.ConfigurationApi
 import com.example.themovies.api.MovieApi
+import com.example.themovies.api.PeopleApi
 import com.example.themovies.api.TvApi
 import com.example.themovies.network.TheMovieDBInterceptor
 import dagger.Module
@@ -42,6 +43,11 @@ object NetworkModule {
     @Provides
     fun provideTvApi(retrofit: Retrofit): TvApi {
         return retrofit.create(TvApi::class.java)
+    }
+
+    @Provides
+    fun providePeopleApi(retrofit: Retrofit): PeopleApi {
+        return retrofit.create(PeopleApi::class.java)
     }
 }
 
