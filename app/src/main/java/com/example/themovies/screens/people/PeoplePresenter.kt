@@ -1,9 +1,9 @@
 package com.example.themovies.screens.people
 
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.SupervisorJob
-import kotlinx.coroutines.launch
+import androidx.paging.Pager
+import androidx.paging.PagingConfig
+import com.example.themovies.data.paging.TheMovieDBPagingSource
+import kotlinx.coroutines.*
 import kotlin.coroutines.CoroutineContext
 
 class PeoplePresenter(
@@ -16,20 +16,23 @@ class PeoplePresenter(
     override val coroutineContext: CoroutineContext = mainJob + Dispatchers.IO
 
     override fun loadPopularPeople() {
-        launch {
             try {
-                val listOfPeople = peopleRepository.getPopularPeople()
-                launch(Dispatchers.Main) {
-                    view.displayListOfPeople(listOfPeople)
-                }
+                view.displayListOfPeople(Pager(PagingConfig(20)) {
+                    TheMovieDBPagingSource { page ->
+                        withContext(Dispatchers.IO) {
+                            if (page >= 2) {
+                                delay(2000L)
+                            }
+                            peopleRepository.getPopularPeople(page)
+                        }
+                    }
+                })
             } catch (e: Exception) {
                 e.printStackTrace()
-                launch(Dispatchers.Main) {
-                    view.onFail()
-                }
+                view.onFail()
             }
-        }
     }
+
 
     override fun cancel() {
         mainJob.cancel()

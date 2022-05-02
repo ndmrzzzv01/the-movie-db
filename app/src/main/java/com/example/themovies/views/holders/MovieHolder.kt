@@ -1,5 +1,7 @@
 package com.example.themovies.views.holders
 
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.themovies.data.Movie
@@ -12,10 +14,15 @@ class MovieHolder(private val binding: ListItemBinding) :
 
     fun bind(movie: Movie) {
         binding.tvTitle.text = movie.title
-        Glide
-            .with(itemView.context)
-            .load("${MovieRepository.URL}${ConfigurationRepository.sizeOfPoster}${movie.posterPath}")
-            .into(binding.image)
+        if (movie.posterPath != null) {
+            Glide
+                .with(itemView.context)
+                .load("${MovieRepository.URL}${ConfigurationRepository.sizeOfPoster}${movie.posterPath}")
+                .into(binding.image)
+        } else {
+            binding.image.background = ColorDrawable(Color.BLACK)
+        }
     }
+
 
 }

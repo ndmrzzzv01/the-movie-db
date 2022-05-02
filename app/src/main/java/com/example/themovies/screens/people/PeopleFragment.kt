@@ -1,20 +1,40 @@
 package com.example.themovies.screens.people
 
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.lifecycleScope
+import androidx.paging.Pager
+import androidx.recyclerview.widget.ConcatAdapter
 import androidx.recyclerview.widget.GridLayoutManager
-import com.example.themovies.data.People
+import com.example.themovies.data.ItemType
+import com.example.themovies.data.paging.ListLoadStateAdapter
 import com.example.themovies.databinding.FragmentMainBinding
-import com.example.themovies.views.adapters.PeopleAdapter
+import com.example.themovies.screens.movie.MovieFragment
+import com.example.themovies.utils.NetworkUtils
+import com.example.themovies.views.adapters.MovieAdapter
+import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.launch
 
 class PeopleFragment : Fragment(), PeopleContract.PeopleView {
 
+    interface OnPeopleItemClickListener {
+        fun onPeopleClick(id: Int)
+    }
+
+    var onPeopleItemClickListener: OnPeopleItemClickListener? = null
     private lateinit var binding: FragmentMainBinding
     private var presenter: PeopleContract.PeoplePresenter? = null
-    private var adapter = PeopleAdapter(mutableListOf())
+    private lateinit var peopleAdapter: MovieAdapter
+    private lateinit var concatAdapter: ConcatAdapter
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        onPeopleItemClickListener = context as OnPeopleItemClickListener
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -28,8 +48,25 @@ class PeopleFragment : Fragment(), PeopleContract.PeopleView {
     ): View {
         binding = FragmentMainBinding.inflate(inflater, container, false)
 
-        binding.rvMovies.layoutManager = GridLayoutManager(requireContext(), 2)
-        binding.rvMovies.adapter = adapter
+        binding.apply {
+            if (!NetworkUtils.isNetworkConnected(requireContext())) {
+                rvMovies.visibility = View.INVISIBLE
+                tvError.visibility = View.VISIBLE
+                btnRetry.apply {
+                    visibility = View.VISIBLE
+                    setOnClickListener {
+                        if (NetworkUtils.isNetworkConnected(requireContext())){
+                            visibility = View.INVISIBLE
+                            tvError.visibility = View.INVISIBLE
+                            rvMovies.visibility = View.VISIBLE
+                            presenter?.loadPopularPeople()
+                        } else {
+                            return@setOnClickListener
+                        }
+                    }
+                }
+            }
+        }
 
         return binding.root
     }
@@ -44,18 +81,53 @@ class PeopleFragment : Fragment(), PeopleContract.PeopleView {
         presenter?.cancel()
     }
 
-    override fun displayListOfPeople(listOfPeople: List<People>) {
-        binding.rvMovies.visibility = View.VISIBLE
-        adapter.people = listOfPeople
-        adapter.notifyDataSetChanged()
+    override fun onDetach() {
+        super.onDetach()
+        onPeopleItemClickListener = null
+    }
+
+    override fun displayListOfPeople(pager: Pager<Int, ItemType>) {
+        createRecyclerView()
+
+        peopleAdapter = MovieAdapter(object : MovieFragment.OnMovieItemClickListener {
+            override fun onMovieClick(id: Int) {
+                onPeopleItemClickListener?.onPeopleClick(id)
+            }
+        })
+        concatAdapter = peopleAdapter.withLoadStateFooter(ListLoadStateAdapter())
+        binding.rvMovies.adapter = concatAdapter
+
+        lifecycleScope.launch {
+            pager.flow.collectLatest {
+                peopleAdapter.submitData(it)
+            }
+        }
 
     }
 
     override fun onFail() {
         binding.apply {
             rvMovies.visibility = View.INVISIBLE
-            btnRetry.visibility = View.VISIBLE
-            tvError.visibility = View.VISIBLE
+            btnRetry.visibility = View.GONE
+            tvError.apply {
+                visibility = View.VISIBLE
+                text = "Something wrong..."
+            }
+        }
+    }
+
+    private fun createRecyclerView() {
+        binding.rvMovies.visibility = View.VISIBLE
+        val gridLayoutManager = GridLayoutManager(requireContext(), 2)
+        binding.rvMovies.layoutManager = gridLayoutManager
+        gridLayoutManager.spanSizeLookup = object : GridLayoutManager.SpanSizeLookup() {
+            override fun getSpanSize(position: Int): Int {
+                return if (position == peopleAdapter.itemCount && peopleAdapter.itemCount > 0) {
+                    2
+                } else {
+                    1
+                }
+            }
         }
     }
 

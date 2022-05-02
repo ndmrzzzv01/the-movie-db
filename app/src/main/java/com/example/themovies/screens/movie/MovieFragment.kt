@@ -19,7 +19,7 @@ import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
-class MainFragment : Fragment() {
+class MovieFragment : Fragment() {
 
     interface OnMovieItemClickListener {
         fun onMovieClick(id: Int)

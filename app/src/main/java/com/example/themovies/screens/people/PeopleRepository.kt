@@ -13,9 +13,9 @@ class PeopleRepository {
     private val peopleApi = NetworkUtils.createRetrofit().create(PeopleApi::class.java)
     private val configurationApi = NetworkUtils.createRetrofit().create(ConfigurationApi::class.java)
 
-    suspend fun getPopularPeople(): List<People> = withContext(Dispatchers.IO) {
+    suspend fun getPopularPeople(page: Int = 1): List<People> = withContext(Dispatchers.IO) {
         checkConfiguration()
-        peopleApi.getPopularPeople()?.results ?: mutableListOf()
+        peopleApi.getPopularPeople(page)?.results ?: mutableListOf()
     }
 
     private suspend fun checkConfiguration() {

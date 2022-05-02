@@ -12,8 +12,9 @@ import androidx.recyclerview.widget.ConcatAdapter
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.themovies.data.paging.ListLoadStateAdapter
 import com.example.themovies.databinding.FragmentMainBinding
+import com.example.themovies.screens.movie.MovieFragment
 import com.example.themovies.utils.NetworkUtils
-import com.example.themovies.views.adapters.TvAdapter
+import com.example.themovies.views.adapters.MovieAdapter
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
@@ -28,7 +29,7 @@ class TvFragment : Fragment() {
     var onTvItemClickListener: OnTvItemClickListener? = null
     private lateinit var binding: FragmentMainBinding
     private val viewModel by viewModels<TvViewModel>()
-    private lateinit var tvAdapter: TvAdapter
+    private lateinit var tvAdapter: MovieAdapter
     private lateinit var concatAdapter: ConcatAdapter
 
     override fun onAttach(context: Context) {
@@ -76,7 +77,11 @@ class TvFragment : Fragment() {
     private fun downloadData() {
         createRecyclerView()
 
-        tvAdapter = TvAdapter()
+        tvAdapter = MovieAdapter(object : MovieFragment.OnMovieItemClickListener {
+            override fun onMovieClick(id: Int) {
+                onTvItemClickListener?.onTvClick(id)
+            }
+        })
         concatAdapter = tvAdapter.withLoadStateFooter(ListLoadStateAdapter())
         binding.rvMovies.adapter = concatAdapter
 

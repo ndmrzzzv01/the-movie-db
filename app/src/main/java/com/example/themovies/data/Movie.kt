@@ -11,4 +11,4 @@ data class Movie(
     @SerializedName("overview") val description: String = "",
     @SerializedName("poster_path") var posterPath: String? = "",
     @SerializedName("backdrop_path") var backdropPath: String = "",
-)
+): ItemType()
