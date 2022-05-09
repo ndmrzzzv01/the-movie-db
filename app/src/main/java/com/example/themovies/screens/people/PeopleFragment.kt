@@ -10,10 +10,11 @@ import androidx.lifecycle.lifecycleScope
 import androidx.paging.Pager
 import androidx.recyclerview.widget.ConcatAdapter
 import androidx.recyclerview.widget.GridLayoutManager
-import com.example.themovies.data.ItemType
+import com.example.themovies.data.RecordType
+import com.example.themovies.data.RecordClick
+import com.example.themovies.data.Record
 import com.example.themovies.data.paging.ListLoadStateAdapter
 import com.example.themovies.databinding.FragmentMainBinding
-import com.example.themovies.screens.movie.MovieFragment
 import com.example.themovies.utils.NetworkUtils
 import com.example.themovies.views.adapters.MovieAdapter
 import kotlinx.coroutines.flow.collectLatest
@@ -21,11 +22,7 @@ import kotlinx.coroutines.launch
 
 class PeopleFragment : Fragment(), PeopleContract.PeopleView {
 
-    interface OnPeopleItemClickListener {
-        fun onPeopleClick(id: Int)
-    }
-
-    var onPeopleItemClickListener: OnPeopleItemClickListener? = null
+    var recordClick: RecordClick? = null
     private lateinit var binding: FragmentMainBinding
     private var presenter: PeopleContract.PeoplePresenter? = null
     private lateinit var peopleAdapter: MovieAdapter
@@ -33,7 +30,7 @@ class PeopleFragment : Fragment(), PeopleContract.PeopleView {
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
-        onPeopleItemClickListener = context as OnPeopleItemClickListener
+        recordClick = context as RecordClick
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -48,25 +45,7 @@ class PeopleFragment : Fragment(), PeopleContract.PeopleView {
     ): View {
         binding = FragmentMainBinding.inflate(inflater, container, false)
 
-        binding.apply {
-            if (!NetworkUtils.isNetworkConnected(requireContext())) {
-                rvMovies.visibility = View.INVISIBLE
-                tvError.visibility = View.VISIBLE
-                btnRetry.apply {
-                    visibility = View.VISIBLE
-                    setOnClickListener {
-                        if (NetworkUtils.isNetworkConnected(requireContext())){
-                            visibility = View.INVISIBLE
-                            tvError.visibility = View.INVISIBLE
-                            rvMovies.visibility = View.VISIBLE
-                            presenter?.loadPopularPeople()
-                        } else {
-                            return@setOnClickListener
-                        }
-                    }
-                }
-            }
-        }
+        showInfoWithoutInternet()
 
         return binding.root
     }
@@ -83,15 +62,15 @@ class PeopleFragment : Fragment(), PeopleContract.PeopleView {
 
     override fun onDetach() {
         super.onDetach()
-        onPeopleItemClickListener = null
+        recordClick = null
     }
 
-    override fun displayListOfPeople(pager: Pager<Int, ItemType>) {
+    override fun displayListOfPeople(pager: Pager<Int, RecordType>) {
         createRecyclerView()
 
-        peopleAdapter = MovieAdapter(object : MovieFragment.OnMovieItemClickListener {
-            override fun onMovieClick(id: Int) {
-                onPeopleItemClickListener?.onPeopleClick(id)
+        peopleAdapter = MovieAdapter(object : RecordClick {
+            override fun onRecordClickListener(id: Int, type: Record) {
+                recordClick?.onRecordClickListener(id, Record.People)
             }
         })
         concatAdapter = peopleAdapter.withLoadStateFooter(ListLoadStateAdapter())
@@ -131,5 +110,26 @@ class PeopleFragment : Fragment(), PeopleContract.PeopleView {
         }
     }
 
+    private fun showInfoWithoutInternet() {
+        binding.apply {
+            if (!NetworkUtils.isNetworkConnected(requireContext())) {
+                rvMovies.visibility = View.INVISIBLE
+                tvError.visibility = View.VISIBLE
+                btnRetry.apply {
+                    visibility = View.VISIBLE
+                    setOnClickListener {
+                        if (NetworkUtils.isNetworkConnected(requireContext())) {
+                            visibility = View.INVISIBLE
+                            tvError.visibility = View.INVISIBLE
+                            rvMovies.visibility = View.VISIBLE
+                            presenter?.loadPopularPeople()
+                        } else {
+                            return@setOnClickListener
+                        }
+                    }
+                }
+            }
+        }
+    }
 
 }

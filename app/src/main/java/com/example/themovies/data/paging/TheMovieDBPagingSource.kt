@@ -3,15 +3,13 @@ package com.example.themovies.data.paging
 import android.util.Log
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
-import com.example.themovies.data.FakeAd
-import com.example.themovies.data.ItemType
-import com.example.themovies.screens.movie.MovieRepository
+import com.example.themovies.data.RecordType
 
 class TheMovieDBPagingSource (
-    private val loadData: suspend (page: Int) -> List<ItemType>
-) : PagingSource<Int, ItemType>() {
+    private val loadData: suspend (page: Int) -> List<RecordType>
+) : PagingSource<Int, RecordType>() {
 
-    override suspend fun load(params: LoadParams<Int>): LoadResult<Int, ItemType> {
+    override suspend fun load(params: LoadParams<Int>): LoadResult<Int, RecordType> {
         val nextPageNumber = params.key ?: 1
 
         return try {
@@ -31,7 +29,7 @@ class TheMovieDBPagingSource (
         }
     }
 
-    override fun getRefreshKey(state: PagingState<Int, ItemType>): Int? {
+    override fun getRefreshKey(state: PagingState<Int, RecordType>): Int? {
         return state.anchorPosition?.let {
             val anchorPage = state.closestPageToPosition(it)
             return anchorPage?.prevKey?.plus(1) ?: anchorPage?.nextKey?.minus(1)

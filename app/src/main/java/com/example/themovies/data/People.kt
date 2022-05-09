@@ -6,4 +6,4 @@ data class People(
     val id: Int? = null,
     val name: String? = null,
     @SerializedName("profile_path") val profilePath: String? = null
-): ItemType()
+): RecordType()

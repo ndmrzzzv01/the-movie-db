@@ -8,8 +8,12 @@ import androidx.core.view.GravityCompat
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import com.example.themovies.R
+import com.example.themovies.data.Record
+import com.example.themovies.data.RecordClick
 import com.example.themovies.databinding.ActivityMainBinding
-import com.example.themovies.screens.detail.movie.DetailsFragment
+import com.example.themovies.screens.detail.movie.MovieDetailFragment
+import com.example.themovies.screens.detail.people.PeopleDetailFragment
+import com.example.themovies.screens.detail.tv.TvDetailFragment
 import com.example.themovies.screens.movie.MovieFragment
 import com.example.themovies.screens.people.PeopleFragment
 import com.example.themovies.screens.tv.TvFragment
@@ -18,13 +22,12 @@ import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity(),
-    MovieFragment.OnMovieItemClickListener,
-    TvFragment.OnTvItemClickListener,
-    PeopleFragment.OnPeopleItemClickListener {
+    RecordClick {
 
     private lateinit var binding: ActivityMainBinding
     private lateinit var actionBarDrawerToggle: ActionBarDrawerToggle
     private var fragment: Fragment? = null
+    private var fragmentDetail: Fragment? = null
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         if (actionBarDrawerToggle.onOptionsItemSelected(item)) return true
@@ -48,25 +51,25 @@ class MainActivity : AppCompatActivity(),
             .commit()
     }
 
-    override fun onMovieClick(id: Int) {
+    override fun onRecordClickListener(id: Int, type: Record) {
+        fragmentDetail = when (type) {
+            Record.Movie -> {
+                MovieDetailFragment.newInstance(id)
+            }
+            Record.TV -> {
+                TvDetailFragment.newInstance(id)
+            }
+            Record.People -> {
+                PeopleDetailFragment()
+            }
+        }
         supportFragmentManager
             .beginTransaction()
-            .replace(binding.fragmentContainer.id, DetailsFragment.newInstance(id))
+            .replace(binding.fragmentContainer.id, fragmentDetail!!)
             .addToBackStack(null)
             .commit()
     }
 
-    override fun onTvClick(id: Int) {
-        supportFragmentManager
-            .beginTransaction()
-            .replace(binding.fragmentContainer.id, DetailsFragment.newInstance(id))
-            .addToBackStack(null)
-            .commit()
-    }
-
-    override fun onPeopleClick(id: Int) {
-        TODO("Not yet implemented")
-    }
 
     private fun showDrawerMenu() {
         actionBarDrawerToggle =
@@ -106,6 +109,5 @@ class MainActivity : AppCompatActivity(),
             menu.getItem(0).isChecked = true
         }
     }
-
 
 }

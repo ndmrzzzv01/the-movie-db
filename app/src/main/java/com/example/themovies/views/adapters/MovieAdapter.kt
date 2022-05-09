@@ -8,15 +8,14 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.themovies.data.*
 import com.example.themovies.databinding.ListItemBinding
 import com.example.themovies.databinding.ViewFakeItemBinding
-import com.example.themovies.screens.movie.MovieFragment
 import com.example.themovies.views.holders.FakeAdHolder
 import com.example.themovies.views.holders.MovieHolder
 import com.example.themovies.views.holders.PeopleHolder
 import com.example.themovies.views.holders.TvHolder
 
 class MovieAdapter(
-    private val onMovieItemClickListener: MovieFragment.OnMovieItemClickListener
-) : PagingDataAdapter<ItemType, RecyclerView.ViewHolder>(AnyDiffUtil()) {
+    private val recordClick: RecordClick
+) : PagingDataAdapter<RecordType, RecyclerView.ViewHolder>(AnyDiffUtil()) {
 
     companion object {
         const val TYPE_FAKE_ITEM = 0
@@ -72,12 +71,18 @@ class MovieAdapter(
                 movie.let { movieItem ->
                     holder.bind(movieItem)
                     holder.itemView.setOnClickListener {
-                        onMovieItemClickListener.onMovieClick(movieItem.id ?: 0)
+                        recordClick.onRecordClickListener(movie.id ?: 0, Record.Movie)
                     }
                 }
             }
             is TvHolder -> {
-                holder.bind(getItem(position) as TV)
+                val tv = getItem(position) as TV
+                tv.let { tv ->
+                    holder.bind(tv)
+                    holder.itemView.setOnClickListener {
+                        recordClick.onRecordClickListener(tv.id ?: 0, Record.TV)
+                    }
+                }
             }
             is PeopleHolder -> {
                 holder.bind(getItem(position) as People)
@@ -93,20 +98,20 @@ class MovieAdapter(
         )
     }
 
-    class AnyDiffUtil : DiffUtil.ItemCallback<ItemType>() {
-        override fun areItemsTheSame(oldItem: ItemType, newItem: ItemType): Boolean {
+    class AnyDiffUtil : DiffUtil.ItemCallback<RecordType>() {
+        override fun areItemsTheSame(oldRecord: RecordType, newRecord: RecordType): Boolean {
             return when {
-                oldItem is FakeAd && newItem is FakeAd -> {
-                    oldItem == newItem
+                oldRecord is FakeAd && newRecord is FakeAd -> {
+                    oldRecord == newRecord
                 }
-                oldItem is Movie && newItem is Movie -> {
-                    oldItem.id == newItem.id
+                oldRecord is Movie && newRecord is Movie -> {
+                    oldRecord.id == newRecord.id
                 }
-                oldItem is TV && newItem is TV -> {
-                    oldItem.id == newItem.id
+                oldRecord is TV && newRecord is TV -> {
+                    oldRecord.id == newRecord.id
                 }
-                oldItem is People && newItem is People -> {
-                    oldItem.id == newItem.id
+                oldRecord is People && newRecord is People -> {
+                    oldRecord.id == newRecord.id
                 }
                 else -> {
                     false
@@ -114,19 +119,19 @@ class MovieAdapter(
             }
         }
 
-        override fun areContentsTheSame(oldItem: ItemType, newItem: ItemType): Boolean {
+        override fun areContentsTheSame(oldRecord: RecordType, newRecord: RecordType): Boolean {
             return when {
-                oldItem is FakeAd && newItem is FakeAd -> {
-                    oldItem == newItem
+                oldRecord is FakeAd && newRecord is FakeAd -> {
+                    oldRecord == newRecord
                 }
-                oldItem is Movie && newItem is Movie -> {
-                    oldItem == newItem
+                oldRecord is Movie && newRecord is Movie -> {
+                    oldRecord == newRecord
                 }
-                oldItem is TV && newItem is TV -> {
-                    oldItem == newItem
+                oldRecord is TV && newRecord is TV -> {
+                    oldRecord == newRecord
                 }
-                oldItem is People && newItem is People -> {
-                    oldItem == newItem
+                oldRecord is People && newRecord is People -> {
+                    oldRecord == newRecord
                 }
                 else -> {
                     false

@@ -1,3 +1,3 @@
 package com.example.themovies.data
 
-sealed class ItemType
+sealed class RecordType

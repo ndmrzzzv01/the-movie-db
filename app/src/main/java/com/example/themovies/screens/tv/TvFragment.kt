@@ -10,9 +10,10 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.ConcatAdapter
 import androidx.recyclerview.widget.GridLayoutManager
+import com.example.themovies.data.RecordClick
+import com.example.themovies.data.Record
 import com.example.themovies.data.paging.ListLoadStateAdapter
 import com.example.themovies.databinding.FragmentMainBinding
-import com.example.themovies.screens.movie.MovieFragment
 import com.example.themovies.utils.NetworkUtils
 import com.example.themovies.views.adapters.MovieAdapter
 import dagger.hilt.android.AndroidEntryPoint
@@ -22,11 +23,7 @@ import kotlinx.coroutines.launch
 @AndroidEntryPoint
 class TvFragment : Fragment() {
 
-    interface OnTvItemClickListener {
-        fun onTvClick(id: Int)
-    }
-
-    var onTvItemClickListener: OnTvItemClickListener? = null
+    var recordClick: RecordClick? = null
     private lateinit var binding: FragmentMainBinding
     private val viewModel by viewModels<TvViewModel>()
     private lateinit var tvAdapter: MovieAdapter
@@ -34,7 +31,7 @@ class TvFragment : Fragment() {
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
-        onTvItemClickListener = context as OnTvItemClickListener
+        recordClick = context as RecordClick
     }
 
     override fun onCreateView(
@@ -71,15 +68,15 @@ class TvFragment : Fragment() {
 
     override fun onDetach() {
         super.onDetach()
-        onTvItemClickListener = null
+        recordClick = null
     }
 
     private fun downloadData() {
         createRecyclerView()
 
-        tvAdapter = MovieAdapter(object : MovieFragment.OnMovieItemClickListener {
-            override fun onMovieClick(id: Int) {
-                onTvItemClickListener?.onTvClick(id)
+        tvAdapter = MovieAdapter(object : RecordClick {
+            override fun onRecordClickListener(id: Int, type: Record) {
+                recordClick?.onRecordClickListener(id, Record.TV)
             }
         })
         concatAdapter = tvAdapter.withLoadStateFooter(ListLoadStateAdapter())

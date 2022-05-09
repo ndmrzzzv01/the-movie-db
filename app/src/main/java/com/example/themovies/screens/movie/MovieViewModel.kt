@@ -6,9 +6,8 @@ import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.cachedIn
 import com.example.themovies.data.FakeAd
-import com.example.themovies.data.ItemType
+import com.example.themovies.data.RecordType
 import com.example.themovies.data.Movie
-import com.example.themovies.data.People
 import com.example.themovies.data.paging.TheMovieDBPagingSource
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
@@ -26,7 +25,7 @@ class MovieViewModel @Inject constructor(
         TheMovieDBPagingSource { page ->
             withContext(Dispatchers.IO) {
                 listOfMovie = movieRepository.getMovies(page)
-                val fullList = listOfMovie.toMutableList<ItemType>()
+                val fullList = listOfMovie.toMutableList<RecordType>()
                 fullList.add(13, FakeAd("Your ad could be here №$page!"))
                 return@withContext fullList
             }

@@ -10,6 +10,8 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.ConcatAdapter
 import androidx.recyclerview.widget.GridLayoutManager
+import com.example.themovies.data.RecordClick
+import com.example.themovies.data.Record
 import com.example.themovies.data.paging.ListLoadStateAdapter
 import com.example.themovies.databinding.FragmentMainBinding
 import com.example.themovies.utils.NetworkUtils
@@ -21,11 +23,7 @@ import kotlinx.coroutines.launch
 @AndroidEntryPoint
 class MovieFragment : Fragment() {
 
-    interface OnMovieItemClickListener {
-        fun onMovieClick(id: Int)
-    }
-
-    var onMovieItemClickListener: OnMovieItemClickListener? = null
+    var recordClick: RecordClick? = null
     private val viewModel by viewModels<MovieViewModel>()
     private lateinit var binding: FragmentMainBinding
     private lateinit var movieAdapter: MovieAdapter
@@ -33,7 +31,7 @@ class MovieFragment : Fragment() {
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
-        onMovieItemClickListener = context as OnMovieItemClickListener
+        recordClick = context as RecordClick
     }
 
     override fun onCreateView(
@@ -71,17 +69,16 @@ class MovieFragment : Fragment() {
 
     override fun onDetach() {
         super.onDetach()
-        onMovieItemClickListener = null
+        recordClick = null
     }
-
 
 
     private fun downloadData() {
         createRecyclerView()
 
-        movieAdapter = MovieAdapter(object : OnMovieItemClickListener {
-            override fun onMovieClick(id: Int) {
-                onMovieItemClickListener?.onMovieClick(id)
+        movieAdapter = MovieAdapter(object : RecordClick {
+            override fun onRecordClickListener(id: Int, type: Record) {
+                recordClick?.onRecordClickListener(id, Record.Movie)
             }
         })
         concatAdapter = movieAdapter.withLoadStateFooter(ListLoadStateAdapter())

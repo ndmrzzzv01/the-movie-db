@@ -14,7 +14,7 @@
 
     <fragment
         android:id="@+id/detailsFragment"
-        android:name="com.example.themovies.screens.detail.movie.DetailsFragment"
+        android:name="com.example.themovies.screens.detail.movie.MovieDetailFragment"
         android:label="Blank" />
 
 </navigation>

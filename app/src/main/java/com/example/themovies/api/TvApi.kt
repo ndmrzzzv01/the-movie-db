@@ -1,7 +1,9 @@
 package com.example.themovies.api
 
+import com.example.themovies.data.TV
 import com.example.themovies.network.responses.TVResponse
 import retrofit2.http.GET
+import retrofit2.http.Path
 import retrofit2.http.Query
 
 interface TvApi {
@@ -11,4 +13,8 @@ interface TvApi {
         @Query("page") page: Int,
     ): TVResponse?
 
+    @GET("tv/{tv_id}")
+    suspend fun getTV(
+        @Path("tv_id", encoded = true) tvId: Int?
+    ): TV?
 }

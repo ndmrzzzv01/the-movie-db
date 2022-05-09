@@ -7,18 +7,18 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.bumptech.glide.Glide
-import com.example.themovies.databinding.FragmentDetailsBinding
+import com.example.themovies.databinding.FragmentDetailsMovieBinding
 import com.example.themovies.network.ConfigurationRepository
 import com.example.themovies.screens.movie.MovieRepository
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class DetailsFragment : Fragment() {
+class MovieDetailFragment : Fragment() {
 
     companion object {
         private const val MOVIE_ID = "movie_id"
-        fun newInstance(id: Int): DetailsFragment {
-            val fragment = DetailsFragment()
+        fun newInstance(id: Int): MovieDetailFragment {
+            val fragment = MovieDetailFragment()
             fragment.arguments = Bundle().apply {
                 putInt(MOVIE_ID, id)
             }
@@ -27,8 +27,8 @@ class DetailsFragment : Fragment() {
     }
 
     private var id: Int? = null
-    private lateinit var binding: FragmentDetailsBinding
-    private val viewModel by viewModels<DetailsViewModel>()
+    private lateinit var binding: FragmentDetailsMovieBinding
+    private val viewModel by viewModels<MovieDetailsViewModel>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -40,7 +40,7 @@ class DetailsFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = FragmentDetailsBinding.inflate(inflater, container, false)
+        binding = FragmentDetailsMovieBinding.inflate(inflater, container, false)
 
         showDetailsAboutMovie()
 

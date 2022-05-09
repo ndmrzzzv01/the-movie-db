@@ -24,6 +24,11 @@ class TVRepository @Inject constructor(
         tvApi.getPopularTV(page)?.results ?: mutableListOf()
     }
 
+    suspend fun getTv(tvId: Int): TV? = withContext(Dispatchers.IO) {
+        checkConfiguration()
+        tvApi.getTV(tvId)
+    }
+
     private suspend fun checkConfiguration() {
         if (!ConfigurationRepository.isConfigurationDownloaded()) {
             ConfigurationRepository.downloadConfiguration(configurationApi)
