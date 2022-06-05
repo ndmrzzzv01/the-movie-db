@@ -7,30 +7,30 @@ import kotlinx.coroutines.*
 import kotlin.coroutines.CoroutineContext
 
 class PeoplePresenter(
-    private val view: PeopleContract.PeopleView
+    private val view: PeopleContract.PeopleView,
 ) : PeopleContract.PeoplePresenter, CoroutineScope {
 
-    private var peopleRepository = PeopleRepository()
     private var mainJob = SupervisorJob()
+    private var peopleRepository = PeopleRepository()
 
     override val coroutineContext: CoroutineContext = mainJob + Dispatchers.IO
 
     override fun loadPopularPeople() {
-            try {
-                view.displayListOfPeople(Pager(PagingConfig(20)) {
-                    TheMovieDBPagingSource { page ->
-                        withContext(Dispatchers.IO) {
-                            if (page >= 2) {
-                                delay(2000L)
-                            }
-                            peopleRepository.getPopularPeople(page)
+        try {
+            view.displayListOfPeople(Pager(PagingConfig(20)) {
+                TheMovieDBPagingSource { page ->
+                    withContext(Dispatchers.IO) {
+                        if (page >= 2) {
+                            delay(2000L)
                         }
+                        peopleRepository.getPopularPeople(page)
                     }
-                })
-            } catch (e: Exception) {
-                e.printStackTrace()
-                view.onFail()
-            }
+                }
+            })
+        } catch (e: Exception) {
+            e.printStackTrace()
+            view.onFail()
+        }
     }
 
 

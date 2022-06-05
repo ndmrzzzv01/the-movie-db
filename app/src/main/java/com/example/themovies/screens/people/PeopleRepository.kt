@@ -11,11 +11,17 @@ import kotlinx.coroutines.withContext
 class PeopleRepository {
 
     private val peopleApi = NetworkUtils.createRetrofit().create(PeopleApi::class.java)
-    private val configurationApi = NetworkUtils.createRetrofit().create(ConfigurationApi::class.java)
+    private val configurationApi =
+        NetworkUtils.createRetrofit().create(ConfigurationApi::class.java)
 
     suspend fun getPopularPeople(page: Int = 1): List<People> = withContext(Dispatchers.IO) {
         checkConfiguration()
         peopleApi.getPopularPeople(page)?.results ?: mutableListOf()
+    }
+
+    suspend fun getPeople(peopleId: Int?): People? = withContext(Dispatchers.IO) {
+        checkConfiguration()
+        peopleApi.getPeople(peopleId)
     }
 
     private suspend fun checkConfiguration() {

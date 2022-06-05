@@ -60,7 +60,7 @@ class MainActivity : AppCompatActivity(),
                 TvDetailFragment.newInstance(id)
             }
             Record.People -> {
-                PeopleDetailFragment()
+                PeopleDetailFragment.newInstance(id)
             }
         }
         supportFragmentManager

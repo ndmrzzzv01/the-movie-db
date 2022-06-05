@@ -3,6 +3,12 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <data>
+        <variable
+            name="tv"
+            type="com.example.themovies.screens.detail.tv.TvDetailsViewModel" />
+    </data>
+
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -29,6 +35,7 @@
                 android:layout_marginTop="16dp"
                 android:layout_marginEnd="16dp"
                 android:textAlignment="center"
+                android:text="@{tv.tv.name}"
                 android:textColor="@color/text_color"
                 android:textSize="20sp"
                 android:textStyle="bold|italic"
@@ -44,6 +51,7 @@
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="32dp"
                 android:textAlignment="center"
+                android:text="@{tv.tv.originalName}"
                 android:textColor="@color/text_color"
                 android:textSize="16sp"
                 android:textStyle="italic"
@@ -72,6 +80,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="16dp"
                 android:textAlignment="viewStart"
+                android:text="@{tv.tv.releaseDate}"
                 android:textColor="@color/text_color"
                 android:textSize="16sp"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -99,6 +108,7 @@
                 android:layout_height="wrap_content"
                 android:textAlignment="viewStart"
                 android:textColor="@color/text_color"
+                android:text="@{tv.tv.status}"
                 android:textSize="16sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_weight="1"
@@ -126,6 +136,7 @@
                 android:layout_height="wrap_content"
                 android:textAlignment="viewStart"
                 android:textColor="@color/text_color"
+                android:text="@{tv.tv.voteAverage.toString()}"
                 android:textSize="16sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="1.0"
@@ -135,6 +146,8 @@
 
             <TextView
                 android:id="@+id/tvHomepage"
+                android:visibility="invisible"
+                android:text="Click here to open the link!"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
@@ -158,6 +171,7 @@
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="16dp"
                 android:textAlignment="center"
+                android:text="@{tv.tv.overview}"
                 android:textColor="@color/text_color"
                 android:textSize="16sp"
                 android:textStyle="italic"
@@ -165,6 +179,16 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/tvHomepage" />
 
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvSeason"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tvDescriptionTv" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>

@@ -17,4 +17,5 @@ interface MovieApi {
     suspend fun getMovie(
         @Path("movie_id", encoded = true) movieId: Int?
     ): Movie?
+
 }

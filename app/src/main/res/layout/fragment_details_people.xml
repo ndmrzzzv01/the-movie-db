@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="people"
+            type="com.example.themovies.screens.detail.people.PeopleDetailsViewModel" />
+    </data>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:id="@+id/imagePeople"
+                android:layout_width="180dp"
+                android:layout_height="280dp"
+                android:layout_alignParentStart="true"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="16dp"
+                tools:srcCompat="@tools:sample/avatars" />
+
+            <TextView
+                android:id="@+id/tvNamePeople"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignTop="@id/imagePeople"
+                android:layout_marginStart="16dp"
+                android:layout_toEndOf="@id/imagePeople"
+                android:text="@{people.people.name}"
+                android:textColor="@color/text_color"
+                android:textSize="20sp"
+                tools:text="name" />
+
+            <TextView
+                android:id="@+id/tvDepartPeople"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tvNamePeople"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:layout_toEndOf="@id/imagePeople"
+                android:text="@{people.people.knownForDepartment}"
+                android:textColor="@color/text_color"
+                android:textSize="17sp"
+                tools:text="depart" />
+
+            <TextView
+                android:id="@+id/tvDateBirthPeople"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tvDepartPeople"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:layout_toEndOf="@id/imagePeople"
+                android:text="@{people.people.birthday}"
+                android:textColor="@color/text_color"
+                android:textSize="17sp"
+                tools:text="date" />
+
+            <TextView
+                android:id="@+id/tvPlaceBirthPeople"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tvDateBirthPeople"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:layout_toEndOf="@id/imagePeople"
+                android:text="@{people.people.placeOfBirth}"
+                android:textColor="@color/text_color"
+                android:textSize="17sp"
+                tools:text="place" />
+
+            <TextView
+                android:id="@+id/tvDescriptionPeople"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/imagePeople"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="16sp"
+                android:text="@{people.people.biography}"
+                android:textColor="@color/text_color"
+                android:textSize="17sp"
+                tools:text="desc" />
+
+        </RelativeLayout>
+
+    </ScrollView>
+
+
+</layout>
+

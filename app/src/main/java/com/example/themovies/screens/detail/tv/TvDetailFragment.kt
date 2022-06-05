@@ -1,6 +1,8 @@
 package com.example.themovies.screens.detail.tv
 
 import android.content.Intent
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -8,10 +10,13 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
+import com.example.themovies.data.Season
 import com.example.themovies.databinding.FragmentDetailTvBinding
 import com.example.themovies.network.ConfigurationRepository
 import com.example.themovies.screens.movie.MovieRepository
+import com.example.themovies.views.adapters.SeasonAdapter
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -52,24 +57,39 @@ class TvDetailFragment : Fragment() {
     private fun showDetailsAboutTv() {
         viewModel.tv.observe(viewLifecycleOwner) { tv ->
             binding.apply {
-                Glide
-                    .with(requireContext())
-                    .load("${MovieRepository.URL}${ConfigurationRepository.sizeOfPoster}${tv.backdropPath}")
-                    .into(image)
-                tvTitle.text = tv.name
-                tvOriginalTitle.text = tv.originalName
-                tvRelease.text = tv.releaseDate
-                tvStatus.text = tv.status
-                tvVote.text = tv.voteAverage.toString()
-                tvHomepage.text = "Click here to follow the link!"
-                tvHomepage.setOnClickListener {
-                    val intent = Intent(Intent.ACTION_VIEW)
-                    intent.data = Uri.parse(tv.homepage)
-                    startActivity(intent)
+                if (tv?.backdropPath != "") {
+                    Glide
+                        .with(requireContext())
+                        .load("${MovieRepository.URL}${ConfigurationRepository.sizeOfPoster}${tv?.backdropPath}")
+                        .into(image)
+                } else {
+                    image.background = ColorDrawable(Color.BLACK)
                 }
-                tvDescriptionTv.text = tv.overview
+                if (tv?.homepage != "") {
+                    tvHomepage.visibility = View.VISIBLE
+                    tvHomepage.setOnClickListener {
+                        val intent = Intent(Intent.ACTION_VIEW)
+                        intent.data = Uri.parse(tv?.homepage)
+                        startActivity(intent)
+                    }
+                } else {
+                    tvHomepage.visibility = View.GONE
+                }
             }
         }
+
+        viewModel.season.observe(viewLifecycleOwner) { list ->
+            if (list?.seasons != null) {
+                binding.apply {
+                    rvSeason.visibility = View.VISIBLE
+                    rvSeason.layoutManager = LinearLayoutManager(requireContext())
+                    rvSeason.adapter = SeasonAdapter(list.seasons)
+                }
+            }
+        }
+        binding.tv = viewModel
+        binding.lifecycleOwner = this
         viewModel.getTv(id ?: 0)
+        viewModel.getTvSeason(id ?: 0)
     }
 }

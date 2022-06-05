@@ -24,5 +24,4 @@ class MovieHolder(private val binding: ListItemBinding) :
         }
     }
 
-
 }

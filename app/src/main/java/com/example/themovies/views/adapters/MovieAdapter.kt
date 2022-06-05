@@ -7,11 +7,9 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.example.themovies.data.*
 import com.example.themovies.databinding.ListItemBinding
+import com.example.themovies.databinding.ListItemSeasonsBinding
 import com.example.themovies.databinding.ViewFakeItemBinding
-import com.example.themovies.views.holders.FakeAdHolder
-import com.example.themovies.views.holders.MovieHolder
-import com.example.themovies.views.holders.PeopleHolder
-import com.example.themovies.views.holders.TvHolder
+import com.example.themovies.views.holders.*
 
 class MovieAdapter(
     private val recordClick: RecordClick
@@ -54,10 +52,11 @@ class MovieAdapter(
                     setListItemBinding(parent)
                 )
             }
-            else ->
+            else -> {
                 return PeopleHolder(
                     setListItemBinding(parent)
                 )
+            }
         }
     }
 
@@ -77,15 +76,21 @@ class MovieAdapter(
             }
             is TvHolder -> {
                 val tv = getItem(position) as TV
-                tv.let { tv ->
-                    holder.bind(tv)
+                tv.let { tvItem ->
+                    holder.bind(tvItem)
                     holder.itemView.setOnClickListener {
                         recordClick.onRecordClickListener(tv.id ?: 0, Record.TV)
                     }
                 }
             }
             is PeopleHolder -> {
-                holder.bind(getItem(position) as People)
+                val people = getItem(position) as People
+                people.let { peopleItem ->
+                    holder.bind(peopleItem)
+                    holder.itemView.setOnClickListener {
+                        recordClick.onRecordClickListener(people.id ?: 0, Record.People)
+                    }
+                }
             }
         }
     }

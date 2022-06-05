@@ -2,8 +2,10 @@ package com.example.themovies.screens.tv
 
 import com.example.themovies.api.ConfigurationApi
 import com.example.themovies.api.TvApi
+import com.example.themovies.data.Season
 import com.example.themovies.data.TV
 import com.example.themovies.network.ConfigurationRepository
+import com.example.themovies.network.responses.SeasonResponse
 import dagger.hilt.android.scopes.ViewModelScoped
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
@@ -27,6 +29,11 @@ class TVRepository @Inject constructor(
     suspend fun getTv(tvId: Int): TV? = withContext(Dispatchers.IO) {
         checkConfiguration()
         tvApi.getTV(tvId)
+    }
+
+    suspend fun getTvSeason(tvId: Int): SeasonResponse? = withContext(Dispatchers.IO) {
+        checkConfiguration()
+        tvApi.getTVSeason(tvId)
     }
 
     private suspend fun checkConfiguration() {

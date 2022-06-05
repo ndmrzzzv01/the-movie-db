@@ -1,7 +1,9 @@
 package com.example.themovies.api
 
+import com.example.themovies.data.People
 import com.example.themovies.network.responses.PeopleResponse
 import retrofit2.http.GET
+import retrofit2.http.Path
 import retrofit2.http.Query
 
 interface PeopleApi {
@@ -11,4 +13,8 @@ interface PeopleApi {
         @Query("page") page: Int,
     ): PeopleResponse?
 
+    @GET("person/{person_id}")
+    suspend fun getPeople(
+        @Path("person_id", encoded = true) personId: Int?
+    ): People?
 }
