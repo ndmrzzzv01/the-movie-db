@@ -10,6 +10,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.paging.Pager
 import androidx.recyclerview.widget.ConcatAdapter
 import androidx.recyclerview.widget.GridLayoutManager
+import com.example.themovies.activities.Loading
 import com.example.themovies.data.RecordType
 import com.example.themovies.data.RecordClick
 import com.example.themovies.data.Record
@@ -29,10 +30,13 @@ class PeopleFragment : Fragment(), PeopleContract.PeopleView {
     var presenter: PeopleContract.PeoplePresenter? = null
     private lateinit var peopleAdapter: MovieAdapter
     private lateinit var concatAdapter: ConcatAdapter
+    var loading: Loading? = null
+
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
         recordClick = context as RecordClick
+        loading = context as Loading
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -55,6 +59,7 @@ class PeopleFragment : Fragment(), PeopleContract.PeopleView {
     override fun onStart() {
         super.onStart()
         presenter?.loadPopularPeople()
+
     }
 
     override fun onStop() {
@@ -72,6 +77,7 @@ class PeopleFragment : Fragment(), PeopleContract.PeopleView {
 
         peopleAdapter = MovieAdapter(object : RecordClick {
             override fun onRecordClickListener(id: Int, type: Record) {
+                loading?.showLoading()
                 recordClick?.onRecordClickListener(id, Record.People)
             }
         })

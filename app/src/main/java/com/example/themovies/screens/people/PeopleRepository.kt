@@ -6,6 +6,7 @@ import com.example.themovies.data.People
 import com.example.themovies.network.ConfigurationRepository
 import com.example.themovies.utils.NetworkUtils
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.withContext
 
 class PeopleRepository {
@@ -16,11 +17,15 @@ class PeopleRepository {
 
     suspend fun getPopularPeople(page: Int = 1): List<People> = withContext(Dispatchers.IO) {
         checkConfiguration()
+        if (page >= 2) {
+            delay(2000L)
+        }
         peopleApi.getPopularPeople(page)?.results ?: mutableListOf()
     }
 
     suspend fun getPeople(peopleId: Int?): People? = withContext(Dispatchers.IO) {
         checkConfiguration()
+        delay(1000L)
         peopleApi.getPeople(peopleId)
     }
 

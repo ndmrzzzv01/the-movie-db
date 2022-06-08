@@ -31,6 +31,7 @@ class MovieRepository @Inject constructor(
 
     suspend fun getMovie(movieId: Int?): Movie? = withContext(Dispatchers.IO) {
         checkConfiguration()
+        delay(1000)
         movieApi.getMovie(movieId)
     }
 

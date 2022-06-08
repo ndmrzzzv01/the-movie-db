@@ -8,6 +8,7 @@ import com.example.themovies.data.TV
 import com.example.themovies.network.responses.SeasonResponse
 import com.example.themovies.screens.tv.TVRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -21,16 +22,15 @@ class TvDetailsViewModel @Inject constructor(
 
     fun getTv(tvId: Int) {
         viewModelScope.launch {
-            val itemTv = tvRepository.getTv(tvId)
-            tv.value = itemTv
-        }
-    }
+            val job1 = async { tvRepository.getTv(tvId) }
+            val job2 = async { tvRepository.getTvSeason(tvId) }
+            val itemTv = job1.await()
+            val seasonItem = job2.await()
 
-    fun getTvSeason(tvId: Int) {
-        viewModelScope.launch {
-            val seasonItem = tvRepository.getTvSeason(tvId)
+            tv.value = itemTv
             season.value = seasonItem
         }
     }
+
 
 }

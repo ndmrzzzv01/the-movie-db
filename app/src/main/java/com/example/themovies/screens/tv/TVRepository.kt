@@ -28,11 +28,13 @@ class TVRepository @Inject constructor(
 
     suspend fun getTv(tvId: Int): TV? = withContext(Dispatchers.IO) {
         checkConfiguration()
+        delay(1000L)
         tvApi.getTV(tvId)
     }
 
     suspend fun getTvSeason(tvId: Int): SeasonResponse? = withContext(Dispatchers.IO) {
         checkConfiguration()
+
         tvApi.getTVSeason(tvId)
     }
 

@@ -1,5 +1,6 @@
 package com.example.themovies.screens.detail.tv
 
+import android.content.Context
 import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
@@ -12,7 +13,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
-import com.example.themovies.data.Season
+import com.example.themovies.activities.Loading
 import com.example.themovies.databinding.FragmentDetailTvBinding
 import com.example.themovies.network.ConfigurationRepository
 import com.example.themovies.screens.movie.MovieRepository
@@ -34,8 +35,14 @@ class TvDetailFragment : Fragment() {
     }
 
     private var id: Int? = null
+    var loading: Loading? = null
     private lateinit var binding: FragmentDetailTvBinding
     private val viewModel by viewModels<TvDetailsViewModel>()
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        loading = context as Loading
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -54,9 +61,18 @@ class TvDetailFragment : Fragment() {
         return binding.root
     }
 
+    override fun onDetach() {
+        super.onDetach()
+        loading = null
+    }
+
     private fun showDetailsAboutTv() {
         viewModel.tv.observe(viewLifecycleOwner) { tv ->
             binding.apply {
+                loading?.hideLoading()
+                tvReleaseDateText.visibility = View.VISIBLE
+                tvStatusText.visibility = View.VISIBLE
+                tvVoteText.visibility = View.VISIBLE
                 if (tv?.backdropPath != "") {
                     Glide
                         .with(requireContext())
@@ -90,6 +106,5 @@ class TvDetailFragment : Fragment() {
         binding.tv = viewModel
         binding.lifecycleOwner = this
         viewModel.getTv(id ?: 0)
-        viewModel.getTvSeason(id ?: 0)
     }
 }

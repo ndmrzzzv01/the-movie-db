@@ -2,6 +2,7 @@ package com.example.themovies.activities
 
 import android.os.Bundle
 import android.view.MenuItem
+import android.view.View
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GravityCompat
@@ -22,7 +23,7 @@ import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity(),
-    RecordClick {
+    RecordClick, Loading {
 
     private lateinit var binding: ActivityMainBinding
     private lateinit var actionBarDrawerToggle: ActionBarDrawerToggle
@@ -37,6 +38,7 @@ class MainActivity : AppCompatActivity(),
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
+        binding.view.setOnClickListener { }
 
         showDrawerMenu()
         showMainList()
@@ -49,6 +51,16 @@ class MainActivity : AppCompatActivity(),
             .replace(binding.fragmentContainer.id, MovieFragment())
             .addToBackStack(null)
             .commit()
+    }
+
+    override fun showLoading() {
+        binding.progressBar.visibility = View.VISIBLE
+        binding.view.visibility = View.VISIBLE
+    }
+
+    override fun hideLoading() {
+        binding.progressBar.visibility = View.GONE
+        binding.view.visibility = View.GONE
     }
 
     override fun onRecordClickListener(id: Int, type: Record) {
@@ -109,5 +121,7 @@ class MainActivity : AppCompatActivity(),
             menu.getItem(0).isChecked = true
         }
     }
+
+
 
 }

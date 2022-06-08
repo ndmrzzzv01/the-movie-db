@@ -10,6 +10,7 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.ConcatAdapter
 import androidx.recyclerview.widget.GridLayoutManager
+import com.example.themovies.activities.Loading
 import com.example.themovies.data.RecordClick
 import com.example.themovies.data.Record
 import com.example.themovies.data.paging.ListLoadStateAdapter
@@ -24,6 +25,7 @@ import kotlinx.coroutines.launch
 class TvFragment : Fragment() {
 
     var recordClick: RecordClick? = null
+    var loading: Loading? = null
     private lateinit var binding: FragmentMainBinding
     private val viewModel by viewModels<TvViewModel>()
     private lateinit var tvAdapter: MovieAdapter
@@ -32,6 +34,7 @@ class TvFragment : Fragment() {
     override fun onAttach(context: Context) {
         super.onAttach(context)
         recordClick = context as RecordClick
+        loading = context as Loading
     }
 
     override fun onCreateView(
@@ -69,6 +72,7 @@ class TvFragment : Fragment() {
     override fun onDetach() {
         super.onDetach()
         recordClick = null
+        loading = null
     }
 
     private fun downloadData() {
@@ -76,6 +80,7 @@ class TvFragment : Fragment() {
 
         tvAdapter = MovieAdapter(object : RecordClick {
             override fun onRecordClickListener(id: Int, type: Record) {
+                loading?.showLoading()
                 recordClick?.onRecordClickListener(id, Record.TV)
             }
         })
