@@ -6,7 +6,7 @@ import com.example.themovies.data.paging.TheMovieDBPagingSource
 import kotlinx.coroutines.*
 import kotlin.coroutines.CoroutineContext
 
-class PeoplePresenter(
+class PeoplePresenterImpl(
     private val view: PeopleContract.PeopleView,
 ) : PeopleContract.PeoplePresenter, CoroutineScope {
 

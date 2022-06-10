@@ -20,7 +20,6 @@ import com.example.themovies.utils.NetworkUtils
 import com.example.themovies.views.adapters.MovieAdapter
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
-import javax.inject.Inject
 
 class PeopleFragment : Fragment(), PeopleContract.PeopleView {
 
@@ -41,7 +40,7 @@ class PeopleFragment : Fragment(), PeopleContract.PeopleView {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        presenter = PeoplePresenter(this)
+        presenter = PeoplePresenterImpl(this)
     }
 
     override fun onCreateView(

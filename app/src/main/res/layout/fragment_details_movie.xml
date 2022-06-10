@@ -3,6 +3,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.example.themovies.screens.detail.movie.MovieDetailsViewModel" />
+    </data>
+
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -19,15 +26,18 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
+                app:loadImage="@{viewModel.movie.backdropPath}"
                 tools:srcCompat="@tools:sample/avatars" />
 
             <TextView
                 android:id="@+id/tvTitle"
+                tools:text="Title"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="16dp"
                 android:layout_marginEnd="16dp"
+                android:text="@{viewModel.movie.title}"
                 android:textAlignment="center"
                 android:textColor="@color/text_color"
                 android:textSize="20sp"
@@ -43,6 +53,8 @@
                 android:layout_marginStart="32dp"
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="32dp"
+                tools:text="Original title"
+                android:text="@{viewModel.movie.originalTitle}"
                 android:textAlignment="center"
                 android:textColor="@color/text_color"
                 android:textSize="16sp"
@@ -55,14 +67,16 @@
                 android:id="@+id/tvBudget"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="16dp"
                 android:textAlignment="viewStart"
                 android:textColor="@color/text_color"
                 android:textSize="16sp"
+                tools:text="1.000.000$"
+                app:dotAfterThreeNumbers="@{viewModel.movie.budget.toString()}"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_weight="1"
                 app:layout_constraintStart_toEndOf="@+id/tvBudgetText"
-                app:layout_constraintTop_toTopOf="@+id/tvBudgetText" />
+                app:layout_constraintTop_toTopOf="@+id/tvBudgetText"
+                app:textOrHideIfEmpty="@{viewModel.movie.budget.toString()}" />
 
             <TextView
                 android:id="@+id/tvRevenue"
@@ -71,26 +85,30 @@
                 android:textAlignment="viewStart"
                 android:textColor="@color/text_color"
                 android:textSize="16sp"
+                tools:text="1.000.000$"
+                app:dotAfterThreeNumbers="@{viewModel.movie.revenue.toString()}"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_weight="1"
                 app:layout_constraintStart_toEndOf="@+id/tvRevenueText"
-                app:layout_constraintTop_toTopOf="@+id/tvRevenueText" />
+                app:layout_constraintTop_toTopOf="@+id/tvRevenueText"
+                app:textOrHideIfEmpty="@{viewModel.movie.revenue.toString()}" />
 
             <TextView
                 android:id="@+id/tvBudgetText"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
                 android:layout_marginTop="8dp"
                 android:text="@string/budget"
-                android:visibility="invisible"
                 android:textAlignment="textEnd"
                 android:textColor="@color/text_color"
                 android:textSize="16sp"
+                tools:text="Budget:"
+                android:visibility="invisible"
                 app:layout_constraintEnd_toStartOf="@+id/tvBudget"
                 app:layout_constraintHorizontal_weight="1"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tvOriginalTitle" />
+                app:layout_constraintTop_toBottomOf="@+id/tvOriginalTitle"
+                app:textOrHideIfEmpty="@{viewModel.movie.budget.toString()}" />
 
             <TextView
                 android:id="@+id/tvRevenueText"
@@ -98,14 +116,16 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:text="@string/revenue"
-                android:visibility="invisible"
                 android:textAlignment="textEnd"
                 android:textColor="@color/text_color"
                 android:textSize="16sp"
+                tools:text="Revenue:"
+                android:visibility="invisible"
                 app:layout_constraintEnd_toStartOf="@+id/tvRevenue"
                 app:layout_constraintHorizontal_weight="1"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tvBudgetText" />
+                app:layout_constraintTop_toBottomOf="@+id/tvBudgetText"
+                app:textOrHideIfEmpty="@{viewModel.movie.revenue.toString()}" />
 
             <TextView
                 android:id="@+id/tvDescriptionMovie"
@@ -114,10 +134,12 @@
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="16dp"
+                android:text="@{viewModel.movie.description}"
                 android:textAlignment="center"
                 android:textColor="@color/text_color"
                 android:textSize="16sp"
                 android:textStyle="italic"
+                tools:text="description"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/tvRevenueText" />

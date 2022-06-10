@@ -25,7 +25,6 @@ class PeopleRepository {
 
     suspend fun getPeople(peopleId: Int?): People? = withContext(Dispatchers.IO) {
         checkConfiguration()
-        delay(1000L)
         peopleApi.getPeople(peopleId)
     }
 

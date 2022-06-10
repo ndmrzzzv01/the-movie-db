@@ -73,14 +73,6 @@ class TvDetailFragment : Fragment() {
                 tvReleaseDateText.visibility = View.VISIBLE
                 tvStatusText.visibility = View.VISIBLE
                 tvVoteText.visibility = View.VISIBLE
-                if (tv?.backdropPath != "") {
-                    Glide
-                        .with(requireContext())
-                        .load("${MovieRepository.URL}${ConfigurationRepository.sizeOfPoster}${tv?.backdropPath}")
-                        .into(image)
-                } else {
-                    image.background = ColorDrawable(Color.BLACK)
-                }
                 if (tv?.homepage != "") {
                     tvHomepage.visibility = View.VISIBLE
                     tvHomepage.setOnClickListener {
@@ -103,7 +95,7 @@ class TvDetailFragment : Fragment() {
                 }
             }
         }
-        binding.tv = viewModel
+        binding.viewModel = viewModel
         binding.lifecycleOwner = this
         viewModel.getTv(id ?: 0)
     }

@@ -1,6 +1,7 @@
 package com.example.themovies.screens.detail.movie
 
 import android.content.Context
+import android.graphics.Color
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -8,6 +9,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.bumptech.glide.Glide
+import com.example.themovies.R
 import com.example.themovies.activities.Loading
 import com.example.themovies.databinding.FragmentDetailsMovieBinding
 import com.example.themovies.network.ConfigurationRepository
@@ -56,65 +58,19 @@ class MovieDetailFragment : Fragment() {
     }
 
     private fun showDetailsAboutMovie() {
-        viewModel.movie.observe(viewLifecycleOwner) { movie ->
+        viewModel.movie.observe(viewLifecycleOwner) {
             binding.apply {
                 loading?.hideLoading()
-                tvTitle.text = movie.title
-                tvOriginalTitle.text = movie.originalTitle
-                Glide
-                    .with(requireContext())
-                    .load("${MovieRepository.URL}${ConfigurationRepository.sizeOfPoster}${movie.backdropPath}")
-                    .into(image)
-                when {
-                    movie.budget.toString() == "0" && movie.revenue.toString() == "0" -> {
-                        tvBudget.visibility = View.GONE
-                        tvBudgetText.visibility = View.GONE
-                        tvRevenue.visibility = View.GONE
-                        tvRevenueText.visibility = View.GONE
-                    }
-                    movie.revenue.toString() == "0" -> {
-                        tvRevenue.visibility = View.GONE
-                        tvRevenueText.visibility = View.GONE
-                        tvBudget.text = setDotAfterThreeNumbers(movie.budget.toString())
-                        tvBudgetText.visibility = View.VISIBLE
-                    }
-                    movie.budget.toString() == "0" -> {
-                        tvBudget.visibility = View.GONE
-                        tvBudgetText.visibility = View.GONE
-                        tvRevenue.text = setDotAfterThreeNumbers(movie.revenue.toString())
-                        tvRevenueText.visibility = View.VISIBLE
-                    }
-                    else -> {
-                        tvBudget.text = setDotAfterThreeNumbers(movie.budget.toString())
-                        tvRevenue.text = setDotAfterThreeNumbers(movie.revenue.toString())
-                        tvBudgetText.visibility = View.VISIBLE
-                        tvRevenueText.visibility = View.VISIBLE
-                    }
-                }
-                tvDescriptionMovie.text = movie.description
             }
         }
+        binding.viewModel = viewModel
+        binding.lifecycleOwner = this
         viewModel.getMovie(id ?: 0)
     }
 
     override fun onDetach() {
         super.onDetach()
         loading = null
-    }
-
-    private fun setDotAfterThreeNumbers(number: String): String {
-        val length = number.length
-        return if (length > 3) {
-            val builder = StringBuilder(number)
-            var dots = length / 3
-            if (length % 3 == 0) dots -= 1
-            for (i in 1..dots) {
-                builder.insert(length - (i * 3), ".")
-            }
-            builder.toString()
-        } else {
-            number
-        }
     }
 
 }

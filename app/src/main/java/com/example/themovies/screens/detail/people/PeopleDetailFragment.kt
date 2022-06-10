@@ -60,14 +60,10 @@ class PeopleDetailFragment : Fragment() {
     }
 
     private fun showDetailsAboutMovie() {
-        viewModel.people.observe(viewLifecycleOwner) { people ->
+        viewModel.people.observe(viewLifecycleOwner) {
             loading?.hideLoading()
-            Glide
-                .with(requireContext())
-                .load("${MovieRepository.URL}${ConfigurationRepository.sizeOfPoster}${people.profilePath}")
-                .into(binding.imagePeople)
         }
-        binding.people = viewModel
+        binding.viewModel = viewModel
         binding.lifecycleOwner = this
         viewModel.getPeople(id ?: 0)
     }
