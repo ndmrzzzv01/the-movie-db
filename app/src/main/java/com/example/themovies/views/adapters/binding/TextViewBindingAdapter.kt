@@ -1,5 +1,7 @@
 package com.example.themovies.views.adapters.binding
 
+import android.content.Intent
+import android.net.Uri
 import android.view.View
 import android.widget.TextView
 import androidx.databinding.BindingAdapter
@@ -26,5 +28,19 @@ fun setDotAfterThreeNumbers(view: TextView, value: String?) {
         view.text = "$builder$"
     } else {
         view.text = "$value$"
+    }
+}
+
+@BindingAdapter("url")
+fun setUrl(view: TextView, url: String?) {
+    if (url?.isNotBlank() == true) {
+        view.visibility = View.VISIBLE
+        view.setOnClickListener {
+            val intent = Intent(Intent.ACTION_VIEW)
+            intent.data = Uri.parse(url)
+            view.context.startActivity(intent)
+        }
+    } else {
+        view.visibility = View.GONE
     }
 }

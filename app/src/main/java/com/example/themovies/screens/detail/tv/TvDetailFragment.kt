@@ -2,8 +2,6 @@ package com.example.themovies.screens.detail.tv
 
 import android.content.Context
 import android.content.Intent
-import android.graphics.Color
-import android.graphics.drawable.ColorDrawable
 import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -12,11 +10,8 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.bumptech.glide.Glide
 import com.example.themovies.activities.Loading
 import com.example.themovies.databinding.FragmentDetailTvBinding
-import com.example.themovies.network.ConfigurationRepository
-import com.example.themovies.screens.movie.MovieRepository
 import com.example.themovies.views.adapters.SeasonAdapter
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -73,16 +68,6 @@ class TvDetailFragment : Fragment() {
                 tvReleaseDateText.visibility = View.VISIBLE
                 tvStatusText.visibility = View.VISIBLE
                 tvVoteText.visibility = View.VISIBLE
-                if (tv?.homepage != "") {
-                    tvHomepage.visibility = View.VISIBLE
-                    tvHomepage.setOnClickListener {
-                        val intent = Intent(Intent.ACTION_VIEW)
-                        intent.data = Uri.parse(tv?.homepage)
-                        startActivity(intent)
-                    }
-                } else {
-                    tvHomepage.visibility = View.GONE
-                }
             }
         }
 

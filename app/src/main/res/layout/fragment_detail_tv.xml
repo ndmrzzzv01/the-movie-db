@@ -43,7 +43,8 @@
                 android:textStyle="bold|italic"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/image" />
+                app:layout_constraintTop_toBottomOf="@+id/image"
+                tools:text="Title" />
 
             <TextView
                 android:id="@+id/tvOriginalTitle"
@@ -59,7 +60,8 @@
                 android:textStyle="italic"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tvTitle" />
+                app:layout_constraintTop_toBottomOf="@+id/tvTitle"
+                tools:text="Original title" />
 
             <TextView
                 android:id="@+id/tvReleaseDateText"
@@ -75,7 +77,8 @@
                 app:layout_constraintEnd_toStartOf="@+id/tvRelease"
                 app:layout_constraintHorizontal_weight="1"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tvOriginalTitle" />
+                app:layout_constraintTop_toBottomOf="@+id/tvOriginalTitle"
+                tools:text="Release date:" />
 
             <TextView
                 android:id="@+id/tvRelease"
@@ -89,7 +92,8 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_weight="1"
                 app:layout_constraintStart_toEndOf="@+id/tvReleaseDateText"
-                app:layout_constraintTop_toTopOf="@+id/tvReleaseDateText" />
+                app:layout_constraintTop_toTopOf="@+id/tvReleaseDateText"
+                tools:text="2020-01-01" />
 
             <TextView
                 android:id="@+id/tvStatusText"
@@ -104,7 +108,8 @@
                 app:layout_constraintEnd_toStartOf="@+id/tvStatus"
                 app:layout_constraintHorizontal_weight="1"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tvReleaseDateText" />
+                app:layout_constraintTop_toBottomOf="@+id/tvReleaseDateText"
+                tools:text="Status:" />
 
             <TextView
                 android:id="@+id/tvStatus"
@@ -117,7 +122,8 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_weight="1"
                 app:layout_constraintStart_toEndOf="@+id/tvStatusText"
-                app:layout_constraintTop_toTopOf="@+id/tvStatusText" />
+                app:layout_constraintTop_toTopOf="@+id/tvStatusText"
+                tools:text="Ending" />
 
             <TextView
                 android:id="@+id/tvVoteText"
@@ -133,7 +139,8 @@
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintHorizontal_weight="1"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tvStatusText" />
+                app:layout_constraintTop_toBottomOf="@+id/tvStatusText"
+                tools:text="Vote: " />
 
             <TextView
                 android:id="@+id/tvVote"
@@ -147,12 +154,13 @@
                 app:layout_constraintHorizontal_bias="1.0"
                 app:layout_constraintHorizontal_weight="1"
                 app:layout_constraintStart_toEndOf="@+id/tvStatusText"
-                app:layout_constraintTop_toTopOf="@id/tvVoteText" />
+                app:layout_constraintTop_toTopOf="@id/tvVoteText"
+                tools:text="10.0" />
 
             <TextView
                 android:id="@+id/tvHomepage"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="16dp"
@@ -164,9 +172,11 @@
                 android:textSize="16sp"
                 android:textStyle="bold"
                 android:visibility="invisible"
+                app:url="@{viewModel.tv.homepage}"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tvVoteText" />
+                app:layout_constraintTop_toBottomOf="@+id/tvVoteText"
+                tools:text="link" />
 
             <TextView
                 android:id="@+id/tvDescriptionTv"
@@ -182,7 +192,8 @@
                 android:textStyle="italic"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tvHomepage" />
+                app:layout_constraintTop_toBottomOf="@+id/tvHomepage"
+                tools:text="description" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rvSeason"
