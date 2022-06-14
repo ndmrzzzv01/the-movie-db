@@ -1,14 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
-    <group android:checkableBehavior="single">
+    <group android:checkableBehavior="single"
+        android:id="@+id/firstGroup">
         <item
             android:id="@+id/popularMovie"
+            android:icon="@drawable/movie"
             android:title="@string/popular_movie" />
         <item
             android:id="@+id/popularTV"
+            android:icon="@drawable/show"
             android:title="@string/popular_tv" />
         <item
             android:id="@+id/popularPeople"
+            android:icon="@drawable/people"
             android:title="@string/popular_people" />
+    </group>
+    <group android:checkableBehavior="single"
+        android:id="@+id/secondGroup">
+        <item
+            android:id="@+id/likes"
+            android:icon="@drawable/heart"
+            android:title="@string/your_likes" />
     </group>
 </menu>

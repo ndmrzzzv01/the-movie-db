@@ -109,6 +109,10 @@ class MainActivity : AppCompatActivity(),
                         supportActionBar?.title = "Popular People"
                         PeopleFragment()
                     }
+                    R.id.likes -> {
+                        supportActionBar?.title = "Likes"
+                        PeopleFragment()
+                    }
                     else -> return@OnNavigationItemSelectedListener true
                 }
                 supportFragmentManager
