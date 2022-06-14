@@ -40,8 +40,11 @@ class MainActivity : AppCompatActivity(),
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
         binding.view.setOnClickListener { }
 
+        if (savedInstanceState == null) {
+            showMainList()
+        }
         showDrawerMenu()
-        showMainList()
+
     }
 
     private fun showMainList() {
@@ -108,7 +111,6 @@ class MainActivity : AppCompatActivity(),
                     }
                     else -> return@OnNavigationItemSelectedListener true
                 }
-
                 supportFragmentManager
                     .beginTransaction()
                     .replace(binding.fragmentContainer.id, fragment!!)
@@ -121,7 +123,6 @@ class MainActivity : AppCompatActivity(),
             menu.getItem(0).isChecked = true
         }
     }
-
 
 
 }

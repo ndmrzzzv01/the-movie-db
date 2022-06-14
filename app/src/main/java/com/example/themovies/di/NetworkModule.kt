@@ -7,6 +7,7 @@ import com.example.themovies.api.TvApi
 import com.example.themovies.network.TheMovieDBInterceptor
 import com.example.themovies.screens.people.PeopleContract
 import com.example.themovies.screens.people.PeoplePresenterImpl
+import com.example.themovies.screens.people.PeopleRepository
 import dagger.Binds
 import dagger.Module
 import dagger.Provides

@@ -20,12 +20,14 @@ import com.example.themovies.utils.NetworkUtils
 import com.example.themovies.views.adapters.MovieAdapter
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
 class PeopleFragment : Fragment(), PeopleContract.PeopleView {
 
     var recordClick: RecordClick? = null
     private lateinit var binding: FragmentMainBinding
-//    @Inject  var presenter: PeopleContract.PeoplePresenter? = null
+//    @Inject
+//    lateinit var presenter: PeopleContract.PeoplePresenter
     var presenter: PeopleContract.PeoplePresenter? = null
     private lateinit var peopleAdapter: MovieAdapter
     private lateinit var concatAdapter: ConcatAdapter
