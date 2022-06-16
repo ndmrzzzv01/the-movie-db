@@ -1,6 +1,7 @@
 package com.example.themovies.data
 
 import com.google.gson.annotations.SerializedName
+import java.lang.RuntimeException
 
 data class Movie(
     val id: Int? = null,
@@ -11,4 +12,6 @@ data class Movie(
     @SerializedName("overview") val description: String = "",
     @SerializedName("poster_path") var posterPath: String? = "",
     @SerializedName("backdrop_path") var backdropPath: String = "",
+    @SerializedName("vote_average") var vote: String? = "",
+    var runtime: String? = ""
 ): RecordType()

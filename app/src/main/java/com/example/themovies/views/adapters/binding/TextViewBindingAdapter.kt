@@ -15,6 +15,15 @@ fun setTextOrHideIfEmpty(view: TextView, value: String?) {
     }
 }
 
+@BindingAdapter("hideText")
+fun hideText(view: TextView, value: String?) {
+    if (value?.isBlank() == true) {
+        view.visibility = View.GONE
+    } else {
+        view.visibility = View.VISIBLE
+    }
+}
+
 @BindingAdapter("dotAfterThreeNumbers")
 fun setDotAfterThreeNumbers(view: TextView, value: String?) {
     val length = value?.length ?: 0
@@ -43,4 +52,9 @@ fun setUrl(view: TextView, url: String?) {
     } else {
         view.visibility = View.GONE
     }
+}
+
+@BindingAdapter("textMinutes")
+fun setTextForMinutes(view: TextView, value: String?) {
+    view.text = "$value minutes"
 }

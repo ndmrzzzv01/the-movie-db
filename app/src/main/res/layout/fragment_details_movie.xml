@@ -29,9 +29,26 @@
                 app:loadImage="@{viewModel.movie.backdropPath}"
                 tools:srcCompat="@tools:sample/avatars" />
 
+            <com.like.LikeButton
+                android:id="@+id/btnLike"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginBottom="8dp"
+                app:isLikedButton="@{viewModel.isLiked()}"
+                app:anim_scale_factor="2"
+                app:icon_size="30dp"
+                app:icon_type="heart"
+                app:layout_constraintBottom_toTopOf="@id/divider1"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/tvTime"
+                app:layout_constraintTop_toBottomOf="@+id/divider"
+                app:like_drawable="@drawable/ic_heart_red"
+                app:unlike_drawable="@drawable/ic_heart" />
+
             <TextView
                 android:id="@+id/tvTitle"
-                tools:text="Title"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
@@ -44,7 +61,8 @@
                 android:textStyle="bold|italic"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/image" />
+                app:layout_constraintTop_toBottomOf="@+id/image"
+                tools:text="Title" />
 
             <TextView
                 android:id="@+id/tvOriginalTitle"
@@ -53,7 +71,6 @@
                 android:layout_marginStart="32dp"
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="32dp"
-                tools:text="Original title"
                 android:text="@{viewModel.movie.originalTitle}"
                 android:textAlignment="center"
                 android:textColor="@color/text_color"
@@ -61,71 +78,139 @@
                 android:textStyle="italic"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tvTitle" />
+                app:layout_constraintTop_toBottomOf="@+id/tvTitle"
+                tools:text="Original title" />
 
-            <TextView
-                android:id="@+id/tvBudget"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:textAlignment="viewStart"
-                android:textColor="@color/text_color"
-                android:textSize="16sp"
-                tools:text="1.000.000$"
-                app:dotAfterThreeNumbers="@{viewModel.movie.budget.toString()}"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_weight="1"
-                app:layout_constraintStart_toEndOf="@+id/tvBudgetText"
-                app:layout_constraintTop_toTopOf="@+id/tvBudgetText"
-                app:textOrHideIfEmpty="@{viewModel.movie.budget.toString()}" />
 
-            <TextView
-                android:id="@+id/tvRevenue"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:textAlignment="viewStart"
-                android:textColor="@color/text_color"
-                android:textSize="16sp"
-                tools:text="1.000.000$"
-                app:dotAfterThreeNumbers="@{viewModel.movie.revenue.toString()}"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_weight="1"
-                app:layout_constraintStart_toEndOf="@+id/tvRevenueText"
-                app:layout_constraintTop_toTopOf="@+id/tvRevenueText"
-                app:textOrHideIfEmpty="@{viewModel.movie.revenue.toString()}" />
-
-            <TextView
-                android:id="@+id/tvBudgetText"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
+            <View
+                android:id="@+id/divider"
+                style="@style/Divider"
                 android:layout_marginTop="8dp"
-                android:text="@string/budget"
-                android:textAlignment="textEnd"
-                android:textColor="@color/text_color"
-                android:textSize="16sp"
-                tools:text="Budget:"
-                android:visibility="invisible"
-                app:layout_constraintEnd_toStartOf="@+id/tvBudget"
-                app:layout_constraintHorizontal_weight="1"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tvOriginalTitle"
-                app:textOrHideIfEmpty="@{viewModel.movie.budget.toString()}" />
+                app:layout_constraintTop_toBottomOf="@+id/tvOriginalTitle" />
+
+            <ImageView
+                android:id="@+id/imageStar"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
+                android:src="@drawable/star"
+                app:layout_constraintEnd_toStartOf="@+id/tvVote"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/divider" />
 
             <TextView
-                android:id="@+id/tvRevenueText"
-                android:layout_width="0dp"
+                android:id="@+id/tvVote"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:text="@string/revenue"
-                android:textAlignment="textEnd"
+                android:text="@{viewModel.movie.vote}"
                 android:textColor="@color/text_color"
                 android:textSize="16sp"
-                tools:text="Revenue:"
-                android:visibility="invisible"
-                app:layout_constraintEnd_toStartOf="@+id/tvRevenue"
-                app:layout_constraintHorizontal_weight="1"
+                app:layout_constraintBottom_toBottomOf="@+id/imageStar"
+                app:layout_constraintEnd_toStartOf="@+id/imageTime"
+                app:layout_constraintStart_toEndOf="@+id/imageStar"
+                app:layout_constraintTop_toTopOf="@+id/imageStar"
+                app:textOrHideIfEmpty="@{viewModel.movie.vote}"
+                tools:text="7.8" />
+
+            <ImageView
+                android:id="@+id/imageTime"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginStart="16dp"
+                android:src="@drawable/time"
+                app:layout_constraintBottom_toBottomOf="@+id/tvVote"
+                app:layout_constraintEnd_toStartOf="@+id/tvTime"
+                app:layout_constraintStart_toEndOf="@+id/tvVote"
+                app:layout_constraintTop_toTopOf="@+id/tvVote" />
+
+            <TextView
+                android:id="@+id/tvTime"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/text_color"
+                android:textSize="16sp"
+                app:layout_constraintBottom_toBottomOf="@+id/imageTime"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/btnLike"
+                app:layout_constraintStart_toEndOf="@+id/imageTime"
+                app:layout_constraintTop_toTopOf="@+id/imageTime"
+                app:textMinutes="@{viewModel.movie.runtime}"
+                app:textOrHideIfEmpty="@{viewModel.movie.runtime}"
+                tools:text="139 minutes" />
+
+            <View
+                android:id="@+id/divider1"
+                style="@style/Divider"
+                android:layout_marginTop="8dp"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tvBudgetText"
-                app:textOrHideIfEmpty="@{viewModel.movie.revenue.toString()}" />
+                app:layout_constraintTop_toBottomOf="@+id/imageStar" />
+
+
+            <LinearLayout
+                android:id="@+id/linearLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintTop_toBottomOf="@+id/divider1">
+
+                <ImageView
+                    android:id="@+id/imageBudget"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="8dp"
+                    android:src="@drawable/budget"
+                    android:layout_weight="1"
+                    app:hideImage="@{viewModel.movie.budget.toString()}" />
+
+                <TextView
+                    android:id="@+id/tvBudget"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textColor="@color/text_color"
+                    android:textSize="16sp"
+                    android:layout_gravity="center"
+                    app:dotAfterThreeNumbers="@{viewModel.movie.budget.toString()}"
+                    app:textOrHideIfEmpty="@{viewModel.movie.budget.toString()}"
+                    tools:text="1.000.000$" />
+
+                <ImageView
+                    android:id="@+id/imageRevenue"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginBottom="8dp"
+                    android:src="@drawable/revenue"
+                    android:layout_weight="1"
+                    app:hideImage="@{viewModel.movie.revenue.toString()}" />
+
+                <TextView
+                    android:id="@+id/tvRevenue"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginEnd="16dp"
+                    android:layout_gravity="center"
+                    android:textColor="@color/text_color"
+                    android:textSize="16sp"
+                    android:layout_weight="1"
+                    app:dotAfterThreeNumbers="@{viewModel.movie.revenue.toString()}"
+                    app:textOrHideIfEmpty="@{viewModel.movie.revenue.toString()}"
+                    tools:text="1.000.000$" />
+
+            </LinearLayout>
+
+            <View
+                android:id="@+id/divider2"
+                style="@style/Divider"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
 
             <TextView
                 android:id="@+id/tvDescriptionMovie"
@@ -143,7 +228,7 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tvRevenueText"
+                app:layout_constraintTop_toBottomOf="@+id/divider2"
                 tools:text="description" />
 
 

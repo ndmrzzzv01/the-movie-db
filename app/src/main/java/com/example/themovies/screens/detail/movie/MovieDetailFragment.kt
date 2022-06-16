@@ -1,19 +1,17 @@
 package com.example.themovies.screens.detail.movie
 
 import android.content.Context
-import android.graphics.Color
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import com.bumptech.glide.Glide
-import com.example.themovies.R
 import com.example.themovies.activities.Loading
+import com.example.themovies.database.Like
 import com.example.themovies.databinding.FragmentDetailsMovieBinding
-import com.example.themovies.network.ConfigurationRepository
-import com.example.themovies.screens.movie.MovieRepository
+import com.like.LikeButton
+import com.like.OnLikeListener
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -58,14 +56,25 @@ class MovieDetailFragment : Fragment() {
     }
 
     private fun showDetailsAboutMovie() {
-        viewModel.movie.observe(viewLifecycleOwner) {
+        viewModel.movie.observe(viewLifecycleOwner) { movie ->
             binding.apply {
                 loading?.hideLoading()
+                btnLike.setOnLikeListener(object : OnLikeListener {
+                    override fun liked(likeButton: LikeButton?) {
+                        viewModel?.insertRecord(Like(idRecord = movie.id, type = 0))
+                    }
+
+                    override fun unLiked(likeButton: LikeButton?) {
+                        viewModel?.deleteRecord(movie.id ?: 0)
+                    }
+
+                })
             }
         }
         binding.viewModel = viewModel
         binding.lifecycleOwner = this
         viewModel.getMovie(id ?: 0)
+        viewModel.isLiked(id ?: 0)
     }
 
     override fun onDetach() {

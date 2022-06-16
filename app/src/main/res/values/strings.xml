@@ -14,8 +14,8 @@
     <string name="popular_tv">Popular TV</string>
     <string name="popular_people">Popular people</string>
     <string name="something_wrong">Something wrong...</string>
-    <string name="release_date">Release date:</string>
-    <string name="status">Status:</string>
-    <string name="vote">Vote:</string>
+    <string name="release_date">Release date</string>
+    <string name="status">Status</string>
+    <string name="vote">Vote</string>
     <string name="your_likes">Your Likes</string>
 </resources>

@@ -5,58 +5,63 @@
 
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/cardView"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="5dp"
-        android:clickable="false"
+        android:clickable="true"
         android:clipToPadding="false"
-        android:focusable="false"
-        app:cardCornerRadius="25dp"
+        android:focusable="true"
+        app:cardCornerRadius="10dp"
         app:cardElevation="20dp"
         app:cardPreventCornerOverlap="true">
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content">
 
             <ImageView
                 android:id="@+id/imageSeason"
-                android:layout_width="120dp"
-                android:layout_height="100dp"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginBottom="8dp"
-                app:layout_constraintBottom_toBottomOf="parent"
+                android:layout_width="150dp"
+                android:layout_height="180dp"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 tools:srcCompat="@tools:sample/avatars" />
 
             <TextView
                 android:id="@+id/tvNameSeason"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
+                android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
-                android:text="NameSeason"
+                android:layout_marginEnd="8dp"
+                android:layout_marginBottom="8dp"
+                android:text="@string/title"
+                android:textAlignment="center"
                 android:textColor="@color/text_color"
-                android:textSize="16sp"
-                app:layout_constraintStart_toEndOf="@+id/imageSeason"
-                app:layout_constraintTop_toTopOf="@+id/imageSeason" />
+                android:textSize="20sp"
+                android:textStyle="italic"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tvReleaseSeason" />
 
             <TextView
                 android:id="@+id/tvReleaseSeason"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="32dp"
-                android:layout_marginBottom="16dp"
-                android:text="ReleaseSeason"
+                android:layout_marginTop="8dp"
+                android:text="2020-12-01"
                 android:textColor="@color/text_color"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent" />
+                android:textSize="16sp"
+                android:textStyle="italic"
+                app:layout_constraintBottom_toTopOf="@+id/tvNameSeason"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/imageSeason" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </com.google.android.material.card.MaterialCardView>
-
 
 </layout>

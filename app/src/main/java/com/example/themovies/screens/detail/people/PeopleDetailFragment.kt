@@ -5,13 +5,13 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import com.bumptech.glide.Glide
 import com.example.themovies.activities.Loading
 import com.example.themovies.databinding.FragmentDetailsPeopleBinding
-import com.example.themovies.network.ConfigurationRepository
-import com.example.themovies.screens.movie.MovieRepository
+import com.like.LikeButton
+import com.like.OnLikeListener
 
 
 class PeopleDetailFragment : Fragment() {
@@ -60,8 +60,21 @@ class PeopleDetailFragment : Fragment() {
     }
 
     private fun showDetailsAboutMovie() {
-        viewModel.people.observe(viewLifecycleOwner) {
+        viewModel.people.observe(viewLifecycleOwner) { people ->
             loading?.hideLoading()
+            binding.btnLike.setOnLikeListener(object : OnLikeListener {
+                override fun liked(likeButton: LikeButton?) {
+                    Toast.makeText(requireContext(), "Like ${people.name}", Toast.LENGTH_LONG).show()
+                }
+
+                override fun unLiked(likeButton: LikeButton?) {
+                    Toast.makeText(requireContext(), "Unlike ${people.name}", Toast.LENGTH_LONG).show()
+                }
+
+            })
+
+//                viewModelLikes.insertRecord(Like(people.id, 2))
+
         }
         binding.viewModel = viewModel
         binding.lifecycleOwner = this

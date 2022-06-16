@@ -11,8 +11,12 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.themovies.activities.Loading
+import com.example.themovies.database.Like
 import com.example.themovies.databinding.FragmentDetailTvBinding
+import com.example.themovies.screens.likes.LikesViewModel
 import com.example.themovies.views.adapters.SeasonAdapter
+import com.like.LikeButton
+import com.like.OnLikeListener
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -65,9 +69,16 @@ class TvDetailFragment : Fragment() {
         viewModel.tv.observe(viewLifecycleOwner) { tv ->
             binding.apply {
                 loading?.hideLoading()
-                tvReleaseDateText.visibility = View.VISIBLE
-                tvStatusText.visibility = View.VISIBLE
-                tvVoteText.visibility = View.VISIBLE
+                btnLike.setOnLikeListener(object : OnLikeListener {
+                    override fun liked(likeButton: LikeButton?) {
+                        viewModel?.insertRecord(Like(idRecord = tv?.id ?: 0, type = 1))
+                    }
+
+                    override fun unLiked(likeButton: LikeButton?) {
+                        viewModel?.deleteRecord(tv?.id ?: 0)
+                    }
+
+                })
             }
         }
 
@@ -75,7 +86,7 @@ class TvDetailFragment : Fragment() {
             if (list?.seasons != null) {
                 binding.apply {
                     rvSeason.visibility = View.VISIBLE
-                    rvSeason.layoutManager = LinearLayoutManager(requireContext())
+                    rvSeason.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
                     rvSeason.adapter = SeasonAdapter(list.seasons)
                 }
             }
@@ -83,5 +94,6 @@ class TvDetailFragment : Fragment() {
         binding.viewModel = viewModel
         binding.lifecycleOwner = this
         viewModel.getTv(id ?: 0)
+        viewModel.isLiked(id ?: 0)
     }
 }
