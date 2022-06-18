@@ -1,6 +1,7 @@
 package com.example.themovies.screens.detail.movie
 
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -10,6 +11,9 @@ import androidx.fragment.app.viewModels
 import com.example.themovies.activities.Loading
 import com.example.themovies.database.Like
 import com.example.themovies.databinding.FragmentDetailsMovieBinding
+import com.example.themovies.screens.settings.MyForegroundService
+import com.example.themovies.screens.settings.SettingsFragment
+import com.example.themovies.utils.SettingsUtils
 import com.like.LikeButton
 import com.like.OnLikeListener
 import dagger.hilt.android.AndroidEntryPoint
@@ -56,12 +60,22 @@ class MovieDetailFragment : Fragment() {
     }
 
     private fun showDetailsAboutMovie() {
+        val value = SettingsUtils.provideSharedPreferences(requireContext())
+            ?.getBoolean(SettingsFragment.NOTIFICATION_LIKE, false)
+        val intent = Intent(requireContext(), MyForegroundService::class.java)
+
         viewModel.movie.observe(viewLifecycleOwner) { movie ->
             binding.apply {
                 loading?.hideLoading()
+
                 btnLike.setOnLikeListener(object : OnLikeListener {
                     override fun liked(likeButton: LikeButton?) {
                         viewModel?.insertRecord(Like(idRecord = movie.id, type = 0))
+
+                        if (value == true) {
+                            intent.putExtra("name", movie.title)
+                            this@MovieDetailFragment.activity?.startForegroundService(intent)
+                        }
                     }
 
                     override fun unLiked(likeButton: LikeButton?) {
@@ -69,6 +83,7 @@ class MovieDetailFragment : Fragment() {
                     }
 
                 })
+
             }
         }
         binding.viewModel = viewModel

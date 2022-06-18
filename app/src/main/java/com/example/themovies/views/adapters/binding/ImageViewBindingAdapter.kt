@@ -31,3 +31,4 @@ fun hideImage(view: ImageView, value: String?) {
         view.visibility = View.GONE
     }
 }
+

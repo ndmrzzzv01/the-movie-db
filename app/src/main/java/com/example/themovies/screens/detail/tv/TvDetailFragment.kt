@@ -14,6 +14,9 @@ import com.example.themovies.activities.Loading
 import com.example.themovies.database.Like
 import com.example.themovies.databinding.FragmentDetailTvBinding
 import com.example.themovies.screens.likes.LikesViewModel
+import com.example.themovies.screens.settings.MyForegroundService
+import com.example.themovies.screens.settings.SettingsFragment
+import com.example.themovies.utils.SettingsUtils
 import com.example.themovies.views.adapters.SeasonAdapter
 import com.like.LikeButton
 import com.like.OnLikeListener
@@ -66,12 +69,21 @@ class TvDetailFragment : Fragment() {
     }
 
     private fun showDetailsAboutTv() {
+        val value = SettingsUtils.provideSharedPreferences(requireContext())
+            ?.getBoolean(SettingsFragment.NOTIFICATION_LIKE, false)
+        val intent = Intent(requireContext(), MyForegroundService::class.java)
+
         viewModel.tv.observe(viewLifecycleOwner) { tv ->
             binding.apply {
                 loading?.hideLoading()
                 btnLike.setOnLikeListener(object : OnLikeListener {
                     override fun liked(likeButton: LikeButton?) {
                         viewModel?.insertRecord(Like(idRecord = tv?.id ?: 0, type = 1))
+
+                        if (value == true) {
+                            intent.putExtra("name", tv?.name)
+                            this@TvDetailFragment.activity?.startForegroundService(intent)
+                        }
                     }
 
                     override fun unLiked(likeButton: LikeButton?) {

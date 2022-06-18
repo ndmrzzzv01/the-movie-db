@@ -67,6 +67,8 @@ dependencies {
     kapt "androidx.room:room-compiler:2.4.2"
     implementation "com.github.jd-alexander:LikeButton:0.2.3"
 
+    implementation 'androidx.preference:preference-ktx:1.2.0'
+
     implementation 'io.reactivex.rxjava2:rxjava:2+'
     implementation 'io.reactivex.rxjava2:rxandroid:2+'
 

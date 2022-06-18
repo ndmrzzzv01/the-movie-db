@@ -18,6 +18,7 @@ import com.example.themovies.screens.detail.tv.TvDetailFragment
 import com.example.themovies.screens.likes.LikesFragment
 import com.example.themovies.screens.movie.MovieFragment
 import com.example.themovies.screens.people.PeopleFragment
+import com.example.themovies.screens.settings.SettingsFragment
 import com.example.themovies.screens.tv.TvFragment
 import com.google.android.material.navigation.NavigationView
 import dagger.hilt.android.AndroidEntryPoint
@@ -113,6 +114,10 @@ class MainActivity : AppCompatActivity(),
                     R.id.likes -> {
                         supportActionBar?.title = "Likes"
                         LikesFragment()
+                    }
+                    R.id.settings -> {
+                        supportActionBar?.title = "Settings"
+                        SettingsFragment()
                     }
                     else -> return@OnNavigationItemSelectedListener true
                 }

@@ -1,6 +1,7 @@
 package com.example.themovies.screens.detail.people
 
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -10,6 +11,9 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.example.themovies.activities.Loading
 import com.example.themovies.databinding.FragmentDetailsPeopleBinding
+import com.example.themovies.screens.settings.MyForegroundService
+import com.example.themovies.screens.settings.SettingsFragment
+import com.example.themovies.utils.SettingsUtils
 import com.like.LikeButton
 import com.like.OnLikeListener
 
@@ -60,11 +64,20 @@ class PeopleDetailFragment : Fragment() {
     }
 
     private fun showDetailsAboutMovie() {
+        val value = SettingsUtils.provideSharedPreferences(requireContext())
+            ?.getBoolean(SettingsFragment.NOTIFICATION_LIKE, false)
+        val intent = Intent(requireContext(), MyForegroundService::class.java)
+
         viewModel.people.observe(viewLifecycleOwner) { people ->
             loading?.hideLoading()
             binding.btnLike.setOnLikeListener(object : OnLikeListener {
                 override fun liked(likeButton: LikeButton?) {
                     Toast.makeText(requireContext(), "Like ${people.name}", Toast.LENGTH_LONG).show()
+
+                    if (value == true) {
+                        intent.putExtra("name", people.name)
+                        this@PeopleDetailFragment.activity?.startForegroundService(intent)
+                    }
                 }
 
                 override fun unLiked(likeButton: LikeButton?) {
