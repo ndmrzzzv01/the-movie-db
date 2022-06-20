@@ -18,6 +18,14 @@
         <service android:name=".screens.settings.ForegroundService"
             android:exported="true"
             android:permission="android.permission.BIND_JOB_SERVICE"/>
+
+        <service android:name=".screens.settings.MyFirebaseMessagingService"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT"/>
+            </intent-filter>
+        </service>
+
         <activity
             android:name=".activities.SplashScreenActivity"
             android:exported="true">
@@ -26,6 +34,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <activity android:name=".activities.MainActivity"
             android:exported="true">
             <intent-filter>
