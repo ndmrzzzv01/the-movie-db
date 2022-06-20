@@ -11,7 +11,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.example.themovies.activities.Loading
 import com.example.themovies.databinding.FragmentDetailsPeopleBinding
-import com.example.themovies.screens.settings.MyForegroundService
+import com.example.themovies.screens.settings.ForegroundService
 import com.example.themovies.screens.settings.SettingsFragment
 import com.example.themovies.utils.SettingsUtils
 import com.like.LikeButton
@@ -66,7 +66,7 @@ class PeopleDetailFragment : Fragment() {
     private fun showDetailsAboutMovie() {
         val value = SettingsUtils.provideSharedPreferences(requireContext())
             ?.getBoolean(SettingsFragment.NOTIFICATION_LIKE, false)
-        val intent = Intent(requireContext(), MyForegroundService::class.java)
+        val intent = Intent(requireContext(), ForegroundService::class.java)
 
         viewModel.people.observe(viewLifecycleOwner) { people ->
             loading?.hideLoading()

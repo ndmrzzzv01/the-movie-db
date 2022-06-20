@@ -2,7 +2,6 @@ package com.example.themovies.screens.detail.tv
 
 import android.content.Context
 import android.content.Intent
-import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -13,8 +12,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.themovies.activities.Loading
 import com.example.themovies.database.Like
 import com.example.themovies.databinding.FragmentDetailTvBinding
-import com.example.themovies.screens.likes.LikesViewModel
-import com.example.themovies.screens.settings.MyForegroundService
+import com.example.themovies.screens.settings.ForegroundService
 import com.example.themovies.screens.settings.SettingsFragment
 import com.example.themovies.utils.SettingsUtils
 import com.example.themovies.views.adapters.SeasonAdapter
@@ -71,7 +69,7 @@ class TvDetailFragment : Fragment() {
     private fun showDetailsAboutTv() {
         val value = SettingsUtils.provideSharedPreferences(requireContext())
             ?.getBoolean(SettingsFragment.NOTIFICATION_LIKE, false)
-        val intent = Intent(requireContext(), MyForegroundService::class.java)
+        val intent = Intent(requireContext(), ForegroundService::class.java)
 
         viewModel.tv.observe(viewLifecycleOwner) { tv ->
             binding.apply {

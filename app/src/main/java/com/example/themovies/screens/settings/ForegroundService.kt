@@ -11,7 +11,7 @@ import androidx.core.app.NotificationCompat
 import com.example.themovies.R
 import com.example.themovies.activities.MainActivity
 
-class MyForegroundService : Service() {
+class ForegroundService : Service() {
 
     override fun onBind(intent: Intent?): IBinder? = null
 
@@ -35,8 +35,8 @@ class MyForegroundService : Service() {
 
         val notification =
             NotificationCompat.Builder(this, SettingsFragment.NOTIFICATION_CHANNEL_ID)
-                .setContentTitle("You are like something!")
-                .setContentText("You are like '${intent?.getStringExtra("name")}' !")
+                .setContentTitle("You like something!")
+                .setContentText("You like '${intent?.getStringExtra("name")}' !")
                 .setContentIntent(contentIntent)
                 .setSmallIcon(R.drawable.ic_launcher_foreground)
                 .setAutoCancel(true)

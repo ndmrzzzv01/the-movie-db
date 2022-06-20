@@ -11,7 +11,7 @@ import androidx.fragment.app.viewModels
 import com.example.themovies.activities.Loading
 import com.example.themovies.database.Like
 import com.example.themovies.databinding.FragmentDetailsMovieBinding
-import com.example.themovies.screens.settings.MyForegroundService
+import com.example.themovies.screens.settings.ForegroundService
 import com.example.themovies.screens.settings.SettingsFragment
 import com.example.themovies.utils.SettingsUtils
 import com.like.LikeButton
@@ -62,7 +62,7 @@ class MovieDetailFragment : Fragment() {
     private fun showDetailsAboutMovie() {
         val value = SettingsUtils.provideSharedPreferences(requireContext())
             ?.getBoolean(SettingsFragment.NOTIFICATION_LIKE, false)
-        val intent = Intent(requireContext(), MyForegroundService::class.java)
+        val intent = Intent(requireContext(), ForegroundService::class.java)
 
         viewModel.movie.observe(viewLifecycleOwner) { movie ->
             binding.apply {
