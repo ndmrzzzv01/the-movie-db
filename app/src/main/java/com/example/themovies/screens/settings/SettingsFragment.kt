@@ -77,7 +77,7 @@ class SettingsFragment : Fragment() {
         val worker = OneTimeWorkRequest.Builder(Worker::class.java)
             .setInitialDelay(180, TimeUnit.MINUTES)
             .build()
-        val instanceWorkManager = WorkManager.getInstance()
+        val instanceWorkManager = WorkManager.getInstance(requireContext())
         instanceWorkManager.beginUniqueWork(NOTIFICATION_WORK, ExistingWorkPolicy.REPLACE, worker)
             .enqueue()
     }

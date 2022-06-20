@@ -46,6 +46,6 @@ class Worker(var context: Context, params: WorkerParameters) : Worker(context, p
         } catch (ex: Exception) {
             return Result.failure()
         }
-        return Result.retry()
+        return Result.success()
     }
 }
