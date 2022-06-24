@@ -10,14 +10,16 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.example.themovies.activities.Loading
+import com.example.themovies.database.Like
 import com.example.themovies.databinding.FragmentDetailsPeopleBinding
 import com.example.themovies.screens.settings.ForegroundService
 import com.example.themovies.screens.settings.SettingsFragment
 import com.example.themovies.utils.SettingsUtils
 import com.like.LikeButton
 import com.like.OnLikeListener
+import dagger.hilt.android.AndroidEntryPoint
 
-
+@AndroidEntryPoint
 class PeopleDetailFragment : Fragment() {
 
     companion object {
@@ -72,7 +74,7 @@ class PeopleDetailFragment : Fragment() {
             loading?.hideLoading()
             binding.btnLike.setOnLikeListener(object : OnLikeListener {
                 override fun liked(likeButton: LikeButton?) {
-                    Toast.makeText(requireContext(), "Like ${people.name}", Toast.LENGTH_LONG).show()
+                    viewModel.insertRecord(Like(idRecord = people.id, type = 2))
 
                     if (value == true) {
                         intent.putExtra("name", people.name)
@@ -81,17 +83,16 @@ class PeopleDetailFragment : Fragment() {
                 }
 
                 override fun unLiked(likeButton: LikeButton?) {
-                    Toast.makeText(requireContext(), "Unlike ${people.name}", Toast.LENGTH_LONG).show()
+                    viewModel.deleteRecord(people.id ?: 0)
                 }
 
             })
-
-//                viewModelLikes.insertRecord(Like(people.id, 2))
 
         }
         binding.viewModel = viewModel
         binding.lifecycleOwner = this
         viewModel.getPeople(id ?: 0)
+        viewModel.isLiked(id ?: 0)
     }
 
 }

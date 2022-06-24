@@ -5,10 +5,6 @@ import com.example.themovies.api.MovieApi
 import com.example.themovies.api.PeopleApi
 import com.example.themovies.api.TvApi
 import com.example.themovies.network.TheMovieDBInterceptor
-import com.example.themovies.screens.people.PeopleContract
-import com.example.themovies.screens.people.PeoplePresenterImpl
-import com.example.themovies.screens.people.PeopleRepository
-import dagger.Binds
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -54,19 +50,19 @@ object NetworkModule {
         return retrofit.create(PeopleApi::class.java)
     }
 
-    @Provides
-    fun providePeoplePresenter(peopleView: PeopleContract.PeopleView): PeoplePresenterImpl {
-        return PeoplePresenterImpl(peopleView)
-    }
+//    @Provides
+//    fun providePeoplePresenter(peopleView: PeopleContract.PeopleView): PeoplePresenterImpl {
+//        return PeoplePresenterImpl(peopleView)
+//    }
 
 }
 
-@Module
-@InstallIn(ViewModelComponent::class)
-abstract class ModulePresenter {
-
-    @Binds
-    abstract fun bindPeoplePresenter(peoplePresenterImpl: PeoplePresenterImpl): PeopleContract.PeoplePresenter
-
-}
+//@Module
+//@InstallIn(ViewModelComponent::class)
+//abstract class ModulePresenter {
+//
+//    @Binds
+//    abstract fun bindPeoplePresenter(peoplePresenterImpl: PeoplePresenterImpl): PeopleContract.PeoplePresenter
+//
+//}
 

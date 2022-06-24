@@ -5,15 +5,21 @@ import com.example.themovies.api.PeopleApi
 import com.example.themovies.data.People
 import com.example.themovies.network.ConfigurationRepository
 import com.example.themovies.utils.NetworkUtils
+import dagger.hilt.android.scopes.ViewModelScoped
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.withContext
+import javax.inject.Inject
 
-class PeopleRepository {
+@ViewModelScoped
+class PeopleRepository @Inject constructor(
+    private val peopleApi: PeopleApi,
+    private val configurationApi: ConfigurationApi
+) {
 
-    private val peopleApi = NetworkUtils.createRetrofit().create(PeopleApi::class.java)
-    private val configurationApi =
-        NetworkUtils.createRetrofit().create(ConfigurationApi::class.java)
+//    private val peopleApi = NetworkUtils.createRetrofit().create(PeopleApi::class.java)
+//    private val configurationApi =
+//        NetworkUtils.createRetrofit().create(ConfigurationApi::class.java)
 
     suspend fun getPopularPeople(page: Int = 1): List<People> = withContext(Dispatchers.IO) {
         checkConfiguration()
