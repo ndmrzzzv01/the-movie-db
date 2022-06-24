@@ -7,7 +7,7 @@ import com.bumptech.glide.Glide
 import com.example.themovies.data.People
 import com.example.themovies.databinding.ListItemBinding
 import com.example.themovies.network.ConfigurationRepository
-import com.example.themovies.screens.movie.MovieRepository
+import com.example.themovies.screens.movie.popular.MovieRepository
 
 class PeopleHolder(var binding: ListItemBinding) : RecyclerView.ViewHolder(binding.root) {
 

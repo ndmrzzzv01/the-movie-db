@@ -5,7 +5,7 @@
 
     <fragment
         android:id="@+id/movieFragment"
-        android:name="com.example.themovies.screens.movie.MovieFragment"
+        android:name="com.example.themovies.screens.movie.popular.MovieFragment"
         android:label="Blank">
         <action
             android:id="@+id/action_mainFragment_to_detailsFragment"

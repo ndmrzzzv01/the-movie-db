@@ -7,7 +7,7 @@ import com.bumptech.glide.Glide
 import com.example.themovies.data.Movie
 import com.example.themovies.databinding.ListItemBinding
 import com.example.themovies.network.ConfigurationRepository
-import com.example.themovies.screens.movie.MovieRepository
+import com.example.themovies.screens.movie.popular.MovieRepository
 
 class MovieHolder(private val binding: ListItemBinding) :
     RecyclerView.ViewHolder(binding.root) {

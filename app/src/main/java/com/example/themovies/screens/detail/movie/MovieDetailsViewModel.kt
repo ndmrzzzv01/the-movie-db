@@ -6,9 +6,8 @@ import androidx.lifecycle.viewModelScope
 import com.example.themovies.data.Movie
 import com.example.themovies.database.Like
 import com.example.themovies.screens.likes.repositories.LikesRepositoryDatabase
-import com.example.themovies.screens.movie.MovieRepository
+import com.example.themovies.screens.movie.popular.MovieRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 

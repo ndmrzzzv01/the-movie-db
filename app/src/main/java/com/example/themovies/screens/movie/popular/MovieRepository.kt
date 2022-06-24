@@ -1,4 +1,4 @@
-package com.example.themovies.screens.movie
+package com.example.themovies.screens.movie.popular
 
 import com.example.themovies.api.ConfigurationApi
 import com.example.themovies.api.MovieApi

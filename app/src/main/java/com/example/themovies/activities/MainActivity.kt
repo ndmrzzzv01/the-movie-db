@@ -16,7 +16,7 @@ import com.example.themovies.screens.detail.movie.MovieDetailFragment
 import com.example.themovies.screens.detail.people.PeopleDetailFragment
 import com.example.themovies.screens.detail.tv.TvDetailFragment
 import com.example.themovies.screens.likes.LikesFragment
-import com.example.themovies.screens.movie.MovieFragment
+import com.example.themovies.screens.movie.popular.MovieFragment
 import com.example.themovies.screens.people.PeopleFragment
 import com.example.themovies.screens.settings.SettingsFragment
 import com.example.themovies.screens.tv.TvFragment

@@ -5,10 +5,9 @@ import android.graphics.drawable.ColorDrawable
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.themovies.data.Season
-import com.example.themovies.data.TV
 import com.example.themovies.databinding.ListItemSeasonsBinding
 import com.example.themovies.network.ConfigurationRepository
-import com.example.themovies.screens.movie.MovieRepository
+import com.example.themovies.screens.movie.popular.MovieRepository
 
 class TvSeasonHolder(private val binding: ListItemSeasonsBinding) :
     RecyclerView.ViewHolder(binding.root) {

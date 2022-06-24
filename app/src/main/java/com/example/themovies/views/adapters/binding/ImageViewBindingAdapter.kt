@@ -7,7 +7,7 @@ import android.widget.ImageView
 import androidx.databinding.BindingAdapter
 import com.bumptech.glide.Glide
 import com.example.themovies.network.ConfigurationRepository
-import com.example.themovies.screens.movie.MovieRepository
+import com.example.themovies.screens.movie.popular.MovieRepository
 
 @BindingAdapter("loadImage")
 fun loadImage(view: ImageView, liveUrl: String?) {
