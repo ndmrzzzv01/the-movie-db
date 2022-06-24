@@ -16,6 +16,7 @@ import com.example.themovies.screens.detail.movie.MovieDetailFragment
 import com.example.themovies.screens.detail.people.PeopleDetailFragment
 import com.example.themovies.screens.detail.tv.TvDetailFragment
 import com.example.themovies.screens.likes.LikesFragment
+import com.example.themovies.screens.movie.toprated.TopRatedMoviesFragment
 import com.example.themovies.screens.movie.popular.MovieFragment
 import com.example.themovies.screens.people.PeopleFragment
 import com.example.themovies.screens.settings.SettingsFragment
@@ -118,6 +119,10 @@ class MainActivity : AppCompatActivity(),
                     R.id.settings -> {
                         supportActionBar?.title = "Settings"
                         SettingsFragment()
+                    }
+                    R.id.topRatedMovie -> {
+                        supportActionBar?.title = "Top Rated Movies"
+                        TopRatedMoviesFragment()
                     }
                     else -> return@OnNavigationItemSelectedListener true
                 }

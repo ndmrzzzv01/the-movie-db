@@ -10,7 +10,7 @@ import com.example.themovies.views.holders.PeopleHolder
 import com.example.themovies.views.holders.TvHolder
 
 class LikesAdapter(
-    private val list: List<RecordType?>,
+    var list: List<RecordType?>,
 //    private val recordClick: RecordClick?
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 

@@ -2,13 +2,10 @@ package com.example.themovies.utils
 
 import android.content.Context
 import android.net.ConnectivityManager
-import com.example.themovies.api.ConfigurationApi
-import com.example.themovies.api.MovieApi
-import com.example.themovies.api.TvApi
 import com.example.themovies.network.TheMovieDBInterceptor
-import dagger.Provides
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
+import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
 
 object NetworkUtils {
@@ -30,6 +27,7 @@ object NetworkUtils {
         return Retrofit.Builder()
             .baseUrl("https://api.themoviedb.org/3/")
             .addConverterFactory(GsonConverterFactory.create())
+            .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
             .client(client)
             .build()
     }

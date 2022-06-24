@@ -17,10 +17,6 @@ class PeopleRepository @Inject constructor(
     private val configurationApi: ConfigurationApi
 ) {
 
-//    private val peopleApi = NetworkUtils.createRetrofit().create(PeopleApi::class.java)
-//    private val configurationApi =
-//        NetworkUtils.createRetrofit().create(ConfigurationApi::class.java)
-
     suspend fun getPopularPeople(page: Int = 1): List<People> = withContext(Dispatchers.IO) {
         checkConfiguration()
         if (page >= 2) {
