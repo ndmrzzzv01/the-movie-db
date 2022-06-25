@@ -8,6 +8,14 @@ plugins {
 }
 
 android {
+    signingConfigs {
+        release {
+            storeFile file('C:\\Users\\Nadushenka\\.keys\\moviedb-key.jks')
+            storePassword '123456'
+            keyAlias 'moviedb-key'
+            keyPassword '123456'
+        }
+    }
     compileSdk 32
 
     defaultConfig {
@@ -18,11 +26,13 @@ android {
         versionName "1.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        signingConfig signingConfigs.release
     }
 
     buildTypes {
         release {
-            minifyEnabled false
+            debuggable true
+            minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
