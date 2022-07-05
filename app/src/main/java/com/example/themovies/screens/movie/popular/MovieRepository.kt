@@ -4,7 +4,6 @@ import com.example.themovies.api.ConfigurationApi
 import com.example.themovies.api.MovieApi
 import com.example.themovies.data.Movie
 import com.example.themovies.network.ConfigurationRepository
-import dagger.hilt.android.scopes.ActivityScoped
 import dagger.hilt.android.scopes.ViewModelScoped
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
@@ -16,10 +15,6 @@ class MovieRepository @Inject constructor(
     private val movieApi: MovieApi,
     private val configurationApi: ConfigurationApi
 ) {
-
-    companion object {
-        const val URL = "https://image.tmdb.org/t/p/"
-    }
 
     suspend fun getMovies(page: Int = 1): List<Movie> = withContext(Dispatchers.IO) {
         checkConfiguration()

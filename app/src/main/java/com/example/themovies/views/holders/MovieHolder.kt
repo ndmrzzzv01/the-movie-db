@@ -17,7 +17,7 @@ class MovieHolder(private val binding: ListItemBinding) :
         if (movie.posterPath != null) {
             Glide
                 .with(itemView.context)
-                .load("${MovieRepository.URL}${ConfigurationRepository.sizeOfPoster}${movie.posterPath}")
+                .load("${ConfigurationRepository.URL}${ConfigurationRepository.sizeOfPoster}${movie.posterPath}")
                 .into(binding.image)
         } else {
             binding.image.background = ColorDrawable(Color.BLACK)

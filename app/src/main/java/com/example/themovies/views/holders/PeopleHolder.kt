@@ -16,7 +16,7 @@ class PeopleHolder(var binding: ListItemBinding) : RecyclerView.ViewHolder(bindi
         if (people.profilePath != null) {
             Glide
                 .with(itemView.context)
-                .load("${MovieRepository.URL}${ConfigurationRepository.sizeOfPoster}${people.profilePath}")
+                .load("${ConfigurationRepository.URL}${ConfigurationRepository.sizeOfPoster}${people.profilePath}")
                 .into(binding.image)
         } else {
             binding.image.background = ColorDrawable(Color.BLACK)

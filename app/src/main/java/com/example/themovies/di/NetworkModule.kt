@@ -50,19 +50,7 @@ object NetworkModule {
         return retrofit.create(PeopleApi::class.java)
     }
 
-//    @Provides
-//    fun providePeoplePresenter(peopleView: PeopleContract.PeopleView): PeoplePresenterImpl {
-//        return PeoplePresenterImpl(peopleView)
-//    }
-
 }
 
-//@Module
-//@InstallIn(ViewModelComponent::class)
-//abstract class ModulePresenter {
-//
-//    @Binds
-//    abstract fun bindPeoplePresenter(peoplePresenterImpl: PeoplePresenterImpl): PeopleContract.PeoplePresenter
-//
-//}
+
 

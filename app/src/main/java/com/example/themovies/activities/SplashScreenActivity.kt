@@ -12,12 +12,10 @@ import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.setPadding
 import androidx.lifecycle.lifecycleScope
-import com.example.themovies.R
 import com.example.themovies.databinding.ActivitySplashBinding
-import com.example.themovies.databinding.ActivitySplashBindingImpl
-import kotlinx.coroutines.*
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 
-// TODO
 @SuppressLint("CustomSplashScreen")
 class SplashScreenActivity : AppCompatActivity() {
 

@@ -17,7 +17,7 @@ class TvSeasonHolder(private val binding: ListItemSeasonsBinding) :
         if (season.posterPath != null) {
             Glide
                 .with(itemView.context)
-                .load("${MovieRepository.URL}${ConfigurationRepository.sizeOfPoster}${season.posterPath}")
+                .load("${ConfigurationRepository.URL}${ConfigurationRepository.sizeOfPoster}${season.posterPath}")
                 .into(binding.imageSeason)
         } else {
             binding.imageSeason.background = ColorDrawable(Color.BLACK)

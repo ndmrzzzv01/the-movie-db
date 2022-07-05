@@ -16,7 +16,7 @@ import com.example.themovies.data.Record
 import com.example.themovies.data.paging.ListLoadStateAdapter
 import com.example.themovies.databinding.FragmentMainBinding
 import com.example.themovies.utils.NetworkUtils
-import com.example.themovies.views.adapters.MovieAdapter
+import com.example.themovies.views.adapters.RecordAdapter
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
@@ -28,7 +28,7 @@ class MovieFragment : Fragment() {
     var loading: Loading? = null
     private val viewModel by viewModels<MovieViewModel>()
     private lateinit var binding: FragmentMainBinding
-    private lateinit var movieAdapter: MovieAdapter
+    private lateinit var movieAdapter: RecordAdapter
     private lateinit var concatAdapter: ConcatAdapter
 
     override fun onAttach(context: Context) {
@@ -80,7 +80,7 @@ class MovieFragment : Fragment() {
     private fun downloadData() {
         createRecyclerView()
 
-        movieAdapter = MovieAdapter(object : RecordClick {
+        movieAdapter = RecordAdapter(object : RecordClick {
             override fun onRecordClickListener(id: Int, type: Record) {
                 loading?.showLoading()
                 recordClick?.onRecordClickListener(id, Record.Movie)

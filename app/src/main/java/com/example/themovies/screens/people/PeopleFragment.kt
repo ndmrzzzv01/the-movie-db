@@ -16,7 +16,7 @@ import com.example.themovies.data.RecordClick
 import com.example.themovies.data.paging.ListLoadStateAdapter
 import com.example.themovies.databinding.FragmentMainBinding
 import com.example.themovies.utils.NetworkUtils
-import com.example.themovies.views.adapters.MovieAdapter
+import com.example.themovies.views.adapters.RecordAdapter
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
@@ -28,7 +28,7 @@ class PeopleFragment : Fragment() {
     var loading: Loading? = null
     private lateinit var binding: FragmentMainBinding
     private val viewModel by viewModels<PeopleViewModel>()
-    private lateinit var peopleAdapter: MovieAdapter
+    private lateinit var peopleAdapter: RecordAdapter
     private lateinit var concatAdapter: ConcatAdapter
 
 
@@ -78,7 +78,7 @@ class PeopleFragment : Fragment() {
     private fun downloadData() {
         createRecyclerView()
 
-        peopleAdapter = MovieAdapter(object : RecordClick {
+        peopleAdapter = RecordAdapter(object : RecordClick {
             override fun onRecordClickListener(id: Int, type: Record) {
                 loading?.showLoading()
                 recordClick?.onRecordClickListener(id, Record.People)

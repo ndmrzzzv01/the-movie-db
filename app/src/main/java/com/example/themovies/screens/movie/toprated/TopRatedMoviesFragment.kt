@@ -14,7 +14,7 @@ class TopRatedMoviesFragment : Fragment(), TopRatedMoviesContract.TopRatedMovies
 
     private lateinit var binding: FragmentMainBinding
     private var presenter: TopRatedMoviesContract.TopRatedMoviesPresenter? = null
-    private var adapter = LikesAdapter(mutableListOf())
+    private var adapter = LikesAdapter(mutableListOf(), null)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

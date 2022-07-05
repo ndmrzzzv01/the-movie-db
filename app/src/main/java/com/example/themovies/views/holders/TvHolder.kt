@@ -15,7 +15,7 @@ class TvHolder(private val binding: ListItemBinding) : RecyclerView.ViewHolder(b
         if (tv.posterPath != null) {
             Glide
                 .with(itemView.context)
-                .load("${MovieRepository.URL}${ConfigurationRepository.sizeOfPoster}${tv.posterPath}")
+                .load("${ConfigurationRepository.URL}${ConfigurationRepository.sizeOfPoster}${tv.posterPath}")
                 .into(binding.image)
         } else {
             binding.image.background = ColorDrawable(Color.BLACK)

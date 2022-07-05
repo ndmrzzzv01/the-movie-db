@@ -11,7 +11,7 @@ import com.example.themovies.views.holders.TvHolder
 
 class LikesAdapter(
     var list: List<RecordType?>,
-//    private val recordClick: RecordClick?
+    private val recordClick: RecordClick?
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     companion object {
@@ -60,23 +60,23 @@ class LikesAdapter(
             is MovieHolder -> {
                 val movie = list[position] as Movie
                 holder.bind(movie)
-//                holder.itemView.setOnClickListener {
-//                    recordClick?.onRecordClickListener(movie.id ?: 0, Record.Movie)
-//                }
+                holder.itemView.setOnClickListener {
+                    recordClick?.onRecordClickListener(movie.id ?: 0, Record.Movie)
+                }
             }
             is TvHolder -> {
                 val tv = list[position] as TV
                 holder.bind(tv)
-//                holder.itemView.setOnClickListener {
-//                    recordClick?.onRecordClickListener(tv.id ?: 0, Record.Movie)
-//                }
+                holder.itemView.setOnClickListener {
+                    recordClick?.onRecordClickListener(tv.id ?: 0, Record.TV)
+                }
             }
             is PeopleHolder -> {
                 val people = list[position] as People
                 holder.bind(people)
-//                holder.itemView.setOnClickListener {
-//                    recordClick?.onRecordClickListener(people.id ?: 0, Record.Movie)
-//                }
+                holder.itemView.setOnClickListener {
+                    recordClick?.onRecordClickListener(people.id ?: 0, Record.People)
+                }
             }
         }
     }

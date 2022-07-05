@@ -4,24 +4,17 @@ import android.content.Intent
 import android.net.Uri
 import android.view.View
 import android.widget.TextView
+import androidx.core.view.isVisible
 import androidx.databinding.BindingAdapter
 
 @BindingAdapter("textOrHideIfEmpty")
 fun setTextOrHideIfEmpty(view: TextView, value: String?) {
-    if (value == "0") {
-        view.visibility = View.GONE
-    } else {
-        view.visibility = View.VISIBLE
-    }
+    view.isVisible = value != "0"
 }
 
 @BindingAdapter("hideText")
 fun hideText(view: TextView, value: String?) {
-    if (value?.isBlank() == true) {
-        view.visibility = View.GONE
-    } else {
-        view.visibility = View.VISIBLE
-    }
+    view.isVisible = value?.isNotBlank() == true
 }
 
 @BindingAdapter("dotAfterThreeNumbers")

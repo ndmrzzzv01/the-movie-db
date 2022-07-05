@@ -11,7 +11,7 @@ import com.example.themovies.databinding.ListItemSeasonsBinding
 import com.example.themovies.databinding.ViewFakeItemBinding
 import com.example.themovies.views.holders.*
 
-class MovieAdapter(
+class RecordAdapter(
     private val recordClick: RecordClick
 ) : PagingDataAdapter<RecordType, RecyclerView.ViewHolder>(AnyDiffUtil()) {
 
