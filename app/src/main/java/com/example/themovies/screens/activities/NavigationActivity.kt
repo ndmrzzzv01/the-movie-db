@@ -9,15 +9,15 @@ import androidx.core.view.GravityCompat
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import com.example.themovies.R
+import com.example.themovies.databinding.ActivityMainBinding
 import com.example.themovies.network.data.Record
 import com.example.themovies.network.data.RecordClick
-import com.example.themovies.databinding.ActivityMainBinding
 import com.example.themovies.screens.detail.movie.MovieDetailFragment
 import com.example.themovies.screens.detail.people.PeopleDetailFragment
 import com.example.themovies.screens.detail.tv.TvDetailFragment
 import com.example.themovies.screens.likes.LikesFragment
-import com.example.themovies.screens.movie.toprated.TopRatedMoviesFragment
 import com.example.themovies.screens.movie.popular.MovieFragment
+import com.example.themovies.screens.movie.toprated.TopRatedMoviesFragment
 import com.example.themovies.screens.people.PeopleFragment
 import com.example.themovies.screens.settings.SettingsFragment
 import com.example.themovies.screens.tv.TvFragment
@@ -90,52 +90,67 @@ class NavigationActivity : AppCompatActivity(),
 
 
     private fun showDrawerMenu() {
-        actionBarDrawerToggle =
-            ActionBarDrawerToggle(this, binding.drawerLayout, R.string.open, R.string.close)
-        binding.drawerLayout.addDrawerListener(actionBarDrawerToggle)
-        actionBarDrawerToggle.syncState()
-
-        supportActionBar?.setDisplayHomeAsUpEnabled(true)
-
-        binding.navigationView.apply {
-            setNavigationItemSelectedListener(NavigationView.OnNavigationItemSelectedListener { item ->
-                fragment = when (item.itemId) {
-                    R.id.popularMovie -> {
-                        supportActionBar?.title = "Popular Movie"
-                        MovieFragment()
-                    }
-                    R.id.popularTV -> {
-                        supportActionBar?.title = "Popular TV Show"
-                        TvFragment()
-                    }
-                    R.id.popularPeople -> {
-                        supportActionBar?.title = "Popular People"
-                        PeopleFragment()
-                    }
-                    R.id.likes -> {
-                        supportActionBar?.title = "Likes"
-                        LikesFragment()
-                    }
-                    R.id.settings -> {
-                        supportActionBar?.title = "Settings"
-                        SettingsFragment()
-                    }
-                    R.id.topRatedMovie -> {
-                        supportActionBar?.title = "Top Rated Movies"
-                        TopRatedMoviesFragment()
-                    }
-                    else -> return@OnNavigationItemSelectedListener true
+        binding.apply {
+            actionBarDrawerToggle =
+                ActionBarDrawerToggle(
+                    this@NavigationActivity,
+                    drawerLayout,
+                    R.string.open,
+                    R.string.close
+                ).apply {
+                    drawerLayout.addDrawerListener(this)
+                    this.syncState()
                 }
-                supportFragmentManager
-                    .beginTransaction()
-                    .replace(binding.fragmentContainer.id, fragment!!)
-                    .commit()
 
-                binding.drawerLayout.closeDrawer(GravityCompat.START)
+            setSupportActionBar(toolbar)
 
-                true
-            })
-            menu.getItem(0).isChecked = true
+            supportActionBar?.apply {
+                setHomeButtonEnabled(true)
+                setDisplayHomeAsUpEnabled(true)
+                setHomeAsUpIndicator(R.drawable.ic_baseline)
+            }
+
+            navigationView.apply {
+                setNavigationItemSelectedListener(NavigationView.OnNavigationItemSelectedListener { item ->
+                    fragment = when (item.itemId) {
+                        R.id.popularMovie -> {
+                            supportActionBar?.title = "Popular Movie"
+                            MovieFragment()
+                        }
+                        R.id.popularTV -> {
+                            supportActionBar?.title = "Popular TV Show"
+                            TvFragment()
+                        }
+                        R.id.popularPeople -> {
+                            supportActionBar?.title = "Popular People"
+                            PeopleFragment()
+                        }
+                        R.id.likes -> {
+                            supportActionBar?.title = "Likes"
+                            LikesFragment()
+                        }
+                        R.id.settings -> {
+                            supportActionBar?.title = "Settings"
+                            SettingsFragment()
+                        }
+                        R.id.topRatedMovie -> {
+                            supportActionBar?.title = "Top Rated Movies"
+                            TopRatedMoviesFragment()
+                        }
+                        else -> return@OnNavigationItemSelectedListener true
+                    }
+                    supportFragmentManager
+                        .beginTransaction()
+                        .replace(fragmentContainer.id, fragment!!)
+                        .commit()
+
+                    drawerLayout.closeDrawer(GravityCompat.START)
+
+                    true
+                })
+                menu.getItem(0).isChecked = true
+            }
+
         }
     }
 
