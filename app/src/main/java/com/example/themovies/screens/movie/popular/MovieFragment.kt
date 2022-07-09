@@ -16,7 +16,7 @@ import com.example.themovies.network.data.RecordClick
 import com.example.themovies.paging.ListLoadStateAdapter
 import com.example.themovies.screens.activities.Loading
 import com.example.themovies.utils.NetworkUtils
-import com.example.themovies.views.adapters.RecordAdapter
+import com.example.themovies.screens.RecordAdapter
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch

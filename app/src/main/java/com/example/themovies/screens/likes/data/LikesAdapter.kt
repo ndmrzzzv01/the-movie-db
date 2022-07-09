@@ -1,13 +1,13 @@
-package com.example.themovies.views.adapters
+package com.example.themovies.screens.likes.data
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.themovies.databinding.ListItemBinding
 import com.example.themovies.network.data.*
-import com.example.themovies.views.holders.MovieHolder
-import com.example.themovies.views.holders.PeopleHolder
-import com.example.themovies.views.holders.TvHolder
+import com.example.themovies.screens.movie.data.MovieHolder
+import com.example.themovies.screens.people.data.PeopleHolder
+import com.example.themovies.screens.tv.data.TvHolder
 
 class LikesAdapter(
     var list: List<RecordType?>,

@@ -17,7 +17,7 @@ import androidx.test.espresso.matcher.ViewMatchers.withId
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.rule.ActivityTestRule
 import com.example.themovies.screens.activities.NavigationActivity
-import com.example.themovies.views.holders.MovieHolder
+import com.example.themovies.screens.movie.data.MovieHolder
 import org.hamcrest.Matcher
 import org.junit.Rule
 import org.junit.Test

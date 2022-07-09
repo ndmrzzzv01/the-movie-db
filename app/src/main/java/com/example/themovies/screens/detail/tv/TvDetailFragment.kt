@@ -13,10 +13,9 @@ import com.example.themovies.database.data.Like
 import com.example.themovies.databinding.FragmentDetailTvBinding
 import com.example.themovies.notifications.NotificationService
 import com.example.themovies.screens.activities.Loading
-import com.example.themovies.screens.detail.movie.MovieDetailFragment
 import com.example.themovies.screens.settings.SettingsFragment
 import com.example.themovies.utils.SettingsUtils
-import com.example.themovies.views.adapters.SeasonAdapter
+import com.example.themovies.screens.tv.data.SeasonAdapter
 import com.like.LikeButton
 import com.like.OnLikeListener
 import dagger.hilt.android.AndroidEntryPoint

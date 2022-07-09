@@ -8,7 +8,7 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.themovies.network.data.Movie
 import com.example.themovies.databinding.FragmentMainBinding
-import com.example.themovies.views.adapters.LikesAdapter
+import com.example.themovies.screens.likes.data.LikesAdapter
 
 class TopRatedMoviesFragment : Fragment(), TopRatedMoviesContract.TopRatedMoviesView {
 

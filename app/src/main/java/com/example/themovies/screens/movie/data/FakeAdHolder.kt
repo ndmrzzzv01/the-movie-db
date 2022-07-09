@@ -1,4 +1,4 @@
-package com.example.themovies.views.holders
+package com.example.themovies.screens.movie.data
 
 import androidx.recyclerview.widget.RecyclerView
 import com.example.themovies.network.data.FakeAd

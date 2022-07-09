@@ -1,11 +1,10 @@
-package com.example.themovies.views.adapters
+package com.example.themovies.screens.tv.data
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.themovies.network.data.Season
 import com.example.themovies.databinding.ListItemSeasonsBinding
-import com.example.themovies.views.holders.TvSeasonHolder
 
 class SeasonAdapter (private val seasons: List<Season>): RecyclerView.Adapter<TvSeasonHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TvSeasonHolder {

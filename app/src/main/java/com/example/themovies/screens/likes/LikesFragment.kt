@@ -12,7 +12,7 @@ import com.example.themovies.databinding.FragmentMainBinding
 import com.example.themovies.network.data.Record
 import com.example.themovies.network.data.RecordClick
 import com.example.themovies.screens.activities.Loading
-import com.example.themovies.views.adapters.LikesAdapter
+import com.example.themovies.screens.likes.data.LikesAdapter
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
