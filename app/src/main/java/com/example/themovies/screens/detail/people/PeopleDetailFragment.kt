@@ -8,10 +8,11 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import com.example.themovies.screens.activities.Loading
 import com.example.themovies.database.data.Like
 import com.example.themovies.databinding.FragmentDetailsPeopleBinding
 import com.example.themovies.notifications.NotificationService
+import com.example.themovies.screens.activities.Loading
+import com.example.themovies.screens.detail.movie.MovieDetailFragment
 import com.example.themovies.screens.settings.SettingsFragment
 import com.example.themovies.utils.SettingsUtils
 import com.like.LikeButton
@@ -69,6 +70,15 @@ class PeopleDetailFragment : Fragment() {
             ?.getBoolean(SettingsFragment.NOTIFICATION_LIKE, false)
         val intent = Intent(requireContext(), NotificationService::class.java)
 
+        initObservers(value, intent)
+
+        binding.viewModel = viewModel
+        binding.lifecycleOwner = this
+        viewModel.getPeople(id ?: 0)
+        viewModel.isLiked(id ?: 0)
+    }
+
+    private fun initObservers(value: Boolean?, intent: Intent) {
         viewModel.people.observe(viewLifecycleOwner) { people ->
             loading?.hideLoading()
             binding.btnLike.setOnLikeListener(object : OnLikeListener {
@@ -76,7 +86,7 @@ class PeopleDetailFragment : Fragment() {
                     viewModel.insertRecord(Like(idRecord = people.id, type = 2))
 
                     if (value == true) {
-                        intent.putExtra("name", people.name)
+                        intent.putExtra(MovieDetailFragment.NAME, people.name)
                         this@PeopleDetailFragment.activity?.startForegroundService(intent)
                     }
                 }
@@ -88,10 +98,6 @@ class PeopleDetailFragment : Fragment() {
             })
 
         }
-        binding.viewModel = viewModel
-        binding.lifecycleOwner = this
-        viewModel.getPeople(id ?: 0)
-        viewModel.isLiked(id ?: 0)
     }
 
 }

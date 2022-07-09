@@ -45,8 +45,6 @@ class NotificationService : Service() {
 
         notificationManager?.notify(0, notification)
 
-//        startForeground(1, notification)
-
         return START_NOT_STICKY
     }
 

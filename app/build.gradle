@@ -101,6 +101,9 @@ dependencies {
     kapt "androidx.room:room-compiler:2.4.2"
     implementation "com.github.jd-alexander:LikeButton:0.2.3"
 
+//    Logging
+    implementation 'com.jakewharton.timber:timber:4.7.1'
+
 
 //    Testing
     testImplementation 'junit:junit:4.13.2'

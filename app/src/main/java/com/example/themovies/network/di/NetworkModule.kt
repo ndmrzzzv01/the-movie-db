@@ -18,6 +18,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 object NetworkModule {
 
     const val URL = "https://api.themoviedb.org/3/"
+    const val API_KEY = "d906252ac4f180bbf851fd1bf9e97f9b"
 
     @Provides
     fun provideRetrofit(): Retrofit {

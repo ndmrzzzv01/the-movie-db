@@ -10,11 +10,11 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.ConcatAdapter
 import androidx.recyclerview.widget.GridLayoutManager
-import com.example.themovies.screens.activities.Loading
-import com.example.themovies.network.data.RecordClick
-import com.example.themovies.network.data.Record
-import com.example.themovies.paging.ListLoadStateAdapter
 import com.example.themovies.databinding.FragmentMainBinding
+import com.example.themovies.network.data.Record
+import com.example.themovies.network.data.RecordClick
+import com.example.themovies.paging.ListLoadStateAdapter
+import com.example.themovies.screens.activities.Loading
 import com.example.themovies.utils.NetworkUtils
 import com.example.themovies.views.adapters.RecordAdapter
 import dagger.hilt.android.AndroidEntryPoint
@@ -87,11 +87,7 @@ class TvFragment : Fragment() {
         concatAdapter = tvAdapter.withLoadStateFooter(ListLoadStateAdapter())
         binding.rvMovies.adapter = concatAdapter
 
-        lifecycleScope.launch {
-            viewModel.flow.collectLatest {
-                tvAdapter.submitData(it)
-            }
-        }
+        initObservers()
     }
 
     private fun createRecyclerView() {
@@ -105,6 +101,14 @@ class TvFragment : Fragment() {
                 } else {
                     1
                 }
+            }
+        }
+    }
+
+    private fun initObservers() {
+        lifecycleScope.launch {
+            viewModel.flow.collectLatest {
+                tvAdapter.submitData(it)
             }
         }
     }

@@ -1,6 +1,6 @@
 package com.example.themovies.network.interceptor
 
-import com.example.themovies.utils.NetworkUtils.API_KEY
+import com.example.themovies.network.di.NetworkModule
 import okhttp3.HttpUrl
 import okhttp3.Interceptor
 import okhttp3.Response
@@ -11,7 +11,7 @@ class ApiKeyInterceptor : Interceptor {
         val request = chain.request()
 
         val newUrl: HttpUrl = request.url().newBuilder()
-            .addQueryParameter("api_key", API_KEY)
+            .addQueryParameter("api_key", NetworkModule.API_KEY)
             .build()
 
         val newRequest = request.newBuilder()

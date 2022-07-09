@@ -4,6 +4,7 @@ import android.util.Log
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
 import com.example.themovies.network.data.RecordType
+import timber.log.Timber
 
 class TheMovieDBPagingSource (
     private val loadData: suspend (page: Int) -> List<RecordType>
@@ -24,7 +25,7 @@ class TheMovieDBPagingSource (
                 nextKey = nextKey
             )
         } catch (exception: Exception) {
-            Log.e("MoviesPagingSource", exception.message ?: "")
+            Timber.e(exception.message)
             return LoadResult.Error(exception)
         }
     }

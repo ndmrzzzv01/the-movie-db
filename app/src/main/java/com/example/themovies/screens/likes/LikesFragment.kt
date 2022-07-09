@@ -8,10 +8,10 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.GridLayoutManager
-import com.example.themovies.screens.activities.Loading
+import com.example.themovies.databinding.FragmentMainBinding
 import com.example.themovies.network.data.Record
 import com.example.themovies.network.data.RecordClick
-import com.example.themovies.databinding.FragmentMainBinding
+import com.example.themovies.screens.activities.Loading
 import com.example.themovies.views.adapters.LikesAdapter
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -42,6 +42,17 @@ class LikesFragment : Fragment() {
     ): View {
         binding = FragmentMainBinding.inflate(inflater, container, false)
 
+        showLikes()
+
+        return binding.root
+    }
+
+    private fun showLikes() {
+        initObservers()
+        viewModel.getAllLikes()
+    }
+
+    private fun initObservers() {
         viewModel.likes.observe(viewLifecycleOwner) {
             binding.apply {
                 rvMovies.layoutManager = GridLayoutManager(requireContext(), 2)
@@ -59,9 +70,6 @@ class LikesFragment : Fragment() {
             }
 
         }
-        viewModel.getAllLikes()
-
-        return binding.root
     }
 
 }

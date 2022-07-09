@@ -8,10 +8,10 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import com.example.themovies.screens.activities.Loading
 import com.example.themovies.database.data.Like
 import com.example.themovies.databinding.FragmentDetailsMovieBinding
 import com.example.themovies.notifications.NotificationService
+import com.example.themovies.screens.activities.Loading
 import com.example.themovies.screens.settings.SettingsFragment
 import com.example.themovies.utils.SettingsUtils
 import com.like.LikeButton
@@ -22,6 +22,7 @@ import dagger.hilt.android.AndroidEntryPoint
 class MovieDetailFragment : Fragment() {
 
     companion object {
+        const val NAME = "name"
         private const val MOVIE_ID = "movie_id"
         fun newInstance(id: Int): MovieDetailFragment {
             val fragment = MovieDetailFragment()
@@ -64,6 +65,15 @@ class MovieDetailFragment : Fragment() {
             ?.getBoolean(SettingsFragment.NOTIFICATION_LIKE, false)
         val intent = Intent(requireContext(), NotificationService::class.java)
 
+        initObservers(value, intent)
+
+        binding.viewModel = viewModel
+        binding.lifecycleOwner = this
+        viewModel.getMovie(id ?: 0)
+        viewModel.isLiked(id ?: 0)
+    }
+
+    private fun initObservers(value: Boolean?, intent: Intent) {
         viewModel.movie.observe(viewLifecycleOwner) { movie ->
             binding.apply {
                 loading?.hideLoading()
@@ -73,7 +83,7 @@ class MovieDetailFragment : Fragment() {
                         viewModel?.insertRecord(Like(idRecord = movie.id, type = 0))
 
                         if (value == true) {
-                            intent.putExtra("name", movie.title)
+                            intent.putExtra(NAME, movie.title)
                             this@MovieDetailFragment.activity?.startForegroundService(intent)
                         }
                     }
@@ -86,10 +96,6 @@ class MovieDetailFragment : Fragment() {
 
             }
         }
-        binding.viewModel = viewModel
-        binding.lifecycleOwner = this
-        viewModel.getMovie(id ?: 0)
-        viewModel.isLiked(id ?: 0)
     }
 
     override fun onDetach() {

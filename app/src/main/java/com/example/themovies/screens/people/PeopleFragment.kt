@@ -31,7 +31,6 @@ class PeopleFragment : Fragment() {
     private lateinit var peopleAdapter: RecordAdapter
     private lateinit var concatAdapter: ConcatAdapter
 
-
     override fun onAttach(context: Context) {
         super.onAttach(context)
         recordClick = context as RecordClick
@@ -87,12 +86,7 @@ class PeopleFragment : Fragment() {
         concatAdapter = peopleAdapter.withLoadStateFooter(ListLoadStateAdapter())
         binding.rvMovies.adapter = concatAdapter
 
-        lifecycleScope.launch {
-            viewModel.flow.collectLatest {
-                peopleAdapter.submitData(it)
-            }
-        }
-
+        initObservers()
     }
 
     private fun createRecyclerView() {
@@ -110,5 +104,11 @@ class PeopleFragment : Fragment() {
         }
     }
 
-
+    private fun initObservers() {
+        lifecycleScope.launch {
+            viewModel.flow.collectLatest {
+                peopleAdapter.submitData(it)
+            }
+        }
+    }
 }

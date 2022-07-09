@@ -10,8 +10,6 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 object NetworkUtils {
 
-    const val API_KEY = "d906252ac4f180bbf851fd1bf9e97f9b"
-
     fun isNetworkConnected(context: Context): Boolean {
         val connect: ConnectivityManager =
             context.getSystemService(Context.CONNECTIVITY_SERVICE)
