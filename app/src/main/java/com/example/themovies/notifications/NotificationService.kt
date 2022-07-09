@@ -10,6 +10,7 @@ import android.os.IBinder
 import androidx.core.app.NotificationCompat
 import com.example.themovies.R
 import com.example.themovies.screens.activities.NavigationActivity
+import com.example.themovies.screens.detail.movie.MovieDetailFragment
 import com.example.themovies.screens.settings.SettingsFragment
 
 class NotificationService : Service() {
@@ -22,7 +23,7 @@ class NotificationService : Service() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             val channel = NotificationChannel(
                 SettingsFragment.NOTIFICATION_CHANNEL_ID,
-                "Movie",
+                SettingsFragment.NAME_CHANNEL,
                 NotificationManager.IMPORTANCE_DEFAULT
             )
             notificationManager = this.getSystemService(NotificationManager::class.java)
@@ -36,8 +37,8 @@ class NotificationService : Service() {
 
         val notification =
             NotificationCompat.Builder(this, SettingsFragment.NOTIFICATION_CHANNEL_ID)
-                .setContentTitle("You like something!")
-                .setContentText("You like '${intent?.getStringExtra("name")}' !")
+                .setContentTitle(getString(R.string.notification_about_likes))
+                .setContentText(String.format(getString(R.string.message_about_your_likes), intent?.getStringExtra(SettingsFragment.NAME)))
                 .setContentIntent(contentIntent)
                 .setSmallIcon(R.drawable.ic_launcher_foreground)
                 .setAutoCancel(true)

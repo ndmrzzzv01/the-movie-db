@@ -22,7 +22,6 @@ import dagger.hilt.android.AndroidEntryPoint
 class MovieDetailFragment : Fragment() {
 
     companion object {
-        const val NAME = "name"
         private const val MOVIE_ID = "movie_id"
         fun newInstance(id: Int): MovieDetailFragment {
             val fragment = MovieDetailFragment()
@@ -83,7 +82,7 @@ class MovieDetailFragment : Fragment() {
                         viewModel?.insertRecord(Like(idRecord = movie.id, type = 0))
 
                         if (value == true) {
-                            intent.putExtra(NAME, movie.title)
+                            intent.putExtra(SettingsFragment.NAME, movie.title)
                             this@MovieDetailFragment.activity?.startForegroundService(intent)
                         }
                     }

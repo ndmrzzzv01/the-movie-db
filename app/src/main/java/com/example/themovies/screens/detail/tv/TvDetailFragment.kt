@@ -89,7 +89,7 @@ class TvDetailFragment : Fragment() {
                         viewModel?.insertRecord(Like(idRecord = tv?.id ?: 0, type = 1))
 
                         if (value == true) {
-                            intent.putExtra(MovieDetailFragment.NAME, tv?.name)
+                            intent.putExtra(SettingsFragment.NAME, tv?.name)
                             this@TvDetailFragment.activity?.startForegroundService(intent)
                         }
                     }

@@ -86,7 +86,7 @@ class PeopleDetailFragment : Fragment() {
                     viewModel.insertRecord(Like(idRecord = people.id, type = 2))
 
                     if (value == true) {
-                        intent.putExtra(MovieDetailFragment.NAME, people.name)
+                        intent.putExtra(SettingsFragment.NAME, people.name)
                         this@PeopleDetailFragment.activity?.startForegroundService(intent)
                     }
                 }

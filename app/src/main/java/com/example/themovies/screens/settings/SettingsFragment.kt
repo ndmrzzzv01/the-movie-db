@@ -20,6 +20,8 @@ class SettingsFragment : Fragment() {
         const val NOTIFICATION_UPDATE = "notification_update"
         const val NOTIFICATION_CHANNEL_ID = "movie_id"
         const val NOTIFICATION_WORK = "notification_work"
+        const val NAME = "name"
+        const val NAME_CHANNEL = "channel"
     }
 
     private lateinit var binding: FragmentSettingsBinding

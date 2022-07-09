@@ -29,7 +29,7 @@ class FCMNotificationService : FirebaseMessagingService() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             val channel = NotificationChannel(
                 SettingsFragment.NOTIFICATION_CHANNEL_ID,
-                "Movie",
+                SettingsFragment.NAME_CHANNEL,
                 NotificationManager.IMPORTANCE_DEFAULT
             )
             notificationManager = this.getSystemService(NotificationManager::class.java)

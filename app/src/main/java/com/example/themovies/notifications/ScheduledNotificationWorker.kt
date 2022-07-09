@@ -13,7 +13,8 @@ import com.example.themovies.R
 import com.example.themovies.screens.activities.NavigationActivity
 import com.example.themovies.screens.settings.SettingsFragment
 
-class ScheduledNotificationWorker(var context: Context, params: WorkerParameters) : Worker(context, params) {
+class ScheduledNotificationWorker(var context: Context, params: WorkerParameters) :
+    Worker(context, params) {
     override fun doWork(): Result {
         try {
             var notificationManager: NotificationManager? = null
@@ -21,7 +22,7 @@ class ScheduledNotificationWorker(var context: Context, params: WorkerParameters
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
                 val channel = NotificationChannel(
                     SettingsFragment.NOTIFICATION_CHANNEL_ID,
-                    "Movie",
+                    SettingsFragment.NAME_CHANNEL,
                     NotificationManager.IMPORTANCE_DEFAULT
                 )
                 notificationManager = context.getSystemService(NotificationManager::class.java)
@@ -29,14 +30,22 @@ class ScheduledNotificationWorker(var context: Context, params: WorkerParameters
             }
 
             val contentIntent =
-                Intent(this.applicationContext, NavigationActivity::class.java).let { notificationIntent ->
-                    PendingIntent.getActivity(context, 0, notificationIntent, PendingIntent.FLAG_IMMUTABLE)
+                Intent(
+                    this.applicationContext,
+                    NavigationActivity::class.java
+                ).let { notificationIntent ->
+                    PendingIntent.getActivity(
+                        context,
+                        0,
+                        notificationIntent,
+                        PendingIntent.FLAG_IMMUTABLE
+                    )
                 }
 
             val notification =
                 NotificationCompat.Builder(context, SettingsFragment.NOTIFICATION_CHANNEL_ID)
-                    .setContentTitle("A little notification!")
-                    .setContentText("List of movie, tv or people update right now!")
+                    .setContentTitle(context.getString(R.string.notification_about_updates_list))
+                    .setContentText(context.getString(R.string.message_notification_about_update))
                     .setContentIntent(contentIntent)
                     .setSmallIcon(R.drawable.ic_launcher_foreground)
                     .setAutoCancel(true)
