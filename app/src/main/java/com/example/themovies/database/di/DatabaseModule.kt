@@ -1,8 +1,8 @@
-package com.example.themovies.di
+package com.example.themovies.database.di
 
 import android.content.Context
 import androidx.room.Room
-import com.example.themovies.database.LikesDao
+import com.example.themovies.database.dao.LikesDao
 import com.example.themovies.database.LikesDatabase
 import com.example.themovies.screens.likes.repositories.LikesRepositoryDatabase
 import dagger.Module

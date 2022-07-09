@@ -1,6 +1,6 @@
 package com.example.themovies.screens.movie.toprated
 
-import com.example.themovies.data.Movie
+import com.example.themovies.network.data.Movie
 
 interface TopRatedMoviesContract {
 

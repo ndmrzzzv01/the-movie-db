@@ -1,6 +1,6 @@
 package com.example.themovies.api
 
-import com.example.themovies.data.Movie
+import com.example.themovies.network.data.Movie
 import com.example.themovies.network.responses.MovieResponse
 import io.reactivex.Observable
 import retrofit2.http.GET

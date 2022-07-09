@@ -1,9 +1,9 @@
-package com.example.themovies.data.paging
+package com.example.themovies.paging
 
 import android.util.Log
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
-import com.example.themovies.data.RecordType
+import com.example.themovies.network.data.RecordType
 
 class TheMovieDBPagingSource (
     private val loadData: suspend (page: Int) -> List<RecordType>

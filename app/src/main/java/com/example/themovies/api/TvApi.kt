@@ -1,7 +1,6 @@
 package com.example.themovies.api
 
-import com.example.themovies.data.Season
-import com.example.themovies.data.TV
+import com.example.themovies.network.data.TV
 import com.example.themovies.network.responses.SeasonResponse
 import com.example.themovies.network.responses.TVResponse
 import retrofit2.http.GET

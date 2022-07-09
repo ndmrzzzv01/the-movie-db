@@ -1,10 +1,10 @@
-package com.example.themovies.di
+package com.example.themovies.network.di
 
 import com.example.themovies.api.ConfigurationApi
 import com.example.themovies.api.MovieApi
 import com.example.themovies.api.PeopleApi
 import com.example.themovies.api.TvApi
-import com.example.themovies.network.TheMovieDBInterceptor
+import com.example.themovies.network.interceptor.ApiKeyInterceptor
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -17,14 +17,16 @@ import retrofit2.converter.gson.GsonConverterFactory
 @InstallIn(ViewModelComponent::class)
 object NetworkModule {
 
+    const val URL = "https://api.themoviedb.org/3/"
+
     @Provides
     fun provideRetrofit(): Retrofit {
         val client = OkHttpClient.Builder()
-            .addInterceptor(TheMovieDBInterceptor())
+            .addInterceptor(ApiKeyInterceptor())
             .build()
 
         return Retrofit.Builder()
-            .baseUrl("https://api.themoviedb.org/3/")
+            .baseUrl(URL)
             .addConverterFactory(GsonConverterFactory.create())
             .client(client)
             .build()

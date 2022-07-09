@@ -2,7 +2,7 @@ package com.example.themovies.utils
 
 import android.content.Context
 import android.net.ConnectivityManager
-import com.example.themovies.network.TheMovieDBInterceptor
+import com.example.themovies.network.interceptor.ApiKeyInterceptor
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
@@ -21,7 +21,7 @@ object NetworkUtils {
 
     fun createRetrofit(): Retrofit {
         val client = OkHttpClient.Builder()
-            .addInterceptor(TheMovieDBInterceptor())
+            .addInterceptor(ApiKeyInterceptor())
             .build()
 
         return Retrofit.Builder()

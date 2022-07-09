@@ -6,7 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
-import com.example.themovies.data.Movie
+import com.example.themovies.network.data.Movie
 import com.example.themovies.databinding.FragmentMainBinding
 import com.example.themovies.views.adapters.LikesAdapter
 

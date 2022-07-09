@@ -1,4 +1,4 @@
-package com.example.themovies.activities
+package com.example.themovies.screens.activities
 
 interface Loading {
 

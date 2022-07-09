@@ -1,4 +1,4 @@
-package com.example.themovies.network
+package com.example.themovies.network.repositories
 
 import com.example.themovies.api.ConfigurationApi
 import kotlinx.coroutines.coroutineScope

@@ -1,8 +1,7 @@
 package com.example.themovies.screens.likes.repositories
 
-import com.example.themovies.database.Like
-import com.example.themovies.database.LikesDao
-import dagger.hilt.android.lifecycle.HiltViewModel
+import com.example.themovies.database.data.Like
+import com.example.themovies.database.dao.LikesDao
 import dagger.hilt.android.scopes.ViewModelScoped
 import javax.inject.Inject
 

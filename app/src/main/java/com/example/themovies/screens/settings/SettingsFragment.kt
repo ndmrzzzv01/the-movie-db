@@ -7,9 +7,9 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.work.ExistingWorkPolicy
 import androidx.work.OneTimeWorkRequest
-import androidx.work.PeriodicWorkRequest
 import androidx.work.WorkManager
 import com.example.themovies.databinding.FragmentSettingsBinding
+import com.example.themovies.notifications.ScheduledNotificationWorker
 import com.example.themovies.utils.SettingsUtils
 import java.util.concurrent.TimeUnit
 
@@ -74,7 +74,7 @@ class SettingsFragment : Fragment() {
     }
 
     private fun scheduleNotification() {
-        val worker = OneTimeWorkRequest.Builder(Worker::class.java)
+        val worker = OneTimeWorkRequest.Builder(ScheduledNotificationWorker::class.java)
             .setInitialDelay(180, TimeUnit.MINUTES)
             .build()
         val instanceWorkManager = WorkManager.getInstance(requireContext())

@@ -1,4 +1,4 @@
-package com.example.themovies.data.paging
+package com.example.themovies.paging
 
 import android.view.LayoutInflater
 import android.view.View

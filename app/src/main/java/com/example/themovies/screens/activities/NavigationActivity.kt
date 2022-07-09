@@ -1,4 +1,4 @@
-package com.example.themovies.activities
+package com.example.themovies.screens.activities
 
 import android.os.Bundle
 import android.view.MenuItem
@@ -9,8 +9,8 @@ import androidx.core.view.GravityCompat
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import com.example.themovies.R
-import com.example.themovies.data.Record
-import com.example.themovies.data.RecordClick
+import com.example.themovies.network.data.Record
+import com.example.themovies.network.data.RecordClick
 import com.example.themovies.databinding.ActivityMainBinding
 import com.example.themovies.screens.detail.movie.MovieDetailFragment
 import com.example.themovies.screens.detail.people.PeopleDetailFragment
@@ -25,7 +25,7 @@ import com.google.android.material.navigation.NavigationView
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class MainActivity : AppCompatActivity(),
+class NavigationActivity : AppCompatActivity(),
     RecordClick, Loading {
 
     private lateinit var binding: ActivityMainBinding

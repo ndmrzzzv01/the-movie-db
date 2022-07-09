@@ -16,7 +16,7 @@ import androidx.test.espresso.matcher.ViewMatchers.isRoot
 import androidx.test.espresso.matcher.ViewMatchers.withId
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.rule.ActivityTestRule
-import com.example.themovies.activities.MainActivity
+import com.example.themovies.screens.activities.NavigationActivity
 import com.example.themovies.views.holders.MovieHolder
 import org.hamcrest.Matcher
 import org.junit.Rule
@@ -29,7 +29,7 @@ class TestsWithEspresso {
 
     @Rule
     @JvmField
-    val rule = ActivityTestRule(MainActivity::class.java)
+    val rule = ActivityTestRule(NavigationActivity::class.java)
 
     @Test
     fun testRecyclerView() {

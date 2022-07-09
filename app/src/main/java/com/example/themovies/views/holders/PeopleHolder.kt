@@ -4,10 +4,9 @@ import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.example.themovies.data.People
+import com.example.themovies.network.data.People
 import com.example.themovies.databinding.ListItemBinding
-import com.example.themovies.network.ConfigurationRepository
-import com.example.themovies.screens.movie.popular.MovieRepository
+import com.example.themovies.network.repositories.ConfigurationRepository
 
 class PeopleHolder(var binding: ListItemBinding) : RecyclerView.ViewHolder(binding.root) {
 

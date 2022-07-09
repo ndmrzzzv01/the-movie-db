@@ -1,6 +1,6 @@
 package com.example.themovies.api
 
-import com.example.themovies.data.People
+import com.example.themovies.network.data.People
 import com.example.themovies.network.responses.PeopleResponse
 import retrofit2.http.GET
 import retrofit2.http.Path

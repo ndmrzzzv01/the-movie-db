@@ -1,9 +1,9 @@
-package com.example.themovies.database
+package com.example.themovies.database.dao
 
 import androidx.room.Dao
-import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.Query
+import com.example.themovies.database.data.Like
 
 @Dao
 interface LikesDao {

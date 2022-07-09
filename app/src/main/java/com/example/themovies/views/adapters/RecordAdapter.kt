@@ -5,10 +5,9 @@ import android.view.ViewGroup
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import com.example.themovies.data.*
 import com.example.themovies.databinding.ListItemBinding
-import com.example.themovies.databinding.ListItemSeasonsBinding
 import com.example.themovies.databinding.ViewFakeItemBinding
+import com.example.themovies.network.data.*
 import com.example.themovies.views.holders.*
 
 class RecordAdapter(

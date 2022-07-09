@@ -3,8 +3,8 @@ package com.example.themovies.views.adapters
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.example.themovies.data.*
 import com.example.themovies.databinding.ListItemBinding
+import com.example.themovies.network.data.*
 import com.example.themovies.views.holders.MovieHolder
 import com.example.themovies.views.holders.PeopleHolder
 import com.example.themovies.views.holders.TvHolder

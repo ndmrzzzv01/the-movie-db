@@ -5,10 +5,10 @@ import androidx.lifecycle.viewModelScope
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.cachedIn
-import com.example.themovies.data.FakeAd
-import com.example.themovies.data.RecordType
-import com.example.themovies.data.Movie
-import com.example.themovies.data.paging.TheMovieDBPagingSource
+import com.example.themovies.network.data.FakeAd
+import com.example.themovies.network.data.RecordType
+import com.example.themovies.network.data.Movie
+import com.example.themovies.paging.TheMovieDBPagingSource
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext

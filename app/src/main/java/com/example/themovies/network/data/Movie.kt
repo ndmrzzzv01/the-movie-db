@@ -1,7 +1,6 @@
-package com.example.themovies.data
+package com.example.themovies.network.data
 
 import com.google.gson.annotations.SerializedName
-import java.lang.RuntimeException
 
 data class Movie(
     val id: Int? = null,

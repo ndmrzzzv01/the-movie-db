@@ -2,9 +2,8 @@ package com.example.themovies.screens.tv
 
 import com.example.themovies.api.ConfigurationApi
 import com.example.themovies.api.TvApi
-import com.example.themovies.data.Season
-import com.example.themovies.data.TV
-import com.example.themovies.network.ConfigurationRepository
+import com.example.themovies.network.data.TV
+import com.example.themovies.network.repositories.ConfigurationRepository
 import com.example.themovies.network.responses.SeasonResponse
 import dagger.hilt.android.scopes.ViewModelScoped
 import kotlinx.coroutines.Dispatchers

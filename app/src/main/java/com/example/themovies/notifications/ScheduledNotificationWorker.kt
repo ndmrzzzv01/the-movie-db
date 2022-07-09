@@ -1,4 +1,4 @@
-package com.example.themovies.screens.settings
+package com.example.themovies.notifications
 
 import android.app.NotificationChannel
 import android.app.NotificationManager
@@ -10,9 +10,10 @@ import androidx.core.app.NotificationCompat
 import androidx.work.Worker
 import androidx.work.WorkerParameters
 import com.example.themovies.R
-import com.example.themovies.activities.MainActivity
+import com.example.themovies.screens.activities.NavigationActivity
+import com.example.themovies.screens.settings.SettingsFragment
 
-class Worker(var context: Context, params: WorkerParameters) : Worker(context, params) {
+class ScheduledNotificationWorker(var context: Context, params: WorkerParameters) : Worker(context, params) {
     override fun doWork(): Result {
         try {
             var notificationManager: NotificationManager? = null
@@ -28,7 +29,7 @@ class Worker(var context: Context, params: WorkerParameters) : Worker(context, p
             }
 
             val contentIntent =
-                Intent(this.applicationContext, MainActivity::class.java).let { notificationIntent ->
+                Intent(this.applicationContext, NavigationActivity::class.java).let { notificationIntent ->
                     PendingIntent.getActivity(context, 0, notificationIntent, PendingIntent.FLAG_IMMUTABLE)
                 }
 

@@ -3,7 +3,7 @@ package com.example.themovies.views.adapters
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.example.themovies.data.Season
+import com.example.themovies.network.data.Season
 import com.example.themovies.databinding.ListItemSeasonsBinding
 import com.example.themovies.views.holders.TvSeasonHolder
 

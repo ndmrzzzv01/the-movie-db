@@ -1,6 +1,6 @@
 package com.example.themovies.network.responses
 
-import com.example.themovies.data.TV
+import com.example.themovies.network.data.TV
 import com.google.gson.annotations.SerializedName
 
 class TVResponse {

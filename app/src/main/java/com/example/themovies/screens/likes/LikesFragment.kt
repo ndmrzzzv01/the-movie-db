@@ -8,9 +8,9 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.GridLayoutManager
-import com.example.themovies.activities.Loading
-import com.example.themovies.data.Record
-import com.example.themovies.data.RecordClick
+import com.example.themovies.screens.activities.Loading
+import com.example.themovies.network.data.Record
+import com.example.themovies.network.data.RecordClick
 import com.example.themovies.databinding.FragmentMainBinding
 import com.example.themovies.views.adapters.LikesAdapter
 import dagger.hilt.android.AndroidEntryPoint

@@ -1,4 +1,4 @@
-package com.example.themovies.screens.settings
+package com.example.themovies.notifications
 
 import android.app.NotificationChannel
 import android.app.NotificationManager
@@ -9,9 +9,10 @@ import android.os.Build
 import android.os.IBinder
 import androidx.core.app.NotificationCompat
 import com.example.themovies.R
-import com.example.themovies.activities.MainActivity
+import com.example.themovies.screens.activities.NavigationActivity
+import com.example.themovies.screens.settings.SettingsFragment
 
-class ForegroundService : Service() {
+class NotificationService : Service() {
 
     override fun onBind(intent: Intent?): IBinder? = null
 
@@ -29,7 +30,7 @@ class ForegroundService : Service() {
         }
 
         val contentIntent =
-            Intent(this.applicationContext, MainActivity::class.java).let { notificationIntent ->
+            Intent(this.applicationContext, NavigationActivity::class.java).let { notificationIntent ->
                 PendingIntent.getActivity(this, 0, notificationIntent, PendingIntent.FLAG_IMMUTABLE)
             }
 

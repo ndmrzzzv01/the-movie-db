@@ -3,8 +3,8 @@ package com.example.themovies.screens.detail.people
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.themovies.data.People
-import com.example.themovies.database.Like
+import com.example.themovies.network.data.People
+import com.example.themovies.database.data.Like
 import com.example.themovies.screens.likes.repositories.LikesRepositoryDatabase
 import com.example.themovies.screens.people.PeopleRepository
 import dagger.hilt.android.lifecycle.HiltViewModel

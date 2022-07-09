@@ -1,4 +1,4 @@
-package com.example.themovies.activities
+package com.example.themovies.screens.activities
 
 import android.animation.AnimatorSet
 import android.animation.ObjectAnimator
@@ -39,7 +39,7 @@ class SplashScreenActivity : AppCompatActivity() {
         lifecycleScope.launch {
             delay(2000L)
 
-            val intent = Intent(this@SplashScreenActivity, MainActivity::class.java)
+            val intent = Intent(this@SplashScreenActivity, NavigationActivity::class.java)
             startActivity(intent)
             finish()
         }

@@ -2,8 +2,8 @@ package com.example.themovies.screens.movie.popular
 
 import com.example.themovies.api.ConfigurationApi
 import com.example.themovies.api.MovieApi
-import com.example.themovies.data.Movie
-import com.example.themovies.network.ConfigurationRepository
+import com.example.themovies.network.data.Movie
+import com.example.themovies.network.repositories.ConfigurationRepository
 import dagger.hilt.android.scopes.ViewModelScoped
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay

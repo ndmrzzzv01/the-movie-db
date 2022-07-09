@@ -1,4 +1,4 @@
-package com.example.themovies.database
+package com.example.themovies.database.data
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity

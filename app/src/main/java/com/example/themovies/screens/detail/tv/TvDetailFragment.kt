@@ -9,10 +9,10 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.themovies.activities.Loading
-import com.example.themovies.database.Like
+import com.example.themovies.screens.activities.Loading
+import com.example.themovies.database.data.Like
 import com.example.themovies.databinding.FragmentDetailTvBinding
-import com.example.themovies.screens.settings.ForegroundService
+import com.example.themovies.notifications.NotificationService
 import com.example.themovies.screens.settings.SettingsFragment
 import com.example.themovies.utils.SettingsUtils
 import com.example.themovies.views.adapters.SeasonAdapter
@@ -69,7 +69,7 @@ class TvDetailFragment : Fragment() {
     private fun showDetailsAboutTv() {
         val value = SettingsUtils.provideSharedPreferences(requireContext())
             ?.getBoolean(SettingsFragment.NOTIFICATION_LIKE, false)
-        val intent = Intent(requireContext(), ForegroundService::class.java)
+        val intent = Intent(requireContext(), NotificationService::class.java)
 
         viewModel.tv.observe(viewLifecycleOwner) { tv ->
             binding.apply {

@@ -10,10 +10,10 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.ConcatAdapter
 import androidx.recyclerview.widget.GridLayoutManager
-import com.example.themovies.activities.Loading
-import com.example.themovies.data.RecordClick
-import com.example.themovies.data.Record
-import com.example.themovies.data.paging.ListLoadStateAdapter
+import com.example.themovies.screens.activities.Loading
+import com.example.themovies.network.data.RecordClick
+import com.example.themovies.network.data.Record
+import com.example.themovies.paging.ListLoadStateAdapter
 import com.example.themovies.databinding.FragmentMainBinding
 import com.example.themovies.utils.NetworkUtils
 import com.example.themovies.views.adapters.RecordAdapter

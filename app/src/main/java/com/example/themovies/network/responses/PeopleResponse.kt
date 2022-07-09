@@ -1,6 +1,6 @@
 package com.example.themovies.network.responses
 
-import com.example.themovies.data.People
+import com.example.themovies.network.data.People
 import com.google.gson.annotations.SerializedName
 
 class PeopleResponse {

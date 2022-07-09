@@ -1,6 +1,6 @@
 package com.example.themovies.screens.likes
 
-import com.example.themovies.data.RecordType
+import com.example.themovies.network.data.RecordType
 import com.example.themovies.screens.likes.repositories.LikesRepositoryDatabase
 import com.example.themovies.screens.likes.repositories.LikesTypeRepositoryNetwork
 import javax.inject.Inject
