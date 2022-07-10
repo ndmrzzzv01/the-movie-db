@@ -2,6 +2,7 @@ package com.example.themovies.screens.detail.tv
 
 import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -14,11 +15,11 @@ import com.example.themovies.databinding.FragmentDetailTvBinding
 import com.example.themovies.notifications.NotificationService
 import com.example.themovies.screens.activities.Loading
 import com.example.themovies.screens.settings.SettingsFragment
-import com.example.themovies.utils.SettingsUtils
 import com.example.themovies.screens.tv.data.SeasonAdapter
 import com.like.LikeButton
 import com.like.OnLikeListener
 import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class TvDetailFragment : Fragment() {
@@ -36,6 +37,9 @@ class TvDetailFragment : Fragment() {
 
     private var id: Int? = null
     var loading: Loading? = null
+
+    @Inject
+    lateinit var sharedPreferences: SharedPreferences
     private lateinit var binding: FragmentDetailTvBinding
     private val viewModel by viewModels<TvDetailsViewModel>()
 
@@ -67,8 +71,7 @@ class TvDetailFragment : Fragment() {
     }
 
     private fun showDetailsAboutTv() {
-        val value = SettingsUtils.provideSharedPreferences(requireContext())
-            ?.getBoolean(SettingsFragment.NOTIFICATION_LIKE, false)
+        val value = sharedPreferences.getBoolean(SettingsFragment.NOTIFICATION_LIKE, false)
         val intent = Intent(requireContext(), NotificationService::class.java)
 
         initObservers(value, intent)

@@ -1,5 +1,6 @@
 package com.example.themovies.screens.settings
 
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -10,8 +11,8 @@ import androidx.work.OneTimeWorkRequest
 import androidx.work.WorkManager
 import com.example.themovies.databinding.FragmentSettingsBinding
 import com.example.themovies.notifications.ScheduledNotificationWorker
-import com.example.themovies.utils.SettingsUtils
 import java.util.concurrent.TimeUnit
+import javax.inject.Inject
 
 class SettingsFragment : Fragment() {
 
@@ -24,6 +25,8 @@ class SettingsFragment : Fragment() {
         const val NAME_CHANNEL = "channel"
     }
 
+    @Inject
+    lateinit var sharedPreferences: SharedPreferences
     private lateinit var binding: FragmentSettingsBinding
 
     override fun onCreateView(
@@ -41,7 +44,7 @@ class SettingsFragment : Fragment() {
 
     private fun notificationSettingsWithLikes() {
         binding.apply {
-            val editor = SettingsUtils.provideSharedPreferences(requireContext())?.edit()
+            val editor = sharedPreferences.edit()
             swLiked.setOnCheckedChangeListener { _, isChecked ->
                 if (isChecked) {
                     editor?.putBoolean(NOTIFICATION_LIKE, true)
@@ -51,14 +54,13 @@ class SettingsFragment : Fragment() {
                     editor?.commit()
                 }
             }
-            swLiked.isChecked = SettingsUtils.provideSharedPreferences(requireContext())
-                ?.getBoolean(NOTIFICATION_LIKE, false)!!
+            swLiked.isChecked = sharedPreferences.getBoolean(NOTIFICATION_LIKE, false)
         }
     }
 
     private fun notificationSettingsWithUpdateList() {
         binding.apply {
-            val editor = SettingsUtils.provideSharedPreferences(requireContext())?.edit()
+            val editor = sharedPreferences.edit()
             swUpdateList.setOnCheckedChangeListener { _, isChecked ->
                 if (isChecked) {
                     editor?.putBoolean(NOTIFICATION_UPDATE, true)
@@ -69,8 +71,7 @@ class SettingsFragment : Fragment() {
                     editor?.commit()
                 }
             }
-            swUpdateList.isChecked = SettingsUtils.provideSharedPreferences(requireContext())
-                ?.getBoolean(NOTIFICATION_UPDATE, false)!!
+            swUpdateList.isChecked = sharedPreferences.getBoolean(NOTIFICATION_UPDATE, false)
         }
 
     }

@@ -2,6 +2,7 @@ package com.example.themovies.screens.detail.people
 
 import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -12,12 +13,11 @@ import com.example.themovies.database.data.Like
 import com.example.themovies.databinding.FragmentDetailsPeopleBinding
 import com.example.themovies.notifications.NotificationService
 import com.example.themovies.screens.activities.Loading
-import com.example.themovies.screens.detail.movie.MovieDetailFragment
 import com.example.themovies.screens.settings.SettingsFragment
-import com.example.themovies.utils.SettingsUtils
 import com.like.LikeButton
 import com.like.OnLikeListener
 import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class PeopleDetailFragment : Fragment() {
@@ -35,6 +35,9 @@ class PeopleDetailFragment : Fragment() {
 
     private var id: Int? = null
     var loading: Loading? = null
+
+    @Inject
+    lateinit var sharedPreferences: SharedPreferences
     private lateinit var binding: FragmentDetailsPeopleBinding
     private val viewModel by viewModels<PeopleDetailsViewModel>()
 
@@ -66,8 +69,7 @@ class PeopleDetailFragment : Fragment() {
     }
 
     private fun showDetailsAboutMovie() {
-        val value = SettingsUtils.provideSharedPreferences(requireContext())
-            ?.getBoolean(SettingsFragment.NOTIFICATION_LIKE, false)
+        val value = sharedPreferences.getBoolean(SettingsFragment.NOTIFICATION_LIKE, false)
         val intent = Intent(requireContext(), NotificationService::class.java)
 
         initObservers(value, intent)
