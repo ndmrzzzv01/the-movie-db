@@ -33,4 +33,5 @@
     <string name="notification_about_likes">You like something!</string>
     <string name="message_about_your_likes">You like %1$s!</string>
     <string name="watch_now_tv_link">Watch now</string>
+    <string name="settings_change_theme">Do you want to change theme?</string>
 </resources>

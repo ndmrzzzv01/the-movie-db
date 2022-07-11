@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.fragment.app.Fragment
 import androidx.work.ExistingWorkPolicy
 import androidx.work.OneTimeWorkRequest
@@ -19,6 +20,7 @@ import javax.inject.Inject
 class SettingsFragment : Fragment() {
 
     companion object {
+        const val CHANGE_THEME = "change_theme"
         const val NOTIFICATION_LIKE = "notification_like"
         const val NOTIFICATION_UPDATE = "notification_update"
         const val NOTIFICATION_CHANNEL_ID = "movie_id"
@@ -40,8 +42,35 @@ class SettingsFragment : Fragment() {
 
         notificationSettingsWithLikes()
         notificationSettingsWithUpdateList()
+        changeTheme()
 
         return binding.root
+    }
+
+    private fun changeTheme() {
+        binding.apply {
+            val editor = sharedPreferences.edit()
+
+            swChangeTheme.setOnCheckedChangeListener { _, isChecked ->
+                if (isChecked) {
+                    editor?.putBoolean(CHANGE_THEME, true)
+                    editor?.commit()
+                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+                } else {
+                    editor?.putBoolean(CHANGE_THEME, false)
+                    editor?.commit()
+                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+                }
+            }
+
+            if (requireContext().resources.configuration.isNightModeActive) {
+                swChangeTheme.isChecked = sharedPreferences.getBoolean(CHANGE_THEME, true)
+            } else {
+                swChangeTheme.isChecked = sharedPreferences.getBoolean(CHANGE_THEME, false)
+            }
+
+
+        }
     }
 
     private fun notificationSettingsWithLikes() {
