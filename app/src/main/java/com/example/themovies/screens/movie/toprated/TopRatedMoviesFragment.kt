@@ -6,20 +6,20 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
-import com.example.themovies.network.data.Movie
 import com.example.themovies.databinding.FragmentMainBinding
+import com.example.themovies.network.data.Movie
 import com.example.themovies.screens.likes.data.LikesAdapter
+import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
-class TopRatedMoviesFragment : Fragment(), TopRatedMoviesContract.TopRatedMoviesView {
+@AndroidEntryPoint
+class TopRatedMoviesFragment @Inject constructor() : Fragment(),
+    TopRatedMoviesContract.TopRatedMoviesView {
 
     private lateinit var binding: FragmentMainBinding
-    private var presenter: TopRatedMoviesContract.TopRatedMoviesPresenter? = null
+    @Inject
+    lateinit var presenter: TopRatedMoviesContract.TopRatedMoviesPresenter
     private var adapter = LikesAdapter(mutableListOf(), null)
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        presenter = TopRatedMoviesPresenter(this)
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -36,12 +36,12 @@ class TopRatedMoviesFragment : Fragment(), TopRatedMoviesContract.TopRatedMovies
 
     override fun onStart() {
         super.onStart()
-        presenter?.loadTopRatedMovies()
+        presenter.loadTopRatedMovies()
     }
 
     override fun onStop() {
         super.onStop()
-        presenter?.cancel()
+        presenter.cancel()
     }
 
     override fun displayListOfTopRatedMovies(list: List<Movie>) {

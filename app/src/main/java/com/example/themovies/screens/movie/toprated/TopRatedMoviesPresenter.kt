@@ -2,15 +2,16 @@ package com.example.themovies.screens.movie.toprated
 
 import com.example.themovies.api.MovieApi
 import com.example.themovies.network.responses.MovieResponse
-import com.example.themovies.utils.NetworkUtils
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.observers.DisposableObserver
 import io.reactivex.schedulers.Schedulers
 import timber.log.Timber
+import javax.inject.Inject
 
-class TopRatedMoviesPresenter(
-    private val view: TopRatedMoviesContract.TopRatedMoviesView
+class TopRatedMoviesPresenter @Inject constructor(
+    val view: TopRatedMoviesContract.TopRatedMoviesView,
+    val movieApi: MovieApi
 ) : TopRatedMoviesContract.TopRatedMoviesPresenter {
 
     override fun loadTopRatedMovies() {
@@ -18,8 +19,7 @@ class TopRatedMoviesPresenter(
     }
 
     private fun getObservable(): Observable<MovieResponse>? {
-        return NetworkUtils.createRetrofit().create(MovieApi::class.java)
-            .getTopRatedMovie()?.subscribeOn(Schedulers.io())
+        return movieApi.getTopRatedMovie()?.subscribeOn(Schedulers.io())
             ?.observeOn(AndroidSchedulers.mainThread())
     }
 
