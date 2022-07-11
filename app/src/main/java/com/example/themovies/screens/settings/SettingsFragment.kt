@@ -20,6 +20,7 @@ import javax.inject.Inject
 class SettingsFragment : Fragment() {
 
     companion object {
+        const val SYSTEM_SETTINGS = "system_settings"
         const val CHANGE_THEME = "change_theme"
         const val NOTIFICATION_LIKE = "notification_like"
         const val NOTIFICATION_UPDATE = "notification_update"
@@ -42,9 +43,30 @@ class SettingsFragment : Fragment() {
 
         notificationSettingsWithLikes()
         notificationSettingsWithUpdateList()
+        getThemeFromSystem()
         changeTheme()
 
         return binding.root
+    }
+
+    private fun getThemeFromSystem() {
+        binding.apply {
+            val editor = sharedPreferences.edit()
+
+            swSystemSettings.setOnCheckedChangeListener { _, isChecked ->
+                if (isChecked) {
+                    editor?.putBoolean(SYSTEM_SETTINGS, true)
+                    editor?.commit()
+                    swChangeTheme.isEnabled = false
+                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM)
+                } else {
+                    editor?.putBoolean(SYSTEM_SETTINGS, false)
+                    editor?.commit()
+                    swChangeTheme.isEnabled = true
+                }
+            }
+            swSystemSettings.isChecked = sharedPreferences.getBoolean(SYSTEM_SETTINGS, false)
+        }
     }
 
     private fun changeTheme() {
@@ -63,12 +85,7 @@ class SettingsFragment : Fragment() {
                 }
             }
 
-            if (requireContext().resources.configuration.isNightModeActive) {
-                swChangeTheme.isChecked = sharedPreferences.getBoolean(CHANGE_THEME, true)
-            } else {
-                swChangeTheme.isChecked = sharedPreferences.getBoolean(CHANGE_THEME, false)
-            }
-
+            swChangeTheme.isChecked = sharedPreferences.getBoolean(CHANGE_THEME, false)
 
         }
     }
