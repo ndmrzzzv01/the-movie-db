@@ -14,16 +14,19 @@ import com.example.themovies.databinding.FragmentMainBinding
 import com.example.themovies.network.data.Record
 import com.example.themovies.network.data.RecordClick
 import com.example.themovies.paging.ListLoadStateAdapter
-import com.example.themovies.screens.activities.Loading
-import com.example.themovies.utils.NetworkUtils
 import com.example.themovies.screens.RecordAdapter
+import com.example.themovies.screens.activities.Loading
+import com.example.themovies.utils.ConnectivityTracker
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class TvFragment : Fragment() {
 
+    @Inject
+    lateinit var connectivityTracker: ConnectivityTracker
     var recordClick: RecordClick? = null
     var loading: Loading? = null
     private lateinit var binding: FragmentMainBinding
@@ -46,13 +49,13 @@ class TvFragment : Fragment() {
         binding = FragmentMainBinding.inflate(inflater, container, false)
 
         binding.apply {
-            if (!NetworkUtils.isNetworkConnected(requireContext())) {
+            if (!connectivityTracker.isNetworkConnected(requireContext())) {
                 rvMovies.visibility = View.INVISIBLE
                 tvError.visibility = View.VISIBLE
                 btnRetry.apply {
                     visibility = View.VISIBLE
                     setOnClickListener {
-                        if (NetworkUtils.isNetworkConnected(requireContext())) {
+                        if (connectivityTracker.isNetworkConnected(requireContext())) {
                             visibility = View.INVISIBLE
                             tvError.visibility = View.INVISIBLE
                             downloadData()

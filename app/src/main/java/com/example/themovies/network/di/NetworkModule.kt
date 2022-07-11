@@ -5,6 +5,7 @@ import com.example.themovies.api.MovieApi
 import com.example.themovies.api.PeopleApi
 import com.example.themovies.api.TvApi
 import com.example.themovies.network.interceptor.ApiKeyInterceptor
+import com.example.themovies.utils.ConnectivityTracker
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -53,6 +54,10 @@ object NetworkModule {
         return retrofit.create(PeopleApi::class.java)
     }
 
+    @Provides
+    fun provideConnectivityTracker(): ConnectivityTracker {
+        return ConnectivityTracker()
+    }
 }
 
 

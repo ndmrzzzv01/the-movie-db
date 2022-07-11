@@ -11,9 +11,11 @@ import androidx.work.OneTimeWorkRequest
 import androidx.work.WorkManager
 import com.example.themovies.databinding.FragmentSettingsBinding
 import com.example.themovies.notifications.ScheduledNotificationWorker
+import dagger.hilt.android.AndroidEntryPoint
 import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 
+@AndroidEntryPoint
 class SettingsFragment : Fragment() {
 
     companion object {
