@@ -17,7 +17,6 @@ import com.example.themovies.screens.detail.people.PeopleDetailFragment
 import com.example.themovies.screens.detail.tv.TvDetailFragment
 import com.example.themovies.screens.likes.LikesFragment
 import com.example.themovies.screens.movie.popular.MovieFragment
-import com.example.themovies.screens.movie.toprated.TopRatedMoviesFragment
 import com.example.themovies.screens.people.PeopleFragment
 import com.example.themovies.screens.settings.SettingsFragment
 import com.example.themovies.screens.tv.TvFragment
@@ -133,10 +132,10 @@ class NavigationActivity : AppCompatActivity(),
                             supportActionBar?.title = "Settings"
                             SettingsFragment()
                         }
-                        R.id.topRatedMovie -> {
-                            supportActionBar?.title = "Top Rated Movies"
-                            TopRatedMoviesFragment()
-                        }
+//                        R.id.topRatedMovie -> {
+//                            supportActionBar?.title = "Top Rated Movies"
+//                            TopRatedMoviesFragment()
+//                        }
                         else -> return@OnNavigationItemSelectedListener true
                     }
                     supportFragmentManager

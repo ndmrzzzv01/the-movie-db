@@ -35,6 +35,7 @@
                 android:layout_alignTop="@id/imagePeople"
                 android:layout_marginStart="16dp"
                 android:layout_toEndOf="@id/imagePeople"
+                android:fontFamily="sans-serif-medium"
                 android:text="@{viewModel.people.name}"
                 android:textColor="@color/text_color"
                 android:textSize="20sp"
@@ -84,28 +85,43 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/tvPlaceBirthPeople"
+                android:layout_alignParentEnd="true"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="16dp"
                 android:layout_marginEnd="16dp"
-                android:layout_alignParentEnd="true"
-                app:isLikedButton="@{viewModel.isLiked()}"
                 android:layout_toEndOf="@id/imagePeople"
                 app:anim_scale_factor="2"
                 app:icon_size="40dp"
                 app:icon_type="heart"
+                app:isLikedButton="@{viewModel.isLiked()}"
                 app:like_drawable="@drawable/ic_heart_red"
                 app:unlike_drawable="@drawable/ic_heart" />
+
+            <View
+                android:id="@+id/divider"
+                style="@style/Divider"
+                android:layout_below="@id/imagePeople"
+                android:layout_marginTop="8dp" />
 
             <TextView
                 android:id="@+id/tvDescriptionPeople"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/imagePeople"
-                android:layout_margin="16dp"
+                android:layout_below="@id/divider"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginBottom="8dp"
                 android:text="@{viewModel.people.biography}"
                 android:textColor="@color/text_color"
                 android:textSize="17sp"
                 tools:text="desc" />
+
+            <View
+                android:id="@+id/divider1"
+                style="@style/Divider"
+                android:layout_below="@id/tvDescriptionPeople"
+                android:layout_marginBottom="8dp" />
 
         </RelativeLayout>
 

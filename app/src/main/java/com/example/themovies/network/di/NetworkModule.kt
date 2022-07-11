@@ -5,15 +5,10 @@ import com.example.themovies.api.MovieApi
 import com.example.themovies.api.PeopleApi
 import com.example.themovies.api.TvApi
 import com.example.themovies.network.interceptor.ApiKeyInterceptor
-import com.example.themovies.screens.movie.toprated.TopRatedMoviesContract
-import com.example.themovies.screens.movie.toprated.TopRatedMoviesFragment
-import com.example.themovies.screens.movie.toprated.TopRatedMoviesPresenter
 import com.example.themovies.utils.ConnectivityTracker
-import dagger.Binds
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
-import dagger.hilt.android.components.FragmentComponent
 import dagger.hilt.android.components.ViewModelComponent
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
@@ -64,25 +59,25 @@ object NetworkModule {
         return ConnectivityTracker()
     }
 
-    @Provides
-    fun provideView(
-        view: TopRatedMoviesContract.TopRatedMoviesView,
-        movieApi: MovieApi
-    ): TopRatedMoviesPresenter {
-        return TopRatedMoviesPresenter(view, movieApi)
-    }
+//    @Provides
+//    fun provideView(
+//        view: TopRatedMoviesContract.TopRatedMoviesView,
+//        movieApi: MovieApi
+//    ): TopRatedMoviesPresenter {
+//        return TopRatedMoviesPresenter(view, movieApi)
+//    }
 }
 
-@Module
-@InstallIn(FragmentComponent::class)
-abstract class TopRatedMovieModule {
-
-    @Binds
-    abstract fun bindView(view: TopRatedMoviesFragment): TopRatedMoviesContract.TopRatedMoviesView
-
-    @Binds
-    abstract fun bindPresenter(presenter: TopRatedMoviesPresenter): TopRatedMoviesContract.TopRatedMoviesPresenter
-}
+//@Module
+//@InstallIn(FragmentComponent::class)
+//abstract class TopRatedMovieModule {
+//
+//    @Binds
+//    abstract fun bindView(view: TopRatedMoviesFragment): TopRatedMoviesContract.TopRatedMoviesView
+//
+//    @Binds
+//    abstract fun bindPresenter(presenter: TopRatedMoviesPresenter): TopRatedMoviesContract.TopRatedMoviesPresenter
+//}
 
 
 
