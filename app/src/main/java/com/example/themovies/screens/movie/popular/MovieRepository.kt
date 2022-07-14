@@ -1,6 +1,5 @@
 package com.example.themovies.screens.movie.popular
 
-import com.example.themovies.api.ConfigurationApi
 import com.example.themovies.api.MovieApi
 import com.example.themovies.network.data.Movie
 import com.example.themovies.network.repositories.ConfigurationRepository
@@ -13,7 +12,7 @@ import javax.inject.Inject
 @ViewModelScoped
 class MovieRepository @Inject constructor(
     private val movieApi: MovieApi,
-    private val configurationApi: ConfigurationApi
+    private val configurationRepository: ConfigurationRepository
 ) {
 
     suspend fun getMovies(page: Int = 1): List<Movie> = withContext(Dispatchers.IO) {
@@ -35,8 +34,8 @@ class MovieRepository @Inject constructor(
     }
 
     private suspend fun checkConfiguration() {
-        if (!ConfigurationRepository.isConfigurationDownloaded()) {
-            ConfigurationRepository.downloadConfiguration(configurationApi)
+        if (!configurationRepository.isConfigurationDownloaded()) {
+            configurationRepository.downloadConfiguration()
         }
     }
 

@@ -1,6 +1,5 @@
 package com.example.themovies.screens.likes.repositories
 
-import com.example.themovies.api.ConfigurationApi
 import com.example.themovies.api.MovieApi
 import com.example.themovies.api.PeopleApi
 import com.example.themovies.api.TvApi
@@ -18,7 +17,7 @@ class LikesTypeRepositoryNetwork @Inject constructor(
     private val movieApi: MovieApi,
     private val tvApi: TvApi,
     private val peopleApi: PeopleApi,
-    private val configurationApi: ConfigurationApi
+    private val configurationRepository: ConfigurationRepository
 ) {
 
     suspend fun getMovie(movieId: Int?): Movie? = withContext(Dispatchers.IO) {
@@ -37,8 +36,8 @@ class LikesTypeRepositoryNetwork @Inject constructor(
     }
 
     private suspend fun checkConfiguration() {
-        if (!ConfigurationRepository.isConfigurationDownloaded()) {
-            ConfigurationRepository.downloadConfiguration(configurationApi)
+        if (!configurationRepository.isConfigurationDownloaded()) {
+            configurationRepository.downloadConfiguration()
         }
     }
 

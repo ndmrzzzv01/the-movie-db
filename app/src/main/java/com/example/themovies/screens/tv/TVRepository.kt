@@ -1,6 +1,5 @@
 package com.example.themovies.screens.tv
 
-import com.example.themovies.api.ConfigurationApi
 import com.example.themovies.api.TvApi
 import com.example.themovies.network.data.TV
 import com.example.themovies.network.repositories.ConfigurationRepository
@@ -13,8 +12,8 @@ import javax.inject.Inject
 
 @ViewModelScoped
 class TVRepository @Inject constructor(
-    private val configurationApi: ConfigurationApi,
-    private val tvApi: TvApi
+    private val tvApi: TvApi,
+    private val configurationRepository: ConfigurationRepository
 ) {
 
     suspend fun getPopularTV(page: Int = 1): List<TV> = withContext(Dispatchers.IO) {
@@ -36,8 +35,8 @@ class TVRepository @Inject constructor(
     }
 
     private suspend fun checkConfiguration() {
-        if (!ConfigurationRepository.isConfigurationDownloaded()) {
-            ConfigurationRepository.downloadConfiguration(configurationApi)
+        if (!configurationRepository.isConfigurationDownloaded()) {
+            configurationRepository.downloadConfiguration()
         }
     }
 }
