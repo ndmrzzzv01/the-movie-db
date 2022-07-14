@@ -7,6 +7,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.navArgs
@@ -70,6 +71,9 @@ class TvDetailFragment : Fragment() {
         viewModel.tv.observe(viewLifecycleOwner) { tv ->
             binding.apply {
                 loading?.hideLoading()
+
+                (requireActivity() as AppCompatActivity).supportActionBar?.title = tv?.name
+
                 btnLike.setOnLikeListener(object : OnLikeListener {
                     override fun liked(likeButton: LikeButton?) {
                         viewModel?.insertRecord(Like(idRecord = tv?.id ?: 0, type = 1))

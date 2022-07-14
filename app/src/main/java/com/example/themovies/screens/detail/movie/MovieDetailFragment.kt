@@ -7,6 +7,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.navArgs
@@ -52,11 +53,14 @@ class MovieDetailFragment : Fragment() {
         val value = sharedPreferences.getBoolean(SettingsFragment.NOTIFICATION_LIKE, false)
         val intent = Intent(requireContext(), NotificationService::class.java)
 
+
+
         initObservers(value, intent)
 
         binding.viewModel = viewModel
         binding.lifecycleOwner = this
         viewModel.getMovie(id.idMovie)
+        viewModel.getCollectionMovie(id.idMovie)
         viewModel.isLiked(id.idMovie)
     }
 
@@ -64,6 +68,8 @@ class MovieDetailFragment : Fragment() {
         viewModel.movie.observe(viewLifecycleOwner) { movie ->
             binding.apply {
                 loading?.hideLoading()
+
+                (requireActivity() as AppCompatActivity).supportActionBar?.title = movie.title
 
                 btnLike.setOnLikeListener(object : OnLikeListener {
                     override fun liked(likeButton: LikeButton?) {

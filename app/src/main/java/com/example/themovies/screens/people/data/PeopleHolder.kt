@@ -1,7 +1,5 @@
 package com.example.themovies.screens.people.data
 
-import android.graphics.Color
-import android.graphics.drawable.ColorDrawable
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
@@ -15,17 +13,16 @@ class PeopleHolder(var binding: ListItemBinding) : RecyclerView.ViewHolder(bindi
 
     fun bind(people: People) {
         binding.tvTitle.text = people.name
-        if (people.profilePath != null) {
-            Glide
-                .with(itemView.context)
-                .load("${ConfigurationRepository.URL}${ConfigurationRepository.sizeOfPoster}${people.profilePath}")
-                .apply(
-                    RequestOptions().placeholder(R.drawable.funnyunicorn)
-                        .error(R.drawable.sadunicorn).centerCrop()
-                )
-                .transition(DrawableTransitionOptions.withCrossFade())
-                .into(binding.image)
-        }
+        Glide
+            .with(itemView.context)
+            .load("${ConfigurationRepository.URL}${ConfigurationRepository.sizeOfPoster}${people.profilePath}")
+            .apply(
+                RequestOptions().placeholder(R.drawable.funnyunicorn)
+                    .error(R.drawable.sadunicorn).centerCrop()
+            )
+            .transition(DrawableTransitionOptions.withCrossFade())
+            .into(binding.image)
+
     }
 
 }

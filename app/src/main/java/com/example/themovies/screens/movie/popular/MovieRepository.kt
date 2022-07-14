@@ -29,6 +29,11 @@ class MovieRepository @Inject constructor(
         movieApi.getMovie(movieId)
     }
 
+    suspend fun getCollectionMovie(movieId: Int?): Movie? = withContext(Dispatchers.IO) {
+        checkConfiguration()
+        movieApi.getCollectionMovie(movieId)?.collection
+    }
+
     private suspend fun checkConfiguration() {
         if (!ConfigurationRepository.isConfigurationDownloaded()) {
             ConfigurationRepository.downloadConfiguration(configurationApi)

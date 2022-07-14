@@ -7,6 +7,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.navArgs
@@ -67,6 +68,9 @@ class PeopleDetailFragment : Fragment() {
     private fun initObservers(value: Boolean?, intent: Intent) {
         viewModel.people.observe(viewLifecycleOwner) { people ->
             loading?.hideLoading()
+
+            (requireActivity() as AppCompatActivity).supportActionBar?.title = people.name
+
             binding.btnLike.setOnLikeListener(object : OnLikeListener {
                 override fun liked(likeButton: LikeButton?) {
                     viewModel.insertRecord(Like(idRecord = people.id, type = 2))
