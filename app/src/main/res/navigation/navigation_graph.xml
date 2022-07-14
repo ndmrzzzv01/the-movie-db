@@ -3,12 +3,12 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/navigation_graph"
-    app:startDestination="@id/movieFragment">
+    app:startDestination="@id/popular_movie">
 
     <fragment
-        android:id="@+id/movieFragment"
+        android:id="@+id/popular_movie"
         android:name="com.example.themovies.screens.movie.popular.MovieFragment"
-        android:label="Blank"
+        android:label="Popular Movie"
         tools:layout="@layout/fragment_main">
         <action
             android:id="@+id/action_mainFragment_to_detailsFragment"
@@ -18,23 +18,22 @@
     <fragment
         android:id="@+id/detailsMovieFragment"
         android:name="com.example.themovies.screens.detail.movie.MovieDetailFragment"
-        android:label="Blank"
-        tools:layout="@layout/fragment_details_movie" />
-    <action
-        android:id="@+id/action_global_movieFragment2"
-        app:destination="@id/movieFragment" />
+        tools:layout="@layout/fragment_details_movie">
+        <argument
+            android:name="idMovie"
+            app:argType="integer" />
+    </fragment>
 
     <fragment
-        android:id="@+id/topRatedMovie"
+        android:id="@+id/top_rated_movie"
         android:name="com.example.themovies.screens.movie.toprated.TopRatedMoviesFragment"
+        android:label="Top Rated Movie"
         tools:layout="@layout/fragment_main" />
-    <action
-        android:id="@+id/action_global_topRatedMovie"
-        app:destination="@id/topRatedMovie" />
 
     <fragment
-        android:id="@+id/tvFragment"
+        android:id="@+id/popular_tv"
         android:name="com.example.themovies.screens.tv.TvFragment"
+        android:label="Popular TV"
         tools:layout="@layout/fragment_main">
 
         <action
@@ -45,14 +44,16 @@
     <fragment
         android:id="@+id/detailsTvFragment"
         android:name="com.example.themovies.screens.detail.tv.TvDetailFragment"
-        tools:layout="@layout/fragment_detail_tv" />
-    <action
-        android:id="@+id/action_global_tvFragment"
-        app:destination="@id/tvFragment" />
+        tools:layout="@layout/fragment_detail_tv">
+        <argument
+            android:name="idTv"
+            app:argType="integer" />
+    </fragment>
 
     <fragment
-        android:id="@+id/peopleFragment"
+        android:id="@+id/popular_people"
         android:name="com.example.themovies.screens.people.PeopleFragment"
+        android:label="Popular People"
         tools:layout="@layout/fragment_main">
         <action
             android:id="@+id/action_peopleFragment_to_detailsPeopleFragment"
@@ -62,22 +63,23 @@
     <fragment
         android:id="@+id/detailsPeopleFragment"
         android:name="com.example.themovies.screens.detail.people.PeopleDetailFragment"
-        tools:layout="@layout/fragment_details_people" />
-
-    <action
-        android:id="@+id/action_global_peopleFragment"
-        app:destination="@id/peopleFragment" />
+        tools:layout="@layout/fragment_details_people">
+        <argument
+            android:name="idPeople"
+            app:argType="integer" />
+    </fragment>
 
     <fragment
-        android:id="@+id/likesFragment"
+        android:id="@+id/likes"
         android:name="com.example.themovies.screens.likes.LikesFragment"
+        android:label="Your likes"
         tools:layout="@layout/fragment_main" />
-    <action
-        android:id="@+id/action_global_likesFragment"
-        app:destination="@id/likesFragment" />
 
-    <fragment android:id="@+id/settingsFragment"
+    <fragment
+        android:id="@+id/settings"
         android:name="com.example.themovies.screens.settings.SettingsFragment"
-        tools:layout="@layout/fragment_settings"/><action android:id="@+id/action_global_settingsFragment" app:destination="@id/settingsFragment"/>
+        android:label="Settings"
+        tools:layout="@layout/fragment_settings" />
+
 
 </navigation>

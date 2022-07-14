@@ -57,7 +57,7 @@ class TestsWithEspresso {
         onView(withId(R.id.drawerLayout)).check(matches(isClosed(Gravity.LEFT)))
             .perform(DrawerActions.open())
         onView(isRoot()).perform(waitFor(1000))
-        onView(withId(R.id.navigationView)).perform(NavigationViewActions.navigateTo(R.id.topRatedMovie))
+        onView(withId(R.id.navigationView)).perform(NavigationViewActions.navigateTo(R.id.top_rated_movie))
     }
 
     private fun waitFor(delay: Long): ViewAction {

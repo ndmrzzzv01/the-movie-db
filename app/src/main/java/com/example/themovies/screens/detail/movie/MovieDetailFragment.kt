@@ -9,9 +9,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.navArgs
 import com.example.themovies.database.data.Like
 import com.example.themovies.databinding.FragmentDetailsMovieBinding
-import com.example.themovies.di.CommonModule.provideSharedPreferences
 import com.example.themovies.notifications.NotificationService
 import com.example.themovies.screens.activities.Loading
 import com.example.themovies.screens.settings.SettingsFragment
@@ -23,31 +23,17 @@ import javax.inject.Inject
 @AndroidEntryPoint
 class MovieDetailFragment : Fragment() {
 
-    companion object {
-        private const val MOVIE_ID = "movie_id"
-        fun newInstance(id: Int): MovieDetailFragment {
-            val fragment = MovieDetailFragment()
-            fragment.arguments = Bundle().apply {
-                putInt(MOVIE_ID, id)
-            }
-            return fragment
-        }
-    }
-
-    private var id: Int? = null
     var loading: Loading? = null
-    @Inject lateinit var sharedPreferences: SharedPreferences
+
+    @Inject
+    lateinit var sharedPreferences: SharedPreferences
     private lateinit var binding: FragmentDetailsMovieBinding
     private val viewModel by viewModels<MovieDetailsViewModel>()
+    private val id by navArgs<MovieDetailFragmentArgs>()
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
         loading = context as Loading
-    }
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        id = arguments?.getInt(MOVIE_ID)
     }
 
     override fun onCreateView(
@@ -70,8 +56,8 @@ class MovieDetailFragment : Fragment() {
 
         binding.viewModel = viewModel
         binding.lifecycleOwner = this
-        viewModel.getMovie(id ?: 0)
-        viewModel.isLiked(id ?: 0)
+        viewModel.getMovie(id.idMovie)
+        viewModel.isLiked(id.idMovie)
     }
 
     private fun initObservers(value: Boolean?, intent: Intent) {

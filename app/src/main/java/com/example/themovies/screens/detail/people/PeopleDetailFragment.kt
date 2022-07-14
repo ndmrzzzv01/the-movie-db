@@ -9,6 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.navArgs
 import com.example.themovies.database.data.Like
 import com.example.themovies.databinding.FragmentDetailsPeopleBinding
 import com.example.themovies.notifications.NotificationService
@@ -22,33 +23,16 @@ import javax.inject.Inject
 @AndroidEntryPoint
 class PeopleDetailFragment : Fragment() {
 
-    companion object {
-        private const val PEOPLE_ID = "people_id"
-        fun newInstance(id: Int): PeopleDetailFragment {
-            val fragment = PeopleDetailFragment()
-            fragment.arguments = Bundle().apply {
-                putInt(PEOPLE_ID, id)
-            }
-            return fragment
-        }
-    }
-
-    private var id: Int? = null
     var loading: Loading? = null
-
     @Inject
     lateinit var sharedPreferences: SharedPreferences
     private lateinit var binding: FragmentDetailsPeopleBinding
     private val viewModel by viewModels<PeopleDetailsViewModel>()
+    private val id by navArgs<PeopleDetailFragmentArgs>()
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
         loading = context as Loading
-    }
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        id = arguments?.getInt(PEOPLE_ID)
     }
 
     override fun onCreateView(
@@ -76,8 +60,8 @@ class PeopleDetailFragment : Fragment() {
 
         binding.viewModel = viewModel
         binding.lifecycleOwner = this
-        viewModel.getPeople(id ?: 0)
-        viewModel.isLiked(id ?: 0)
+        viewModel.getPeople(id.idPeople)
+        viewModel.isLiked(id.idPeople)
     }
 
     private fun initObservers(value: Boolean?, intent: Intent) {

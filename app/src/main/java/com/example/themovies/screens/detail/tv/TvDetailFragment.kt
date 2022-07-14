@@ -9,6 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.themovies.database.data.Like
 import com.example.themovies.databinding.FragmentDetailTvBinding
@@ -24,33 +25,16 @@ import javax.inject.Inject
 @AndroidEntryPoint
 class TvDetailFragment : Fragment() {
 
-    companion object {
-        private const val TV_ID = "tv_id"
-        fun newInstance(id: Int): TvDetailFragment {
-            val fragment = TvDetailFragment()
-            fragment.arguments = Bundle().apply {
-                putInt(TV_ID, id)
-            }
-            return fragment
-        }
-    }
-
-    private var id: Int? = null
     var loading: Loading? = null
-
     @Inject
     lateinit var sharedPreferences: SharedPreferences
     private lateinit var binding: FragmentDetailTvBinding
     private val viewModel by viewModels<TvDetailsViewModel>()
+    private val id by navArgs<TvDetailFragmentArgs>()
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
         loading = context as Loading
-    }
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        id = arguments?.getInt(TV_ID)
     }
 
     override fun onCreateView(
@@ -78,8 +62,8 @@ class TvDetailFragment : Fragment() {
 
         binding.viewModel = viewModel
         binding.lifecycleOwner = this
-        viewModel.getTv(id ?: 0)
-        viewModel.isLiked(id ?: 0)
+        viewModel.getTv(id.idTv)
+        viewModel.isLiked(id.idTv)
     }
 
     private fun initObservers(value: Boolean?, intent: Intent) {
