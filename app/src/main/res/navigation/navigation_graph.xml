@@ -67,13 +67,16 @@
         <argument
             android:name="idPeople"
             app:argType="integer" />
+        <argument
+            android:name="customParameters"
+            app:argType="com.example.themovies.screens.people.PeopleFragment$CustomParameters" />
     </fragment>
 
     <fragment
         android:id="@+id/likes"
         android:name="com.example.themovies.screens.likes.LikesFragment"
         android:label="Your likes"
-        tools:layout="@layout/fragment_main" />
+        tools:layout="@layout/fragment_main"></fragment>
 
     <fragment
         android:id="@+id/settings"

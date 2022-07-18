@@ -12,118 +12,173 @@
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content">
 
-        <RelativeLayout
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="wrap_content">
 
             <ImageView
                 android:id="@+id/imagePeople"
-                android:layout_width="180dp"
-                android:layout_height="280dp"
-                android:layout_alignParentStart="true"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
                 android:layout_marginStart="8dp"
-                android:layout_marginTop="16dp"
-                app:loadImage="@{viewModel.people.profilePath}"
+                android:layout_marginTop="8dp"
+                app:layout_constraintDimensionRatio="2:3"
+                app:layout_constraintEnd_toStartOf="@+id/guideline2"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:loadImage="@{viewModel.person.profilePath}"
                 tools:srcCompat="@tools:sample/avatars" />
 
             <TextView
                 android:id="@+id/tvNamePeople"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_alignTop="@id/imagePeople"
-                android:layout_marginStart="16dp"
-                android:layout_toEndOf="@id/imagePeople"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
                 android:fontFamily="sans-serif-medium"
-                android:text="@{viewModel.people.name}"
+                android:text="@{viewModel.person.name}"
+                android:textAlignment="center"
                 android:textColor="@color/text_color"
                 android:textSize="20sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/imagePeople"
+                app:layout_constraintTop_toTopOf="@+id/imagePeople"
                 tools:text="name" />
+
+            <View
+                android:id="@+id/divider"
+                style="@style/Divider"
+                android:layout_width="0dp"
+                android:layout_marginTop="8dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/imagePeople"
+                app:layout_constraintTop_toBottomOf="@+id/tvNamePeople" />
 
             <TextView
                 android:id="@+id/tvDepartPeople"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/tvNamePeople"
-                android:layout_marginStart="16dp"
+                android:layout_marginStart="8dp"
                 android:layout_marginTop="16dp"
-                android:layout_toEndOf="@id/imagePeople"
-                android:text="@{viewModel.people.knownForDepartment}"
+                android:layout_marginEnd="8dp"
+                android:text="@{viewModel.person.knownForDepartment}"
+                android:textAlignment="center"
                 android:textColor="@color/text_color"
                 android:textSize="17sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/imagePeople"
+                app:layout_constraintTop_toBottomOf="@+id/divider"
                 tools:text="depart" />
 
             <TextView
                 android:id="@+id/tvDateBirthPeople"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/tvDepartPeople"
-                android:layout_marginStart="16dp"
+                android:layout_marginStart="8dp"
                 android:layout_marginTop="16dp"
-                android:layout_toEndOf="@id/imagePeople"
-                android:text="@{viewModel.people.birthday}"
+                android:layout_marginEnd="8dp"
+                android:text="@{viewModel.person.birthday}"
+                android:textAlignment="center"
                 android:textColor="@color/text_color"
                 android:textSize="17sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/imagePeople"
+                app:layout_constraintTop_toBottomOf="@+id/tvDepartPeople"
                 tools:text="date" />
 
             <TextView
                 android:id="@+id/tvPlaceBirthPeople"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/tvDateBirthPeople"
-                android:layout_marginStart="16dp"
+                android:layout_marginStart="8dp"
                 android:layout_marginTop="16dp"
-                android:layout_toEndOf="@id/imagePeople"
-                android:text="@{viewModel.people.placeOfBirth}"
+                android:layout_marginEnd="8dp"
+                android:text="@{viewModel.person.placeOfBirth}"
+                android:textAlignment="center"
                 android:textColor="@color/text_color"
                 android:textSize="17sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/imagePeople"
+                app:layout_constraintTop_toBottomOf="@+id/tvDateBirthPeople"
                 tools:text="place" />
+
+            <View
+                android:id="@+id/divider1"
+                style="@style/Divider"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/imagePeople" />
 
             <com.like.LikeButton
                 android:id="@+id/btnLike"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/tvPlaceBirthPeople"
-                android:layout_alignParentEnd="true"
-                android:layout_marginStart="16dp"
+                android:layout_marginStart="8dp"
                 android:layout_marginTop="16dp"
-                android:layout_marginEnd="16dp"
-                android:layout_toEndOf="@id/imagePeople"
                 app:anim_scale_factor="2"
                 app:icon_size="40dp"
                 app:icon_type="heart"
                 app:isLikedButton="@{viewModel.isLiked()}"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/imagePeople"
+                app:layout_constraintTop_toBottomOf="@+id/tvPlaceBirthPeople"
                 app:like_drawable="@drawable/ic_heart_red"
                 app:unlike_drawable="@drawable/ic_heart" />
-
-            <View
-                android:id="@+id/divider"
-                style="@style/Divider"
-                android:layout_below="@id/imagePeople"
-                android:layout_marginTop="8dp" />
 
             <TextView
                 android:id="@+id/tvDescriptionPeople"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/divider"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="16dp"
                 android:layout_marginBottom="8dp"
-                android:text="@{viewModel.people.biography}"
+                android:text="@{viewModel.person.biography}"
                 android:textColor="@color/text_color"
                 android:textSize="17sp"
+                app:hideText="@{viewModel.person.biography}"
+                app:layout_constraintBottom_toTopOf="@id/divider2"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/divider1"
                 tools:text="desc" />
 
             <View
-                android:id="@+id/divider1"
+                android:id="@+id/divider2"
                 style="@style/Divider"
-                android:layout_below="@id/tvDescriptionPeople"
-                android:layout_marginBottom="8dp" />
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginBottom="8dp"
+                app:layout_constraintBottom_toTopOf="@id/rvKnownForPerson"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tvDescriptionPeople" />
 
-        </RelativeLayout>
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvKnownForPerson"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/divider2"
+                tools:listitem="@layout/item_people" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="0.5" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
     </ScrollView>
 

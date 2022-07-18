@@ -11,10 +11,12 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.navArgs
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.themovies.database.data.Like
 import com.example.themovies.databinding.FragmentDetailsPeopleBinding
 import com.example.themovies.notifications.NotificationService
 import com.example.themovies.screens.activities.Loading
+import com.example.themovies.screens.detail.people.data.KnownForAdapter
 import com.example.themovies.screens.settings.SettingsFragment
 import com.like.LikeButton
 import com.like.OnLikeListener
@@ -25,11 +27,13 @@ import javax.inject.Inject
 class PeopleDetailFragment : Fragment() {
 
     var loading: Loading? = null
+
     @Inject
     lateinit var sharedPreferences: SharedPreferences
     private lateinit var binding: FragmentDetailsPeopleBinding
+    private var adapter = KnownForAdapter(listOf())
     private val viewModel by viewModels<PeopleDetailsViewModel>()
-    private val id by navArgs<PeopleDetailFragmentArgs>()
+    private val args by navArgs<PeopleDetailFragmentArgs>()
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -61,12 +65,13 @@ class PeopleDetailFragment : Fragment() {
 
         binding.viewModel = viewModel
         binding.lifecycleOwner = this
-        viewModel.getPeople(id.idPeople)
-        viewModel.isLiked(id.idPeople)
+        viewModel.getMovieForKnownPerson(args.customParameters)
+        viewModel.getPeople(args.idPeople)
+        viewModel.isLiked(args.idPeople)
     }
 
     private fun initObservers(value: Boolean?, intent: Intent) {
-        viewModel.people.observe(viewLifecycleOwner) { people ->
+        viewModel.person.observe(viewLifecycleOwner) { people ->
             loading?.hideLoading()
 
             (requireActivity() as AppCompatActivity).supportActionBar?.title = people.name
@@ -88,6 +93,14 @@ class PeopleDetailFragment : Fragment() {
             })
 
         }
+
+        viewModel.movieForKnownPerson.observe(viewLifecycleOwner) {
+            adapter.updateList(it)
+            binding.rvKnownForPerson.layoutManager =
+                LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
+            binding.rvKnownForPerson.adapter = adapter
+        }
+
     }
 
 }

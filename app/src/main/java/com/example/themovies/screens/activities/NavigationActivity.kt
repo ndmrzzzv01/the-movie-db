@@ -14,6 +14,7 @@ import com.example.themovies.databinding.ActivityMainBinding
 import com.example.themovies.network.data.Record
 import com.example.themovies.network.data.RecordClick
 import com.example.themovies.screens.movie.popular.MovieFragmentDirections
+import com.example.themovies.screens.people.PeopleFragment
 import com.example.themovies.screens.people.PeopleFragmentDirections
 import com.example.themovies.screens.tv.TvFragmentDirections
 import dagger.hilt.android.AndroidEntryPoint
@@ -47,7 +48,7 @@ class NavigationActivity : AppCompatActivity(), RecordClick, Loading {
         binding.view.visibility = View.GONE
     }
 
-    override fun onRecordClickListener(id: Int, type: Record) {
+    override fun onRecordClickListener(id: Int, type: Record, customParameter: Any?) {
         when (type) {
             Record.Movie -> {
                 navController.navigate(
@@ -64,11 +65,12 @@ class NavigationActivity : AppCompatActivity(), RecordClick, Loading {
                 )
             }
             Record.People -> {
-                navController.navigate(
-                    directions = PeopleFragmentDirections.actionPeopleFragmentToDetailsPeopleFragment(
-                        id
+                if (customParameter is PeopleFragment.CustomParameters)
+                    navController.navigate(
+                        directions = PeopleFragmentDirections.actionPeopleFragmentToDetailsPeopleFragment(
+                            id, customParameter
+                        )
                     )
-                )
             }
         }
     }

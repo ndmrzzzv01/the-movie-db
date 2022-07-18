@@ -72,10 +72,10 @@ class LikesAdapter(
                 }
             }
             is PeopleHolder -> {
-                val people = list[position] as People
-                holder.bind(people)
+                val person = list[position] as Person
+                holder.bind(person)
                 holder.itemView.setOnClickListener {
-                    recordClick?.onRecordClickListener(people.id ?: 0, Record.People)
+                    recordClick?.onRecordClickListener(person.id ?: 0, Record.People)
                 }
             }
         }

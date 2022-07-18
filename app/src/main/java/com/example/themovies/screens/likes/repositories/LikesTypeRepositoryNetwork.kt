@@ -4,7 +4,7 @@ import com.example.themovies.api.MovieApi
 import com.example.themovies.api.PeopleApi
 import com.example.themovies.api.TvApi
 import com.example.themovies.network.data.Movie
-import com.example.themovies.network.data.People
+import com.example.themovies.network.data.Person
 import com.example.themovies.network.data.TV
 import com.example.themovies.network.repositories.ConfigurationRepository
 import dagger.hilt.android.scopes.ViewModelScoped
@@ -30,7 +30,7 @@ class LikesTypeRepositoryNetwork @Inject constructor(
         tvApi.getTV(tvId)
     }
 
-    suspend fun getPeople(peopleId: Int?): People? = withContext(Dispatchers.IO) {
+    suspend fun getPeople(peopleId: Int?): Person? = withContext(Dispatchers.IO) {
         checkConfiguration()
         peopleApi.getPeople(peopleId)
     }

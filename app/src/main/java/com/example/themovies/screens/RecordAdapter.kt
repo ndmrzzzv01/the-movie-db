@@ -10,6 +10,7 @@ import com.example.themovies.databinding.ViewFakeItemBinding
 import com.example.themovies.network.data.*
 import com.example.themovies.screens.movie.data.FakeAdHolder
 import com.example.themovies.screens.movie.data.MovieHolder
+import com.example.themovies.screens.people.PeopleFragment
 import com.example.themovies.screens.people.data.PeopleHolder
 import com.example.themovies.screens.tv.data.TvHolder
 
@@ -86,11 +87,15 @@ class RecordAdapter(
                 }
             }
             is PeopleHolder -> {
-                val people = getItem(position) as People
-                people.let { peopleItem ->
+                val person = getItem(position) as Person
+                person.let { peopleItem ->
                     holder.bind(peopleItem)
                     holder.itemView.setOnClickListener {
-                        recordClick.onRecordClickListener(people.id ?: 0, Record.People)
+                        recordClick.onRecordClickListener(
+                            person.id ?: 0,
+                            Record.People,
+                            PeopleFragment.CustomParameters(person.knownFor ?: listOf())
+                        )
                     }
                 }
             }
@@ -117,7 +122,7 @@ class RecordAdapter(
                 oldRecord is TV && newRecord is TV -> {
                     oldRecord.id == newRecord.id
                 }
-                oldRecord is People && newRecord is People -> {
+                oldRecord is Person && newRecord is Person -> {
                     oldRecord.id == newRecord.id
                 }
                 else -> {
@@ -137,7 +142,7 @@ class RecordAdapter(
                 oldRecord is TV && newRecord is TV -> {
                     oldRecord == newRecord
                 }
-                oldRecord is People && newRecord is People -> {
+                oldRecord is Person && newRecord is Person -> {
                     oldRecord == newRecord
                 }
                 else -> {

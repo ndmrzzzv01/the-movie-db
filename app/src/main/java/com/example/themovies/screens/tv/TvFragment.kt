@@ -82,7 +82,7 @@ class TvFragment : Fragment() {
         createRecyclerView()
 
         tvAdapter = RecordAdapter(object : RecordClick {
-            override fun onRecordClickListener(id: Int, type: Record) {
+            override fun onRecordClickListener(id: Int, type: Record, customParameter: Any?) {
                 loading?.showLoading()
                 recordClick?.onRecordClickListener(id, Record.TV)
             }

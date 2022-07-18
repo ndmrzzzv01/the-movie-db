@@ -58,7 +58,11 @@ class LikesFragment : Fragment() {
                 rvMovies.layoutManager = GridLayoutManager(requireContext(), 2)
                 if (it.size != 0) {
                     rvMovies.adapter = LikesAdapter(it, object : RecordClick {
-                        override fun onRecordClickListener(id: Int, type: Record) {
+                        override fun onRecordClickListener(
+                            id: Int,
+                            type: Record,
+                            customParameter: Any?
+                        ) {
                             loading?.showLoading()
                             recordClick?.onRecordClickListener(id, type)
                         }

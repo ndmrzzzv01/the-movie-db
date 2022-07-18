@@ -2,6 +2,7 @@ package com.example.themovies.screens.people
 
 import android.content.Context
 import android.os.Bundle
+import android.os.Parcelable
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,6 +12,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.ConcatAdapter
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.themovies.databinding.FragmentMainBinding
+import com.example.themovies.network.data.KnownForPerson
 import com.example.themovies.network.data.Record
 import com.example.themovies.network.data.RecordClick
 import com.example.themovies.paging.ListLoadStateAdapter
@@ -20,10 +22,14 @@ import com.example.themovies.utils.ConnectivityTracker
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
+import kotlinx.parcelize.Parcelize
 import javax.inject.Inject
 
 @AndroidEntryPoint
 class PeopleFragment : Fragment() {
+
+    @Parcelize
+    data class CustomParameters(var id: List<KnownForPerson>) : Parcelable
 
     @Inject
     lateinit var connectivityTracker: ConnectivityTracker
@@ -81,9 +87,9 @@ class PeopleFragment : Fragment() {
         createRecyclerView()
 
         peopleAdapter = RecordAdapter(object : RecordClick {
-            override fun onRecordClickListener(id: Int, type: Record) {
+            override fun onRecordClickListener(id: Int, type: Record, customParameter: Any?) {
                 loading?.showLoading()
-                recordClick?.onRecordClickListener(id, Record.People)
+                recordClick?.onRecordClickListener(id, Record.People, customParameter)
             }
         })
         concatAdapter = peopleAdapter.withLoadStateFooter(ListLoadStateAdapter())

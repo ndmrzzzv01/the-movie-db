@@ -6,16 +6,16 @@ import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.bumptech.glide.request.RequestOptions
 import com.example.themovies.R
 import com.example.themovies.databinding.ListItemBinding
-import com.example.themovies.network.data.People
+import com.example.themovies.network.data.Person
 import com.example.themovies.network.repositories.ConfigurationRepository
 
 class PeopleHolder(var binding: ListItemBinding) : RecyclerView.ViewHolder(binding.root) {
 
-    fun bind(people: People) {
-        binding.tvTitle.text = people.name
+    fun bind(person: Person) {
+        binding.tvTitle.text = person.name
         Glide
             .with(itemView.context)
-            .load("${ConfigurationRepository.URL}${ConfigurationRepository.sizeOfPoster}${people.profilePath}")
+            .load("${ConfigurationRepository.URL}${ConfigurationRepository.sizeOfPoster}${person.profilePath}")
             .apply(
                 RequestOptions().placeholder(R.drawable.funnyunicorn)
                     .error(R.drawable.sadunicorn).centerCrop()

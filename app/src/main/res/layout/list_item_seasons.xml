@@ -3,6 +3,21 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <data>
+
+        <variable
+            name="imageUrl"
+            type="String" />
+
+        <variable
+            name="nameSeason"
+            type="String" />
+
+        <variable
+            name="releaseDate"
+            type="String" />
+    </data>
+
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/cardView"
         android:layout_width="wrap_content"
@@ -24,6 +39,7 @@
                 android:layout_width="160dp"
                 android:layout_height="200dp"
                 android:scaleType="fitXY"
+                app:loadImageForItem="@{imageUrl}"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
@@ -37,7 +53,7 @@
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="8dp"
                 android:layout_marginBottom="8dp"
-                android:text="@string/title"
+                android:text="@{nameSeason}"
                 android:fontFamily="sans-serif-medium"
                 android:textAlignment="center"
                 android:textColor="@color/text_color"
@@ -51,7 +67,7 @@
                 android:id="@+id/tvReleaseSeason"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="2020-12-01"
+                android:text="@{releaseDate}"
                 android:textColor="@color/text_color"
                 android:textSize="16sp"
                 android:textStyle="italic"
