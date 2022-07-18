@@ -23,6 +23,19 @@ fun loadImage(view: ImageView, liveUrl: String?) {
     }
 }
 
+@BindingAdapter("loadImageForMainLists")
+fun loadImageForMainLists(view: ImageView, path: String?) {
+    Glide
+        .with(view)
+        .load("${ConfigurationRepository.URL}${ConfigurationRepository.sizeOfPoster}${path}")
+        .apply(
+            RequestOptions().placeholder(R.drawable.funnyunicorn).error(R.drawable.sadunicorn)
+                .centerCrop()
+        )
+        .transition(DrawableTransitionOptions.withCrossFade())
+        .into(view)
+}
+
 @BindingAdapter("loadImageForItem")
 fun loadImageForItem(view: ImageView, path: String?) {
     Glide
