@@ -65,7 +65,7 @@ class PeopleDetailFragment : Fragment() {
 
         binding.viewModel = viewModel
         binding.lifecycleOwner = this
-        viewModel.getMovieForKnownPerson(args.customParameters)
+        viewModel.getMovieOrTvForKnownPerson(args.customParameters)
         viewModel.getPeople(args.idPeople)
         viewModel.isLiked(args.idPeople)
     }
@@ -95,7 +95,9 @@ class PeopleDetailFragment : Fragment() {
         }
 
         viewModel.movieForKnownPerson.observe(viewLifecycleOwner) {
-            adapter.updateList(it)
+            it?.let { list ->
+                adapter.updateList(list)
+            }
             binding.rvKnownForPerson.layoutManager =
                 LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
             binding.rvKnownForPerson.adapter = adapter

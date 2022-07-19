@@ -1,7 +1,6 @@
 package com.example.themovies.screens.people
 
 import com.example.themovies.api.PeopleApi
-import com.example.themovies.network.data.Movie
 import com.example.themovies.network.data.Person
 import com.example.themovies.network.repositories.ConfigurationRepository
 import dagger.hilt.android.scopes.ViewModelScoped
@@ -29,10 +28,10 @@ class PeopleRepository @Inject constructor(
         peopleApi.getPeople(peopleId)
     }
 
-    suspend fun getMovieForKnownPerson(movieId: Int?): Movie? = withContext(Dispatchers.IO) {
-        checkConfiguration()
-        peopleApi.getMovieForKnownPerson(movieId)
-    }
+//    suspend fun getMovieForKnownPerson(movieId: Int?): Movie? = withContext(Dispatchers.IO) {
+//        checkConfiguration()
+//        peopleApi.getMovieForKnownPerson(movieId)
+//    }
 
     private suspend fun checkConfiguration() {
         if (!configurationRepository.isConfigurationDownloaded()) {

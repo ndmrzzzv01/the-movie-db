@@ -30,22 +30,22 @@ class LikesAdapter(
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-        when (viewType) {
-            TYPE_MOVIE_ITEM -> return MovieHolder(
+        return when (viewType) {
+            TYPE_MOVIE_ITEM -> MovieHolder(
                 ListItemBinding.inflate(
                     LayoutInflater.from(parent.context),
                     parent,
                     false
                 )
             )
-            TYPE_TV_ITEM -> return TvHolder(
+            TYPE_TV_ITEM -> TvHolder(
                 ListItemBinding.inflate(
                     LayoutInflater.from(parent.context),
                     parent,
                     false
                 )
             )
-            else -> return PeopleHolder(
+            else -> PeopleHolder(
                 ListItemBinding.inflate(
                     LayoutInflater.from(parent.context),
                     parent,

@@ -1,6 +1,5 @@
 package com.example.themovies.api
 
-import com.example.themovies.network.data.Movie
 import com.example.themovies.network.data.Person
 import com.example.themovies.network.responses.PeopleResponse
 import retrofit2.http.GET
@@ -19,8 +18,8 @@ interface PeopleApi {
         @Path("person_id", encoded = true) personId: Int?
     ): Person?
 
-    @GET("movie/{movie_id}")
-    suspend fun getMovieForKnownPerson(
-        @Path("movie_id", encoded = true) movieId: Int?
-    ): Movie?
+//    @GET("movie/{movie_id}")
+//    suspend fun getMovieForKnownPerson(
+//        @Path("movie_id", encoded = true) movieId: Int?
+//    ): Movie?
 }

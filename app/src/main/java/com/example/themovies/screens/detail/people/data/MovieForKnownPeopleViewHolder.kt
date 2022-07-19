@@ -4,7 +4,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.themovies.databinding.ItemPeopleBinding
 import com.example.themovies.network.data.Movie
 
-class KnownForViewHolder(val binding: ItemPeopleBinding) :
+class MovieForKnownPeopleViewHolder(val binding: ItemPeopleBinding) :
     RecyclerView.ViewHolder(binding.root) {
 
     fun bind(movie: Movie) {

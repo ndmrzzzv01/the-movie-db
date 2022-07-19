@@ -29,7 +29,7 @@ import javax.inject.Inject
 class PeopleFragment : Fragment() {
 
     @Parcelize
-    data class CustomParameters(var id: List<KnownForPerson>) : Parcelable
+    data class CustomParameters(var customParameters: List<KnownForPerson>) : Parcelable
 
     @Inject
     lateinit var connectivityTracker: ConnectivityTracker
