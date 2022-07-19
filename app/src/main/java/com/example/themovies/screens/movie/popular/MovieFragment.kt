@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.ConcatAdapter
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.themovies.databinding.FragmentMainBinding
@@ -27,7 +28,6 @@ class MovieFragment : Fragment() {
 
     @Inject
     lateinit var connectivityTracker: ConnectivityTracker
-    var recordClick: RecordClick? = null
     var loading: Loading? = null
     private val viewModel by viewModels<MovieViewModel>()
     private lateinit var binding: FragmentMainBinding
@@ -36,7 +36,6 @@ class MovieFragment : Fragment() {
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
-        recordClick = context as RecordClick
         loading = context as Loading
     }
 
@@ -75,7 +74,6 @@ class MovieFragment : Fragment() {
 
     override fun onDetach() {
         super.onDetach()
-        recordClick = null
         loading = null
     }
 
@@ -86,7 +84,11 @@ class MovieFragment : Fragment() {
         movieAdapter = RecordAdapter(object : RecordClick {
             override fun onRecordClickListener(id: Int, type: Record, customParameter: Any?) {
                 loading?.showLoading()
-                recordClick?.onRecordClickListener(id, Record.Movie)
+                findNavController().navigate(
+                    MovieFragmentDirections.actionMainFragmentToDetailsFragment(
+                        id
+                    )
+                )
             }
         })
 

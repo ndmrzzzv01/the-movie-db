@@ -18,8 +18,4 @@ interface PeopleApi {
         @Path("person_id", encoded = true) personId: Int?
     ): Person?
 
-//    @GET("movie/{movie_id}")
-//    suspend fun getMovieForKnownPerson(
-//        @Path("movie_id", encoded = true) movieId: Int?
-//    ): Movie?
 }

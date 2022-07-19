@@ -7,12 +7,14 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.themovies.databinding.FragmentMainBinding
 import com.example.themovies.network.data.Record
 import com.example.themovies.network.data.RecordClick
 import com.example.themovies.screens.activities.Loading
 import com.example.themovies.screens.likes.data.LikesAdapter
+import com.example.themovies.screens.people.PeopleFragment
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -20,18 +22,15 @@ class LikesFragment : Fragment() {
 
     private lateinit var binding: FragmentMainBinding
     private val viewModel by viewModels<LikesViewModel>()
-    var recordClick: RecordClick? = null
     var loading: Loading? = null
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
-        recordClick = context as RecordClick
         loading = context as Loading
     }
 
     override fun onDetach() {
         super.onDetach()
-        recordClick = null
         loading = null
     }
 
@@ -64,7 +63,31 @@ class LikesFragment : Fragment() {
                             customParameter: Any?
                         ) {
                             loading?.showLoading()
-                            recordClick?.onRecordClickListener(id, type)
+                            when (type) {
+                                Record.Movie -> {
+                                    findNavController().navigate(
+                                        LikesFragmentDirections.actionLikesToDetailsMovieFragment(
+                                            id
+                                        )
+                                    )
+                                }
+                                Record.TV -> {
+                                    findNavController().navigate(
+                                        LikesFragmentDirections.actionLikesToDetailsTvFragment(
+                                            id
+                                        )
+                                    )
+                                }
+                                Record.People -> {
+                                    if (customParameter is PeopleFragment.CustomParameters)
+                                        findNavController().navigate(
+                                            LikesFragmentDirections.actionLikesToDetailsPeopleFragment(
+                                                id,
+                                                customParameter
+                                            )
+                                        )
+                                }
+                            }
                         }
 
                     })

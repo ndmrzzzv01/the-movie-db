@@ -5,7 +5,9 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.themovies.databinding.ListItemBinding
 import com.example.themovies.network.data.*
+import com.example.themovies.screens.RecordAdapter
 import com.example.themovies.screens.movie.data.MovieHolder
+import com.example.themovies.screens.people.PeopleFragment
 import com.example.themovies.screens.people.data.PeopleHolder
 import com.example.themovies.screens.tv.data.TvHolder
 
@@ -14,31 +16,24 @@ class LikesAdapter(
     private val recordClick: RecordClick?
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
-    companion object {
-        const val TYPE_MOVIE_ITEM = 0
-        const val TYPE_TV_ITEM = 1
-        const val TYPE_PEOPLE_ITEM = 2
-    }
-
-
     override fun getItemViewType(position: Int): Int {
         return when (list[position]) {
-            is Movie -> TYPE_MOVIE_ITEM
-            is TV -> TYPE_TV_ITEM
-            else -> TYPE_PEOPLE_ITEM
+            is Movie -> RecordAdapter.TYPE_MOVIE_ITEM
+            is TV -> RecordAdapter.TYPE_TV_ITEM
+            else -> RecordAdapter.TYPE_PEOPLE_ITEM
         }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         return when (viewType) {
-            TYPE_MOVIE_ITEM -> MovieHolder(
+            RecordAdapter.TYPE_MOVIE_ITEM -> MovieHolder(
                 ListItemBinding.inflate(
                     LayoutInflater.from(parent.context),
                     parent,
                     false
                 )
             )
-            TYPE_TV_ITEM -> TvHolder(
+            RecordAdapter.TYPE_TV_ITEM -> TvHolder(
                 ListItemBinding.inflate(
                     LayoutInflater.from(parent.context),
                     parent,
@@ -75,7 +70,11 @@ class LikesAdapter(
                 val person = list[position] as Person
                 holder.bind(person)
                 holder.itemView.setOnClickListener {
-                    recordClick?.onRecordClickListener(person.id ?: 0, Record.People)
+                    recordClick?.onRecordClickListener(
+                        person.id ?: 0,
+                        Record.People,
+                        PeopleFragment.CustomParameters(person.knownFor ?: listOf())
+                    )
                 }
             }
         }

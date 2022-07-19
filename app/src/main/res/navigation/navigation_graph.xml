@@ -76,7 +76,17 @@
         android:id="@+id/likes"
         android:name="com.example.themovies.screens.likes.LikesFragment"
         android:label="Your likes"
-        tools:layout="@layout/fragment_main"></fragment>
+        tools:layout="@layout/fragment_main">
+        <action
+            android:id="@+id/action_likes_to_detailsPeopleFragment"
+            app:destination="@id/detailsPeopleFragment" />
+        <action
+            android:id="@+id/action_likes_to_detailsMovieFragment"
+            app:destination="@id/detailsMovieFragment" />
+        <action
+            android:id="@+id/action_likes_to_detailsTvFragment"
+            app:destination="@id/detailsTvFragment" />
+    </fragment>
 
     <fragment
         android:id="@+id/settings"

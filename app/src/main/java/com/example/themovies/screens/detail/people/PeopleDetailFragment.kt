@@ -72,6 +72,8 @@ class PeopleDetailFragment : Fragment() {
 
     private fun swipePager() {
         binding.apply {
+            btnLeft.visibility = View.VISIBLE
+            btnRight.visibility = View.VISIBLE
             btnLeft.setOnClickListener {
                 if (pagerForKnownPerson.currentItem > pagerForKnownPerson.left) {
                     pagerForKnownPerson.setCurrentItem(pagerForKnownPerson.currentItem - 1, true)

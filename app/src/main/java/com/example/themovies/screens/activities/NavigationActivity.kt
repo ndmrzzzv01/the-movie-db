@@ -11,16 +11,10 @@ import androidx.navigation.ui.NavigationUI
 import androidx.navigation.ui.onNavDestinationSelected
 import com.example.themovies.R
 import com.example.themovies.databinding.ActivityMainBinding
-import com.example.themovies.network.data.Record
-import com.example.themovies.network.data.RecordClick
-import com.example.themovies.screens.movie.popular.MovieFragmentDirections
-import com.example.themovies.screens.people.PeopleFragment
-import com.example.themovies.screens.people.PeopleFragmentDirections
-import com.example.themovies.screens.tv.TvFragmentDirections
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class NavigationActivity : AppCompatActivity(), RecordClick, Loading {
+class NavigationActivity : AppCompatActivity(), Loading {
 
     private lateinit var binding: ActivityMainBinding
     private lateinit var navController: NavController
@@ -46,33 +40,6 @@ class NavigationActivity : AppCompatActivity(), RecordClick, Loading {
     override fun hideLoading() {
         binding.progressBar.visibility = View.GONE
         binding.view.visibility = View.GONE
-    }
-
-    override fun onRecordClickListener(id: Int, type: Record, customParameter: Any?) {
-        when (type) {
-            Record.Movie -> {
-                navController.navigate(
-                    directions = MovieFragmentDirections.actionMainFragmentToDetailsFragment(
-                        id
-                    )
-                )
-            }
-            Record.TV -> {
-                navController.navigate(
-                    directions = TvFragmentDirections.actionTvFragmentToDetailsTvFragment(
-                        id
-                    )
-                )
-            }
-            Record.People -> {
-                if (customParameter is PeopleFragment.CustomParameters)
-                    navController.navigate(
-                        directions = PeopleFragmentDirections.actionPeopleFragmentToDetailsPeopleFragment(
-                            id, customParameter
-                        )
-                    )
-            }
-        }
     }
 
     override fun onSupportNavigateUp(): Boolean {

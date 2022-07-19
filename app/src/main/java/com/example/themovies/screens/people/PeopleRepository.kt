@@ -28,10 +28,6 @@ class PeopleRepository @Inject constructor(
         peopleApi.getPeople(peopleId)
     }
 
-//    suspend fun getMovieForKnownPerson(movieId: Int?): Movie? = withContext(Dispatchers.IO) {
-//        checkConfiguration()
-//        peopleApi.getMovieForKnownPerson(movieId)
-//    }
 
     private suspend fun checkConfiguration() {
         if (!configurationRepository.isConfigurationDownloaded()) {

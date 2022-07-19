@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.ConcatAdapter
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.themovies.databinding.FragmentMainBinding
@@ -33,7 +34,6 @@ class PeopleFragment : Fragment() {
 
     @Inject
     lateinit var connectivityTracker: ConnectivityTracker
-    var recordClick: RecordClick? = null
     var loading: Loading? = null
     private lateinit var binding: FragmentMainBinding
     private val viewModel by viewModels<PeopleViewModel>()
@@ -42,7 +42,6 @@ class PeopleFragment : Fragment() {
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
-        recordClick = context as RecordClick
         loading = context as Loading
     }
 
@@ -79,7 +78,6 @@ class PeopleFragment : Fragment() {
 
     override fun onDetach() {
         super.onDetach()
-        recordClick = null
         loading = null
     }
 
@@ -89,7 +87,14 @@ class PeopleFragment : Fragment() {
         peopleAdapter = RecordAdapter(object : RecordClick {
             override fun onRecordClickListener(id: Int, type: Record, customParameter: Any?) {
                 loading?.showLoading()
-                recordClick?.onRecordClickListener(id, Record.People, customParameter)
+                if (customParameter is CustomParameters) {
+                    findNavController().navigate(
+                        PeopleFragmentDirections.actionPeopleFragmentToDetailsPeopleFragment(
+                            id,
+                            customParameter
+                        )
+                    )
+                }
             }
         })
         concatAdapter = peopleAdapter.withLoadStateFooter(ListLoadStateAdapter())

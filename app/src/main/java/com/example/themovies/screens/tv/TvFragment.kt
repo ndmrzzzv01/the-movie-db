@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.ConcatAdapter
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.themovies.databinding.FragmentMainBinding
@@ -27,7 +28,6 @@ class TvFragment : Fragment() {
 
     @Inject
     lateinit var connectivityTracker: ConnectivityTracker
-    var recordClick: RecordClick? = null
     var loading: Loading? = null
     private lateinit var binding: FragmentMainBinding
     private val viewModel by viewModels<TvViewModel>()
@@ -36,7 +36,6 @@ class TvFragment : Fragment() {
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
-        recordClick = context as RecordClick
         loading = context as Loading
     }
 
@@ -74,7 +73,6 @@ class TvFragment : Fragment() {
 
     override fun onDetach() {
         super.onDetach()
-        recordClick = null
         loading = null
     }
 
@@ -84,7 +82,11 @@ class TvFragment : Fragment() {
         tvAdapter = RecordAdapter(object : RecordClick {
             override fun onRecordClickListener(id: Int, type: Record, customParameter: Any?) {
                 loading?.showLoading()
-                recordClick?.onRecordClickListener(id, Record.TV)
+                findNavController().navigate(
+                    TvFragmentDirections.actionTvFragmentToDetailsTvFragment(
+                        id
+                    )
+                )
             }
         })
         concatAdapter = tvAdapter.withLoadStateFooter(ListLoadStateAdapter())

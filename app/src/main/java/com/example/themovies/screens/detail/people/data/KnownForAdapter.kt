@@ -7,15 +7,15 @@ import com.example.themovies.databinding.ItemPeopleBinding
 import com.example.themovies.network.data.Movie
 import com.example.themovies.network.data.RecordType
 import com.example.themovies.network.data.TV
-import com.example.themovies.screens.likes.data.LikesAdapter
+import com.example.themovies.screens.RecordAdapter
 
 class KnownForAdapter(var list: List<RecordType?>) :
     RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     override fun getItemViewType(position: Int): Int {
         return when (list[position]) {
-            is Movie -> LikesAdapter.TYPE_MOVIE_ITEM
-            else -> LikesAdapter.TYPE_TV_ITEM
+            is Movie -> RecordAdapter.TYPE_MOVIE_ITEM
+            else -> RecordAdapter.TYPE_TV_ITEM
         }
     }
 
@@ -24,7 +24,7 @@ class KnownForAdapter(var list: List<RecordType?>) :
         viewType: Int
     ): RecyclerView.ViewHolder {
         return when (viewType) {
-            LikesAdapter.TYPE_MOVIE_ITEM -> MovieForKnownPeopleViewHolder(
+            RecordAdapter.TYPE_MOVIE_ITEM -> MovieForKnownPeopleViewHolder(
                 ItemPeopleBinding.inflate(
                     LayoutInflater.from(parent.context),
                     parent, false
