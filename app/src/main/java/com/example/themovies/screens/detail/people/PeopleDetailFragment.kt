@@ -11,7 +11,6 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.navArgs
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.themovies.database.data.Like
 import com.example.themovies.databinding.FragmentDetailsPeopleBinding
 import com.example.themovies.notifications.NotificationService
@@ -62,12 +61,28 @@ class PeopleDetailFragment : Fragment() {
         val intent = Intent(requireContext(), NotificationService::class.java)
 
         initObservers(value, intent)
+        swipePager()
 
         binding.viewModel = viewModel
         binding.lifecycleOwner = this
         viewModel.getMovieOrTvForKnownPerson(args.customParameters)
         viewModel.getPeople(args.idPeople)
         viewModel.isLiked(args.idPeople)
+    }
+
+    private fun swipePager() {
+        binding.apply {
+            btnLeft.setOnClickListener {
+                if (pagerForKnownPerson.currentItem > pagerForKnownPerson.left) {
+                    pagerForKnownPerson.setCurrentItem(pagerForKnownPerson.currentItem - 1, true)
+                }
+            }
+            btnRight.setOnClickListener {
+                if (pagerForKnownPerson.currentItem < pagerForKnownPerson.right) {
+                    pagerForKnownPerson.setCurrentItem(pagerForKnownPerson.currentItem + 1, true)
+                }
+            }
+        }
     }
 
     private fun initObservers(value: Boolean?, intent: Intent) {
@@ -94,13 +109,12 @@ class PeopleDetailFragment : Fragment() {
 
         }
 
+
         viewModel.movieForKnownPerson.observe(viewLifecycleOwner) {
             it?.let { list ->
                 adapter.updateList(list)
             }
-            binding.rvKnownForPerson.layoutManager =
-                LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
-            binding.rvKnownForPerson.adapter = adapter
+            binding.pagerForKnownPerson.adapter = adapter
         }
 
     }

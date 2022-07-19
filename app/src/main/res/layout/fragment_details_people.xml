@@ -152,24 +152,42 @@
             <View
                 android:id="@+id/divider2"
                 style="@style/Divider"
-                android:layout_marginStart="8dp"
-                android:layout_marginEnd="8dp"
                 android:layout_marginBottom="8dp"
-                app:layout_constraintBottom_toTopOf="@id/rvKnownForPerson"
+                app:layout_constraintBottom_toTopOf="@id/pagerForKnownPerson"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/tvDescriptionPeople" />
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rvKnownForPerson"
+            <androidx.viewpager2.widget.ViewPager2
+                android:id="@+id/pagerForKnownPerson"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="8dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/divider2"
-                tools:listitem="@layout/item_people" />
+                app:layout_constraintTop_toBottomOf="@+id/divider2" />
+
+            <ImageButton
+                android:id="@+id/btnLeft"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:src="@drawable/ic_baseline_arrow_back"
+                android:background="@drawable/roundcorner"
+                app:layout_constraintBottom_toBottomOf="@id/pagerForKnownPerson"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/pagerForKnownPerson" />
+
+            <ImageButton
+                android:id="@+id/btnRight"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:src="@drawable/ic_baseline_arrow_forward_24"
+                android:background="@drawable/roundcorner"
+                app:layout_constraintBottom_toBottomOf="@id/pagerForKnownPerson"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/pagerForKnownPerson" />
 
             <androidx.constraintlayout.widget.Guideline
                 android:id="@+id/guideline2"
