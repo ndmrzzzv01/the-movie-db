@@ -1,14 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
-
-    <item
-        android:id="@+id/account"
-        android:title="My Account" />
-    <item
-        android:id="@+id/settings"
-        android:title="Settings" />
-    <item
-        android:id="@+id/mycart"
-        android:title="My Cart" />
-
+    <group
+        android:id="@+id/firstGroup"
+        android:checkableBehavior="single">
+        <item
+            android:id="@+id/popular_movie"
+            android:icon="@drawable/movie"
+            android:title="@string/popular_movie" />
+        <item
+            android:id="@+id/top_rated_movie"
+            android:icon="@drawable/toprated"
+            android:title="Top Rated Movie" />
+        <item
+            android:id="@+id/popular_tv"
+            android:icon="@drawable/show"
+            android:title="@string/popular_tv" />
+        <item
+            android:id="@+id/popular_people"
+            android:icon="@drawable/people"
+            android:title="@string/popular_people" />
+    </group>
+    <group
+        android:id="@+id/secondGroup"
+        android:checkableBehavior="single">
+        <item
+            android:id="@+id/likes"
+            android:icon="@drawable/heart"
+            android:title="@string/your_likes" />
+    </group>
+    <group
+        android:id="@+id/thirdGroup"
+        android:checkableBehavior="single">
+        <item
+            android:id="@+id/settings"
+            android:icon="@drawable/settings"
+            android:title="@string/settings" />
+    </group>
 </menu>

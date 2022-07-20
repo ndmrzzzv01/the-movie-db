@@ -19,3 +19,7 @@
 # If you keep the line number information, uncomment this to
 # hide the original source file name.
 #-renamesourcefileattribute SourceFile
+
+-keep class com.example.themovies.network.data.** { *; }
+-keep class com.example.themovies.network.responses.** { *; }
+-keep class com.example.themovies.screens.people.PeopleFragment$CustomParameters { *; }

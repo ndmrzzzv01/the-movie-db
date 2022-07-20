@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/navigation_graph"
+    app:startDestination="@id/popular_movie">
+
+    <fragment
+        android:id="@+id/popular_movie"
+        android:name="com.example.themovies.screens.movie.popular.MovieFragment"
+        android:label="Popular Movie"
+        tools:layout="@layout/fragment_main">
+        <action
+            android:id="@+id/action_mainFragment_to_detailsFragment"
+            app:destination="@id/detailsMovieFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/detailsMovieFragment"
+        android:name="com.example.themovies.screens.detail.movie.MovieDetailFragment"
+        tools:layout="@layout/fragment_details_movie">
+        <argument
+            android:name="idMovie"
+            app:argType="integer" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/top_rated_movie"
+        android:name="com.example.themovies.screens.movie.toprated.TopRatedMoviesFragment"
+        android:label="Top Rated Movie"
+        tools:layout="@layout/fragment_main" />
+
+    <fragment
+        android:id="@+id/popular_tv"
+        android:name="com.example.themovies.screens.tv.TvFragment"
+        android:label="Popular TV"
+        tools:layout="@layout/fragment_main">
+
+        <action
+            android:id="@+id/action_tvFragment_to_detailsTvFragment"
+            app:destination="@id/detailsTvFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/detailsTvFragment"
+        android:name="com.example.themovies.screens.detail.tv.TvDetailFragment"
+        tools:layout="@layout/fragment_detail_tv">
+        <argument
+            android:name="idTv"
+            app:argType="integer" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/popular_people"
+        android:name="com.example.themovies.screens.people.PeopleFragment"
+        android:label="Popular People"
+        tools:layout="@layout/fragment_main">
+        <action
+            android:id="@+id/action_peopleFragment_to_detailsPeopleFragment"
+            app:destination="@id/detailsPeopleFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/detailsPeopleFragment"
+        android:name="com.example.themovies.screens.detail.people.PeopleDetailFragment"
+        tools:layout="@layout/fragment_details_people">
+        <argument
+            android:name="idPeople"
+            app:argType="integer" />
+        <argument
+            android:name="customParameters"
+            app:argType="com.example.themovies.screens.people.PeopleFragment$CustomParameters" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/likes"
+        android:name="com.example.themovies.screens.likes.LikesFragment"
+        android:label="Your likes"
+        tools:layout="@layout/fragment_main">
+        <action
+            android:id="@+id/action_likes_to_detailsPeopleFragment"
+            app:destination="@id/detailsPeopleFragment" />
+        <action
+            android:id="@+id/action_likes_to_detailsMovieFragment"
+            app:destination="@id/detailsMovieFragment" />
+        <action
+            android:id="@+id/action_likes_to_detailsTvFragment"
+            app:destination="@id/detailsTvFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/settings"
+        android:name="com.example.themovies.screens.settings.SettingsFragment"
+        android:label="Settings"
+        tools:layout="@layout/fragment_settings" />
+
+
+</navigation>
