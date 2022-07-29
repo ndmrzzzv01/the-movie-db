@@ -48,6 +48,7 @@ class MovieDetailFragment : Fragment() {
         binding.viewModel = viewModel
         binding.lifecycleOwner = this
         viewModel.getMovie(id.idMovie)
+        viewModel.getCredits(id.idMovie)
         viewModel.isLiked(id.idMovie)
     }
 

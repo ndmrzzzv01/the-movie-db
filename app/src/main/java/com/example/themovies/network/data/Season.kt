@@ -6,4 +6,4 @@ data class Season(
     @SerializedName("air_date") val airDate: String? = null,
     @SerializedName("poster_path") val posterPath: String? = null,
     val name: String? = null
-)
+): RecordType()

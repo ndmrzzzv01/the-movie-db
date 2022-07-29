@@ -1,6 +1,7 @@
 package com.example.themovies.screens.movie.popular
 
 import com.example.themovies.api.MovieApi
+import com.example.themovies.network.data.Actor
 import com.example.themovies.network.data.Movie
 import com.example.themovies.network.repositories.ConfigurationRepository
 import dagger.hilt.android.scopes.ViewModelScoped
@@ -26,6 +27,11 @@ class MovieRepository @Inject constructor(
     suspend fun getMovie(movieId: Int?): Movie? = withContext(Dispatchers.IO) {
         checkConfiguration()
         movieApi.getMovie(movieId)
+    }
+
+    suspend fun getCredits(movieId: Int?): List<Actor> = withContext(Dispatchers.IO) {
+        checkConfiguration()
+        movieApi.getCredits(movieId).cast ?: mutableListOf()
     }
 
     private suspend fun checkConfiguration() {

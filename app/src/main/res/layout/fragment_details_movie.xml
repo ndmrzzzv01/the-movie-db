@@ -241,6 +241,42 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/tvDescriptionMovie" />
 
+            <TextView
+                android:id="@+id/tvActors"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                android:text="Actors"
+                android:textAlignment="center"
+                android:textColor="@color/text_color"
+                android:textSize="20sp"
+                android:textStyle="italic"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/divider3" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvActors"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tvActors"
+                app:observeList="@{viewModel.credits}"
+                tools:listitem="@layout/list_item_seasons" />
+
+            <View
+                android:id="@+id/divider4"
+                style="@style/Divider"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/rvActors" />
+
             <ImageView
                 android:id="@+id/imageCollection"
                 android:layout_width="match_parent"
@@ -249,7 +285,7 @@
                 app:loadImage="@{viewModel.movie.collection.backdropPath}"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/divider3"
+                app:layout_constraintTop_toBottomOf="@+id/divider4"
                 tools:srcCompat="@tools:sample/avatars" />
 
 

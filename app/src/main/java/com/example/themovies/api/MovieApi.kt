@@ -1,6 +1,7 @@
 package com.example.themovies.api
 
 import com.example.themovies.network.data.Movie
+import com.example.themovies.network.responses.CreditResponse
 import com.example.themovies.network.responses.MovieResponse
 import io.reactivex.Observable
 import retrofit2.http.GET
@@ -18,4 +19,9 @@ interface MovieApi {
     suspend fun getMovie(
         @Path("movie_id", encoded = true) movieId: Int?
     ): Movie?
+
+    @GET("movie/{movie_id}/credits")
+    suspend fun getCredits(
+        @Path("movie_id", encoded = true) movieId: Int?
+    ): CreditResponse
 }

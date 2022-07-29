@@ -182,9 +182,9 @@
                     app:icon_size="30dp"
                     app:icon_type="heart"
                     app:isLikedButton="@{viewModel.isLiked()}"
+                    app:layout_constraintBottom_toBottomOf="@id/tvStatus"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="@id/tvStatus"
-                    app:layout_constraintBottom_toBottomOf="@id/tvStatus"
                     app:like_drawable="@drawable/ic_heart_red"
                     app:unlike_drawable="@drawable/ic_heart" />
 
@@ -292,11 +292,11 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:layout_marginBottom="8dp"
-                app:observeList="@{viewModel.tv.seasons}"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/divider3"
+                app:observeListForSeason="@{viewModel.tv.seasons}"
                 tools:listitem="@layout/list_item_seasons" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
