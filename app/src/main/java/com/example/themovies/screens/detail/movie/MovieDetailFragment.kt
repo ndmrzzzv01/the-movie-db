@@ -1,8 +1,6 @@
 package com.example.themovies.screens.detail.movie
 
 import android.content.Context
-import android.content.Intent
-import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -13,21 +11,15 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.navArgs
 import com.example.themovies.database.data.Like
 import com.example.themovies.databinding.FragmentDetailsMovieBinding
-import com.example.themovies.notifications.NotificationService
 import com.example.themovies.screens.activities.Loading
-import com.example.themovies.screens.settings.SettingsFragment
 import com.like.LikeButton
 import com.like.OnLikeListener
 import dagger.hilt.android.AndroidEntryPoint
-import javax.inject.Inject
 
 @AndroidEntryPoint
 class MovieDetailFragment : Fragment() {
 
     var loading: Loading? = null
-
-    @Inject
-    lateinit var sharedPreferences: SharedPreferences
     private lateinit var binding: FragmentDetailsMovieBinding
     private val viewModel by viewModels<MovieDetailsViewModel>()
     private val id by navArgs<MovieDetailFragmentArgs>()
@@ -50,10 +42,8 @@ class MovieDetailFragment : Fragment() {
     }
 
     private fun showDetailsAboutMovie() {
-        val value = sharedPreferences.getBoolean(SettingsFragment.NOTIFICATION_LIKE, false)
-        val intent = Intent(requireContext(), NotificationService::class.java)
 
-        initObservers(value, intent)
+        initObservers()
 
         binding.viewModel = viewModel
         binding.lifecycleOwner = this
@@ -61,7 +51,7 @@ class MovieDetailFragment : Fragment() {
         viewModel.isLiked(id.idMovie)
     }
 
-    private fun initObservers(value: Boolean?, intent: Intent) {
+    private fun initObservers() {
         viewModel.movie.observe(viewLifecycleOwner) { movie ->
             binding.apply {
                 loading?.hideLoading()
@@ -71,11 +61,6 @@ class MovieDetailFragment : Fragment() {
                 btnLike.setOnLikeListener(object : OnLikeListener {
                     override fun liked(likeButton: LikeButton?) {
                         viewModel?.insertRecord(Like(idRecord = movie.id, type = 0))
-
-                        if (value == true) {
-                            intent.putExtra(SettingsFragment.NAME, movie.title)
-                            this@MovieDetailFragment.activity?.startForegroundService(intent)
-                        }
                     }
 
                     override fun unLiked(likeButton: LikeButton?) {

@@ -162,31 +162,34 @@
                 android:id="@+id/pagerForKnownPerson"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                app:observeList="@{viewModel.movieOrTvForKnownPerson}"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/divider2" />
 
             <ImageButton
-                android:visibility="gone"
                 android:id="@+id/btnLeft"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:background="@drawable/roundcorner"
                 android:src="@drawable/ic_baseline_arrow_back"
+                android:visibility="gone"
+                app:isVisibleViewIfListNotNull="@{viewModel.movieOrTvForKnownPerson}"
                 app:layout_constraintBottom_toBottomOf="@id/pagerForKnownPerson"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="@+id/pagerForKnownPerson" />
 
             <ImageButton
                 android:id="@+id/btnRight"
-                android:visibility="gone"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="16dp"
                 android:background="@drawable/roundcorner"
                 android:src="@drawable/ic_baseline_arrow_forward_24"
+                android:visibility="gone"
+                app:isVisibleViewIfListNotNull="@{viewModel.movieOrTvForKnownPerson}"
                 app:layout_constraintBottom_toBottomOf="@id/pagerForKnownPerson"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="@+id/pagerForKnownPerson" />

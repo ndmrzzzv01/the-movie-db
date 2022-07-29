@@ -1,7 +1,6 @@
 package com.example.themovies.screens.detail.people
 
 import android.content.Context
-import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -13,10 +12,8 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.navArgs
 import com.example.themovies.database.data.Like
 import com.example.themovies.databinding.FragmentDetailsPeopleBinding
-import com.example.themovies.notifications.NotificationService
 import com.example.themovies.screens.activities.Loading
 import com.example.themovies.screens.detail.people.data.KnownForAdapter
-import com.example.themovies.screens.settings.SettingsFragment
 import com.like.LikeButton
 import com.like.OnLikeListener
 import dagger.hilt.android.AndroidEntryPoint
@@ -26,11 +23,7 @@ import javax.inject.Inject
 class PeopleDetailFragment : Fragment() {
 
     var loading: Loading? = null
-
-    @Inject
-    lateinit var sharedPreferences: SharedPreferences
     private lateinit var binding: FragmentDetailsPeopleBinding
-    private var adapter = KnownForAdapter(listOf())
     private val viewModel by viewModels<PeopleDetailsViewModel>()
     private val args by navArgs<PeopleDetailFragmentArgs>()
 
@@ -57,10 +50,7 @@ class PeopleDetailFragment : Fragment() {
     }
 
     private fun showDetailsAboutMovie() {
-        val value = sharedPreferences.getBoolean(SettingsFragment.NOTIFICATION_LIKE, false)
-        val intent = Intent(requireContext(), NotificationService::class.java)
-
-        initObservers(value, intent)
+        initObservers()
         swipePager()
 
         binding.viewModel = viewModel
@@ -85,7 +75,7 @@ class PeopleDetailFragment : Fragment() {
         }
     }
 
-    private fun initObservers(value: Boolean?, intent: Intent) {
+    private fun initObservers() {
         viewModel.person.observe(viewLifecycleOwner) { people ->
             loading?.hideLoading()
 
@@ -94,11 +84,6 @@ class PeopleDetailFragment : Fragment() {
             binding.btnLike.setOnLikeListener(object : OnLikeListener {
                 override fun liked(likeButton: LikeButton?) {
                     viewModel.insertRecord(Like(idRecord = people.id, type = 2))
-
-                    if (value == true) {
-                        intent.putExtra(SettingsFragment.NAME, people.name)
-                        this@PeopleDetailFragment.activity?.startForegroundService(intent)
-                    }
                 }
 
                 override fun unLiked(likeButton: LikeButton?) {
@@ -107,16 +92,6 @@ class PeopleDetailFragment : Fragment() {
 
             })
 
-        }
-
-
-        viewModel.movieOrTvForKnownPerson.observe(viewLifecycleOwner) {
-            binding.btnLeft.visibility = View.VISIBLE
-            binding.btnRight.visibility = View.VISIBLE
-            it?.let { list ->
-                adapter.updateList(list)
-            }
-            binding.pagerForKnownPerson.adapter = adapter
         }
 
     }
