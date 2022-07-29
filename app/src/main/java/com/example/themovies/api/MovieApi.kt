@@ -24,7 +24,4 @@ interface MovieApi {
         @Path("movie_id", encoded = true) movieId: Int?
     ): MovieResponse?
 
-    @GET("movie/top_rated")
-    fun getTopRatedMovie(): Observable<MovieResponse>?
-
 }

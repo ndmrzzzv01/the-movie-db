@@ -8,10 +8,6 @@
             android:icon="@drawable/movie"
             android:title="@string/popular_movie" />
         <item
-            android:id="@+id/top_rated_movie"
-            android:icon="@drawable/toprated"
-            android:title="Top Rated Movie" />
-        <item
             android:id="@+id/popular_tv"
             android:icon="@drawable/show"
             android:title="@string/popular_tv" />

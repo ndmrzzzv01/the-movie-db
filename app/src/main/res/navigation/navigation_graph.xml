@@ -25,12 +25,6 @@
     </fragment>
 
     <fragment
-        android:id="@+id/top_rated_movie"
-        android:name="com.example.themovies.screens.movie.toprated.TopRatedMoviesFragment"
-        android:label="Top Rated Movie"
-        tools:layout="@layout/fragment_main" />
-
-    <fragment
         android:id="@+id/popular_tv"
         android:name="com.example.themovies.screens.tv.TvFragment"
         android:label="Popular TV"
