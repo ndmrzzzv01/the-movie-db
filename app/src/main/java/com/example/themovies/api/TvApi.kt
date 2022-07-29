@@ -1,7 +1,6 @@
 package com.example.themovies.api
 
 import com.example.themovies.network.data.TV
-import com.example.themovies.network.responses.SeasonResponse
 import com.example.themovies.network.responses.TVResponse
 import retrofit2.http.GET
 import retrofit2.http.Path
@@ -19,9 +18,5 @@ interface TvApi {
         @Path("tv_id", encoded = true) tvId: Int?
     ): TV?
 
-    @GET("tv/{tv_id}")
-    suspend fun getTVSeason(
-        @Path("tv_id", encoded = true) tvId: Int?
-    ): SeasonResponse?
 
 }

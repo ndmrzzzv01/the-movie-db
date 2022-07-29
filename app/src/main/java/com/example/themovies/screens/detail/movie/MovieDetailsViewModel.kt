@@ -18,19 +18,12 @@ class MovieDetailsViewModel @Inject constructor(
 ) : ViewModel() {
 
     val movie = MutableLiveData<Movie>()
-    val collection = MutableLiveData<Movie>()
     val isLiked = MutableLiveData<Boolean>()
 
     fun getMovie(movieId: Int?) {
         viewModelScope.launch {
             val itemMovie = movieRepository.getMovie(movieId)
             movie.value = itemMovie!!
-        }
-    }
-
-    fun getCollectionMovie(movieId: Int?) {
-        viewModelScope.launch {
-            collection.value = movieRepository.getCollectionMovie(movieId)
         }
     }
 

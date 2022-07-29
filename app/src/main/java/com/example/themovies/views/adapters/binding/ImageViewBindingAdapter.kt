@@ -12,42 +12,42 @@ import com.example.themovies.R
 import com.example.themovies.network.repositories.ConfigurationRepository
 
 @BindingAdapter("loadImage")
-fun loadImage(view: ImageView, liveUrl: String?) {
+fun ImageView.loadImage(liveUrl: String?) {
     if (liveUrl?.isNotEmpty() == true) {
         Glide
-            .with(view)
+            .with(this)
             .load("${ConfigurationRepository.URL}${ConfigurationRepository.sizeOfPoster}${liveUrl}")
-            .into(view)
+            .into(this)
     } else {
-        view.background = ColorDrawable(Color.BLACK)
+        this.background = ColorDrawable(Color.BLACK)
     }
 }
 
 @BindingAdapter("loadImageForMainLists")
-fun loadImageForMainLists(view: ImageView, path: String?) {
+fun ImageView.loadImageForMainLists(path: String?) {
     Glide
-        .with(view)
+        .with(this)
         .load("${ConfigurationRepository.URL}${ConfigurationRepository.sizeOfPoster}${path}")
         .apply(
             RequestOptions().placeholder(R.drawable.funnyunicorn).error(R.drawable.sadunicorn)
                 .centerCrop()
         )
         .transition(DrawableTransitionOptions.withCrossFade())
-        .into(view)
+        .into(this)
 }
 
 @BindingAdapter("loadImageForItem")
-fun loadImageForItem(view: ImageView, path: String?) {
+fun ImageView.loadImageForItem(path: String?) {
     Glide
-        .with(view)
+        .with(this)
         .load("${ConfigurationRepository.URL}${ConfigurationRepository.sizeOfPoster}${path}")
         .apply(RequestOptions().error(R.drawable.sadunicorn))
         .transition(DrawableTransitionOptions.withCrossFade())
-        .into(view)
+        .into(this)
 }
 
 @BindingAdapter("hideImage")
-fun hideImage(view: ImageView, value: String?) {
-    view.isVisible = value != "0"
+fun ImageView.hideImage(value: String?) {
+    this.isVisible = value != "0"
 }
 

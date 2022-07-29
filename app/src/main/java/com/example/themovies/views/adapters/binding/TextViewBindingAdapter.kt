@@ -8,17 +8,17 @@ import androidx.core.view.isVisible
 import androidx.databinding.BindingAdapter
 
 @BindingAdapter("textOrHideIfEmpty")
-fun setTextOrHideIfEmpty(view: TextView, value: String?) {
-    view.isVisible = value != "0"
+fun TextView.setTextOrHideIfEmpty(value: String?) {
+    this.isVisible = value != "0"
 }
 
 @BindingAdapter("hideText")
-fun hideText(view: TextView, value: String?) {
-    view.isVisible = value?.isNotBlank() == true
+fun TextView.hideText(value: String?) {
+    this.isVisible = value?.isNotBlank() == true
 }
 
 @BindingAdapter("dotAfterThreeNumbers")
-fun setDotAfterThreeNumbers(view: TextView, value: String?) {
+fun TextView.setDotAfterThreeNumbers(value: String?) {
     val length = value?.length ?: 0
     if (length > 3) {
         val builder = StringBuilder(value.toString())
@@ -27,27 +27,27 @@ fun setDotAfterThreeNumbers(view: TextView, value: String?) {
         for (i in 1..dots) {
             builder.insert(length - (i * 3), ".")
         }
-        view.text = "$builder$"
+        this.text = "$builder$"
     } else {
-        view.text = "$value$"
+        this.text = "$value$"
     }
 }
 
 @BindingAdapter("url")
-fun setUrl(view: TextView, url: String?) {
+fun TextView.setUrl(url: String?) {
     if (url?.isNotBlank() == true) {
-        view.visibility = View.VISIBLE
-        view.setOnClickListener {
+        this.visibility = View.VISIBLE
+        this.setOnClickListener {
             val intent = Intent(Intent.ACTION_VIEW)
             intent.data = Uri.parse(url)
-            view.context.startActivity(intent)
+            this.context.startActivity(intent)
         }
     } else {
-        view.visibility = View.GONE
+        this.visibility = View.GONE
     }
 }
 
 @BindingAdapter("textMinutes")
-fun setTextForMinutes(view: TextView, value: String?) {
-    view.text = "$value minutes"
+fun TextView.setTextForMinutes(value: String?) {
+    this.text = "$value minutes"
 }

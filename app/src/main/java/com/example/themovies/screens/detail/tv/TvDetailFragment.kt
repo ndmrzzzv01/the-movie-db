@@ -92,15 +92,5 @@ class TvDetailFragment : Fragment() {
             }
         }
 
-        viewModel.season.observe(viewLifecycleOwner) { list ->
-            if (list?.seasons != null) {
-                binding.apply {
-                    rvSeason.visibility = View.VISIBLE
-                    rvSeason.layoutManager =
-                        LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
-                    rvSeason.adapter = SeasonAdapter(list.seasons)
-                }
-            }
-        }
     }
 }

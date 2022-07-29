@@ -18,10 +18,4 @@ interface MovieApi {
     suspend fun getMovie(
         @Path("movie_id", encoded = true) movieId: Int?
     ): Movie?
-
-    @GET("movie/{movie_id}")
-    suspend fun getCollectionMovie(
-        @Path("movie_id", encoded = true) movieId: Int?
-    ): MovieResponse?
-
 }

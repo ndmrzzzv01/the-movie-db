@@ -53,14 +53,11 @@ class MovieDetailFragment : Fragment() {
         val value = sharedPreferences.getBoolean(SettingsFragment.NOTIFICATION_LIKE, false)
         val intent = Intent(requireContext(), NotificationService::class.java)
 
-
-
         initObservers(value, intent)
 
         binding.viewModel = viewModel
         binding.lifecycleOwner = this
         viewModel.getMovie(id.idMovie)
-        viewModel.getCollectionMovie(id.idMovie)
         viewModel.isLiked(id.idMovie)
     }
 

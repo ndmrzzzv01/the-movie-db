@@ -13,5 +13,6 @@ data class Movie(
     @SerializedName("poster_path") var posterPath: String? = "",
     @SerializedName("backdrop_path") var backdropPath: String = "",
     @SerializedName("vote_average") var vote: String? = "",
-    var runtime: String? = ""
-): RecordType()
+    var runtime: String? = "",
+    @SerializedName("belongs_to_collection") val collection: Collection? = null
+) : RecordType()
