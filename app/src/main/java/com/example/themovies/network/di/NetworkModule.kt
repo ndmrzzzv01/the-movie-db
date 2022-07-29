@@ -69,11 +69,6 @@ object NetworkModule {
         return ConfigurationRepository(configurationApi)
     }
 
-    @Provides
-    fun provideConnectivityTracker(): ConnectivityTracker {
-        return ConnectivityTracker()
-    }
-
 }
 
 

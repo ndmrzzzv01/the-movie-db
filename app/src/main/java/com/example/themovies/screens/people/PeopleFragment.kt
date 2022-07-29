@@ -82,8 +82,6 @@ class PeopleFragment : Fragment() {
     }
 
     private fun downloadData() {
-        createRecyclerView()
-
         peopleAdapter = RecordAdapter(object : RecordClick {
             override fun onRecordClickListener(id: Int, type: Record, customParameter: Any?) {
                 loading?.showLoading()
@@ -97,25 +95,13 @@ class PeopleFragment : Fragment() {
                 }
             }
         })
+
+        connectivityTracker.recyclerViewConnect(binding.rvMovies, peopleAdapter, requireContext())
+
         concatAdapter = peopleAdapter.withLoadStateFooter(ListLoadStateAdapter())
         binding.rvMovies.adapter = concatAdapter
 
         initObservers()
-    }
-
-    private fun createRecyclerView() {
-        binding.rvMovies.visibility = View.VISIBLE
-        val gridLayoutManager = GridLayoutManager(requireContext(), 2)
-        binding.rvMovies.layoutManager = gridLayoutManager
-        gridLayoutManager.spanSizeLookup = object : GridLayoutManager.SpanSizeLookup() {
-            override fun getSpanSize(position: Int): Int {
-                return if (position == peopleAdapter.itemCount && peopleAdapter.itemCount > 0) {
-                    2
-                } else {
-                    1
-                }
-            }
-        }
     }
 
     private fun initObservers() {

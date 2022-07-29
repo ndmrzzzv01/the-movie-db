@@ -10,7 +10,6 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.ConcatAdapter
-import androidx.recyclerview.widget.GridLayoutManager
 import com.example.themovies.databinding.FragmentMainBinding
 import com.example.themovies.network.data.Record
 import com.example.themovies.network.data.RecordClick
@@ -79,7 +78,6 @@ class MovieFragment : Fragment() {
 
 
     private fun downloadData() {
-        createRecyclerView()
 
         movieAdapter = RecordAdapter(object : RecordClick {
             override fun onRecordClickListener(id: Int, type: Record, customParameter: Any?) {
@@ -92,26 +90,14 @@ class MovieFragment : Fragment() {
             }
         })
 
+        connectivityTracker.recyclerViewConnect(binding.rvMovies, movieAdapter, requireContext())
+
         concatAdapter = movieAdapter.withLoadStateFooter(ListLoadStateAdapter())
         binding.rvMovies.adapter = concatAdapter
 
         initObservers()
     }
 
-    private fun createRecyclerView() {
-        binding.rvMovies.visibility = View.VISIBLE
-        val gridLayoutManager = GridLayoutManager(requireContext(), 2)
-        binding.rvMovies.layoutManager = gridLayoutManager
-        gridLayoutManager.spanSizeLookup = object : GridLayoutManager.SpanSizeLookup() {
-            override fun getSpanSize(position: Int): Int {
-                return if (position == movieAdapter.itemCount && movieAdapter.itemCount > 0) {
-                    2
-                } else {
-                    1
-                }
-            }
-        }
-    }
 
     private fun initObservers() {
         lifecycleScope.launch {

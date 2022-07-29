@@ -72,8 +72,6 @@ class PeopleDetailFragment : Fragment() {
 
     private fun swipePager() {
         binding.apply {
-            btnLeft.visibility = View.VISIBLE
-            btnRight.visibility = View.VISIBLE
             btnLeft.setOnClickListener {
                 if (pagerForKnownPerson.currentItem > pagerForKnownPerson.left) {
                     pagerForKnownPerson.setCurrentItem(pagerForKnownPerson.currentItem - 1, true)
@@ -112,7 +110,9 @@ class PeopleDetailFragment : Fragment() {
         }
 
 
-        viewModel.movieForKnownPerson.observe(viewLifecycleOwner) {
+        viewModel.movieOrTvForKnownPerson.observe(viewLifecycleOwner) {
+            binding.btnLeft.visibility = View.VISIBLE
+            binding.btnRight.visibility = View.VISIBLE
             it?.let { list ->
                 adapter.updateList(list)
             }

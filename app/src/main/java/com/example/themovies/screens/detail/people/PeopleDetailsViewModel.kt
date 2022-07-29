@@ -25,7 +25,7 @@ class PeopleDetailsViewModel @Inject constructor(
 ) : ViewModel() {
 
     val person = MutableLiveData<Person>()
-    val movieForKnownPerson = MutableLiveData<List<RecordType?>>()
+    val movieOrTvForKnownPerson = MutableLiveData<List<RecordType?>>()
     val isLiked = MutableLiveData<Boolean>()
 
     fun getPeople(peopleId: Int?) {
@@ -48,7 +48,7 @@ class PeopleDetailsViewModel @Inject constructor(
                     }
                     list.add(query)
                 }
-                movieForKnownPerson.value = list
+                movieOrTvForKnownPerson.value = list
                 Timber.d(list.toString())
             } catch (exception: Exception) {
                 Timber.e(exception)
