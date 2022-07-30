@@ -255,7 +255,9 @@
             <View
                 android:id="@+id/divider2"
                 style="@style/Divider"
-                android:layout_marginTop="7dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/tvHomepage" />
@@ -273,6 +275,7 @@
                 android:textSize="16sp"
                 android:textStyle="italic"
                 app:hideText="@{viewModel.tv.overview}"
+                app:layout_constraintBottom_toTopOf="@+id/divider3"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/divider2"
@@ -282,6 +285,7 @@
                 android:id="@+id/divider3"
                 style="@style/Divider"
                 android:layout_marginTop="8dp"
+                app:layout_constraintBottom_toTopOf="@+id/rvSeason"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/tvDescriptionTv" />
@@ -290,14 +294,13 @@
                 android:id="@+id/rvSeason"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
                 android:layout_marginBottom="8dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/divider3"
-                app:observeListForSeason="@{viewModel.tv.seasons}"
-                tools:listitem="@layout/list_item_seasons" />
+                app:observeList="@{viewModel.tv.seasons}"
+                tools:listitem="@layout/list_inner_item" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>

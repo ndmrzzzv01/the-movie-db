@@ -265,7 +265,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/tvActors"
                 app:observeList="@{viewModel.credits}"
-                tools:listitem="@layout/list_item_seasons" />
+                tools:listitem="@layout/list_inner_item" />
 
             <View
                 android:id="@+id/divider4"
