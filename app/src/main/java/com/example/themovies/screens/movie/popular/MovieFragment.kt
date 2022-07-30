@@ -9,6 +9,8 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
+import androidx.paging.CombinedLoadStates
+import androidx.paging.LoadState
 import androidx.recyclerview.widget.ConcatAdapter
 import com.example.themovies.databinding.FragmentMainBinding
 import com.example.themovies.network.data.Record
@@ -46,28 +48,13 @@ class MovieFragment : Fragment() {
         super.onCreateView(inflater, container, savedInstanceState)
         binding = FragmentMainBinding.inflate(inflater, container, false)
 
-        binding.apply {
-            if (!connectivityTracker.isNetworkConnected(requireContext())) {
-                rvMovies.visibility = View.INVISIBLE
-                tvError.visibility = View.VISIBLE
-                btnRetry.apply {
-                    visibility = View.VISIBLE
-                    setOnClickListener {
-                        if (connectivityTracker.isNetworkConnected(requireContext())) {
-                            visibility = View.INVISIBLE
-                            tvError.visibility = View.INVISIBLE
-                            downloadData()
-                        } else {
-                            return@setOnClickListener
-                        }
-                    }
-                }
-            } else {
-                downloadData()
-            }
+        binding.lifecycleOwner = this
+        binding.viewModel = viewModel
 
-            return root
-        }
+        initList()
+        initObservers()
+
+        return binding.root
 
     }
 
@@ -76,9 +63,15 @@ class MovieFragment : Fragment() {
         loading = null
     }
 
+    private fun initList() {
+        movieAdapter = initAdapter()
+        concatAdapter = movieAdapter.withLoadStateFooter(ListLoadStateAdapter())
+        binding.rvMovies.adapter = concatAdapter
 
-    private fun downloadData() {
+        connectivityTracker.initGridLayoutManager(binding.rvMovies, movieAdapter, requireContext())
+    }
 
+    private fun initAdapter(): RecordAdapter {
         movieAdapter = RecordAdapter(object : RecordClick {
             override fun onRecordClickListener(id: Int, type: Record, customParameter: Any?) {
                 loading?.showLoading()
@@ -90,12 +83,16 @@ class MovieFragment : Fragment() {
             }
         })
 
-        connectivityTracker.recyclerViewConnect(binding.rvMovies, movieAdapter, requireContext())
+        val loadStateAdapter: (CombinedLoadStates) -> Unit = {
+            when (it.refresh) {
+                is LoadState.Loading -> viewModel.showLoading()
+                is LoadState.Error -> viewModel.showError()
+                else -> viewModel.showList()
+            }
+        }
 
-        concatAdapter = movieAdapter.withLoadStateFooter(ListLoadStateAdapter())
-        binding.rvMovies.adapter = concatAdapter
-
-        initObservers()
+        movieAdapter.addLoadStateListener(loadStateAdapter)
+        return movieAdapter
     }
 
 
@@ -104,6 +101,9 @@ class MovieFragment : Fragment() {
             viewModel.flow.collectLatest {
                 movieAdapter.submitData(it)
             }
+        }
+        viewModel.retryLoadData = {
+            movieAdapter.retry()
         }
     }
 

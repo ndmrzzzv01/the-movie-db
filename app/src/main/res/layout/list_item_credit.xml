@@ -33,7 +33,7 @@
 
             <ImageView
                 android:id="@+id/imageActor"
-                android:layout_width="210dp"
+                android:layout_width="180dp"
                 android:layout_height="260dp"
                 android:scaleType="fitXY"
                 app:layout_constraintDimensionRatio="2:3"
@@ -46,6 +46,7 @@
             <TextView
                 android:id="@+id/tvName"
                 android:layout_width="0dp"
+                android:minLines="2"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"

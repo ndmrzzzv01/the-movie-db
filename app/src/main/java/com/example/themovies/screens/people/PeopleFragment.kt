@@ -10,8 +10,9 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
+import androidx.paging.CombinedLoadStates
+import androidx.paging.LoadState
 import androidx.recyclerview.widget.ConcatAdapter
-import androidx.recyclerview.widget.GridLayoutManager
 import com.example.themovies.databinding.FragmentMainBinding
 import com.example.themovies.network.data.KnownForPerson
 import com.example.themovies.network.data.Record
@@ -52,26 +53,11 @@ class PeopleFragment : Fragment() {
     ): View {
         binding = FragmentMainBinding.inflate(inflater, container, false)
 
-        binding.apply {
-            if (!connectivityTracker.isNetworkConnected(requireContext())) {
-                rvMovies.visibility = View.INVISIBLE
-                tvError.visibility = View.VISIBLE
-                btnRetry.apply {
-                    visibility = View.VISIBLE
-                    setOnClickListener {
-                        if (connectivityTracker.isNetworkConnected(requireContext())) {
-                            visibility = View.INVISIBLE
-                            tvError.visibility = View.INVISIBLE
-                            downloadData()
-                        } else {
-                            return@setOnClickListener
-                        }
-                    }
-                }
-            } else {
-                downloadData()
-            }
-        }
+        binding.lifecycleOwner = this
+        binding.viewModel = viewModel
+
+        initList()
+        initObservers()
 
         return binding.root
     }
@@ -81,7 +67,15 @@ class PeopleFragment : Fragment() {
         loading = null
     }
 
-    private fun downloadData() {
+    private fun initList() {
+        peopleAdapter = initAdapter()
+        concatAdapter = peopleAdapter.withLoadStateFooter(ListLoadStateAdapter())
+        binding.rvMovies.adapter = concatAdapter
+
+        connectivityTracker.initGridLayoutManager(binding.rvMovies, peopleAdapter, requireContext())
+    }
+
+    private fun initAdapter(): RecordAdapter {
         peopleAdapter = RecordAdapter(object : RecordClick {
             override fun onRecordClickListener(id: Int, type: Record, customParameter: Any?) {
                 loading?.showLoading()
@@ -96,12 +90,17 @@ class PeopleFragment : Fragment() {
             }
         })
 
-        connectivityTracker.recyclerViewConnect(binding.rvMovies, peopleAdapter, requireContext())
+        val loadStateAdapter: (CombinedLoadStates) -> Unit = {
+            when (it.refresh) {
+                is LoadState.Loading -> viewModel.showLoading()
+                is LoadState.Error -> viewModel.showError()
+                else -> viewModel.showList()
+            }
+        }
 
-        concatAdapter = peopleAdapter.withLoadStateFooter(ListLoadStateAdapter())
-        binding.rvMovies.adapter = concatAdapter
+        peopleAdapter.addLoadStateListener(loadStateAdapter)
+        return peopleAdapter
 
-        initObservers()
     }
 
     private fun initObservers() {
@@ -109,6 +108,9 @@ class PeopleFragment : Fragment() {
             viewModel.flow.collectLatest {
                 peopleAdapter.submitData(it)
             }
+        }
+        viewModel.retryLoadData = {
+            peopleAdapter.retry()
         }
     }
 }

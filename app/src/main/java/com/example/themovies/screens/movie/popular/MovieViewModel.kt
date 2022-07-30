@@ -1,7 +1,6 @@
 package com.example.themovies.screens.movie.popular
 
 import android.content.Context
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
@@ -11,6 +10,7 @@ import com.example.themovies.network.data.FakeAd
 import com.example.themovies.network.data.Movie
 import com.example.themovies.network.data.RecordType
 import com.example.themovies.paging.TheMovieDBPagingSource
+import com.example.themovies.screens.BaseListViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.Dispatchers
@@ -21,7 +21,7 @@ import javax.inject.Inject
 class MovieViewModel @Inject constructor(
     private val movieRepository: MovieRepository,
     @ApplicationContext context: Context
-) : ViewModel() {
+) : BaseListViewModel() {
 
     private var listOfMovie: List<Movie> = mutableListOf()
     private val resources = context.resources

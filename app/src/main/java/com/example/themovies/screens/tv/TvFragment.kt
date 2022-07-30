@@ -9,8 +9,9 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
+import androidx.paging.CombinedLoadStates
+import androidx.paging.LoadState
 import androidx.recyclerview.widget.ConcatAdapter
-import androidx.recyclerview.widget.GridLayoutManager
 import com.example.themovies.databinding.FragmentMainBinding
 import com.example.themovies.network.data.Record
 import com.example.themovies.network.data.RecordClick
@@ -47,28 +48,13 @@ class TvFragment : Fragment() {
         super.onCreateView(inflater, container, savedInstanceState)
         binding = FragmentMainBinding.inflate(inflater, container, false)
 
-        binding.apply {
-            if (!connectivityTracker.isNetworkConnected(requireContext())) {
-                rvMovies.visibility = View.INVISIBLE
-                tvError.visibility = View.VISIBLE
-                btnRetry.apply {
-                    visibility = View.VISIBLE
-                    setOnClickListener {
-                        if (connectivityTracker.isNetworkConnected(requireContext())) {
-                            visibility = View.INVISIBLE
-                            tvError.visibility = View.INVISIBLE
-                            downloadData()
-                        } else {
-                            return@setOnClickListener
-                        }
-                    }
-                }
-            } else {
-                downloadData()
-            }
+        binding.lifecycleOwner = this
+        binding.viewModel = viewModel
 
-            return root
-        }
+        initList()
+        initObservers()
+
+        return binding.root
     }
 
     override fun onDetach() {
@@ -76,7 +62,15 @@ class TvFragment : Fragment() {
         loading = null
     }
 
-    private fun downloadData() {
+    private fun initList() {
+        tvAdapter = initAdapter()
+        concatAdapter = tvAdapter.withLoadStateFooter(ListLoadStateAdapter())
+        binding.rvMovies.adapter = concatAdapter
+
+        connectivityTracker.initGridLayoutManager(binding.rvMovies, tvAdapter, requireContext())
+    }
+
+    private fun initAdapter(): RecordAdapter {
         tvAdapter = RecordAdapter(object : RecordClick {
             override fun onRecordClickListener(id: Int, type: Record, customParameter: Any?) {
                 loading?.showLoading()
@@ -88,12 +82,17 @@ class TvFragment : Fragment() {
             }
         })
 
-        connectivityTracker.recyclerViewConnect(binding.rvMovies, tvAdapter, requireContext())
+        val loadStateAdapter: (CombinedLoadStates) -> Unit = {
+            when (it.refresh) {
+                is LoadState.Loading -> viewModel.showLoading()
+                is LoadState.Error -> viewModel.showError()
+                else -> viewModel.showList()
+            }
+        }
 
-        concatAdapter = tvAdapter.withLoadStateFooter(ListLoadStateAdapter())
-        binding.rvMovies.adapter = concatAdapter
+        tvAdapter.addLoadStateListener(loadStateAdapter)
+        return tvAdapter
 
-        initObservers()
     }
 
     private fun initObservers() {
@@ -101,6 +100,9 @@ class TvFragment : Fragment() {
             viewModel.flow.collectLatest {
                 tvAdapter.submitData(it)
             }
+        }
+        viewModel.retryLoadData = {
+            tvAdapter.retry()
         }
     }
 }

@@ -9,15 +9,7 @@ import com.example.themovies.screens.RecordAdapter
 
 class ConnectivityTracker {
 
-    fun isNetworkConnected(context: Context): Boolean {
-        val connect: ConnectivityManager =
-            context.getSystemService(Context.CONNECTIVITY_SERVICE)
-                    as ConnectivityManager
-        return connect.activeNetworkInfo != null && connect.activeNetworkInfo!!.isConnected
-    }
-
-    fun recyclerViewConnect(recyclerView: RecyclerView, adapter: RecordAdapter, context: Context) {
-        recyclerView.visibility = View.VISIBLE
+    fun initGridLayoutManager(recyclerView: RecyclerView, adapter: RecordAdapter, context: Context) {
         val gridLayoutManager = GridLayoutManager(context, 2)
         recyclerView.layoutManager = gridLayoutManager
         gridLayoutManager.spanSizeLookup = object : GridLayoutManager.SpanSizeLookup() {

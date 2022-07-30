@@ -3,6 +3,7 @@ package com.example.themovies.paging
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.isVisible
 import androidx.paging.LoadState
 import androidx.paging.LoadStateAdapter
 import androidx.recyclerview.widget.RecyclerView
@@ -32,12 +33,12 @@ class LoadStateViewHolder(
         binding.apply {
             when (loadState) {
                 is LoadState.Loading -> {
-                    progressBar.visibility = View.VISIBLE
+                    progressBar.isVisible = true
                 }
                 is LoadState.Error -> {
-                    progressBar.visibility = View.INVISIBLE
-                    btnRetryAgain.visibility = View.VISIBLE
-                    tvErrorMessage.visibility = View.VISIBLE
+                    progressBar.isVisible = false
+                    btnRetryAgain.isVisible = true
+                    tvErrorMessage.isVisible = true
                 }
                 else -> {}
             }
