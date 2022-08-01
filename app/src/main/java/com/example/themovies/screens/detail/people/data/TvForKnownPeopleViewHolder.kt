@@ -13,7 +13,8 @@ class TvForKnownPeopleViewHolder(val binding: ItemPeopleBinding) :
             title = tv.name
             originalTitle = tv.originalName
             releaseDate = tv.releaseDate
-            vote = tv.voteAverage.toString()
+            vote = tv.voteAverage
+            character = tv.character
             description = tv.overview
         }
     }

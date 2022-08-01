@@ -30,9 +30,6 @@ import javax.inject.Inject
 @AndroidEntryPoint
 class PeopleFragment : Fragment() {
 
-    @Parcelize
-    data class CustomParameters(var customParameters: List<KnownForPerson>) : Parcelable
-
     @Inject
     lateinit var connectivityTracker: ConnectivityTracker
     var loading: Loading? = null
@@ -80,10 +77,9 @@ class PeopleFragment : Fragment() {
         actionHandler.onMediaTypeClick = OnMediaTypeClick {
             loading?.showLoading()
 
-//            if (it.customParameter is CustomParameters)
             findNavController().navigate(
                 PeopleFragmentDirections.actionPeopleFragmentToDetailsPeopleFragment(
-                    it.id ?: 0, CustomParameters(listOf())
+                    it.id ?: 0
                 )
             )
 

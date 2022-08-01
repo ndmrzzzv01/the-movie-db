@@ -162,7 +162,7 @@
                 android:id="@+id/pagerForKnownPerson"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:observeList="@{viewModel.movieOrTvForKnownPerson}"
+                app:observeList="@{viewModel.listOfMovieAndTV}"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -176,7 +176,7 @@
                 android:background="@drawable/roundcorner"
                 android:src="@drawable/ic_baseline_arrow_back"
                 android:visibility="gone"
-                app:isVisibleViewIfListNotNull="@{viewModel.movieOrTvForKnownPerson}"
+                app:isVisibleViewIfListNotNull="@{viewModel.listOfMovieAndTV}"
                 app:layout_constraintBottom_toBottomOf="@id/pagerForKnownPerson"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="@+id/pagerForKnownPerson" />
@@ -189,7 +189,7 @@
                 android:background="@drawable/roundcorner"
                 android:src="@drawable/ic_baseline_arrow_forward_24"
                 android:visibility="gone"
-                app:isVisibleViewIfListNotNull="@{viewModel.movieOrTvForKnownPerson}"
+                app:isVisibleViewIfListNotNull="@{viewModel.listOfMovieAndTV}"
                 app:layout_constraintBottom_toBottomOf="@id/pagerForKnownPerson"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="@+id/pagerForKnownPerson" />

@@ -3,6 +3,7 @@ package com.example.themovies.views.adapters.binding
 import android.content.Intent
 import android.net.Uri
 import android.view.View
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.core.view.isVisible
 import androidx.databinding.BindingAdapter
@@ -11,15 +12,23 @@ import com.example.themovies.network.data.Person
 import com.example.themovies.network.data.RecordType
 import com.example.themovies.network.data.TV
 
+@BindingAdapter("nullOrEmpty")
+fun TextView.nullOrEmpty(text: String?) {
+    if (text.isNullOrBlank()) {
+        this.visibility = View.GONE
+    } else {
+        this.visibility = View.VISIBLE
+    }
+}
 
-//@BindingAdapter("setText")
-//fun TextView.setText(type: RecordType?) {
-//    when (type) {
-//        is Movie -> this.text = type.name
-//        is TV -> this.text = type.name
-//        is Person -> this.text = type.name
-//    }
-//}
+@BindingAdapter("equalsZero")
+fun TextView.equalsZero(value: String?) {
+    if (value == "0" || value == "0.0") {
+        this.visibility = View.GONE
+    } else {
+        this.visibility = View.VISIBLE
+    }
+}
 
 @BindingAdapter("textOrHideIfEmpty")
 fun TextView.setTextOrHideIfEmpty(value: String?) {

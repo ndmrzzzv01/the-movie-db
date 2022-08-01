@@ -79,7 +79,7 @@ class LikesFragment : Fragment() {
                                 //                            if (it.customParameter is PeopleFragment.CustomParameters)
                                 findNavController().navigate(
                                     LikesFragmentDirections.actionLikesToDetailsPeopleFragment(
-                                        id, PeopleFragment.CustomParameters(listOf())
+                                        id
                                     )
                                 )
                             }

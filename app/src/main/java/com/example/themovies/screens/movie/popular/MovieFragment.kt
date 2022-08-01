@@ -15,8 +15,6 @@ import androidx.recyclerview.widget.ConcatAdapter
 import com.example.themovies.databinding.FragmentMainBinding
 import com.example.themovies.network.MediaItemTypeActionHandler
 import com.example.themovies.network.OnMediaTypeClick
-import com.example.themovies.network.data.Record
-import com.example.themovies.network.data.RecordClick
 import com.example.themovies.paging.ListLoadStateAdapter
 import com.example.themovies.screens.RecordAdapter
 import com.example.themovies.screens.activities.Loading

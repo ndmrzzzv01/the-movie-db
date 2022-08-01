@@ -2,6 +2,7 @@ package com.example.themovies.views.adapters.binding
 
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
+import android.view.View
 import android.widget.ImageView
 import androidx.core.view.isVisible
 import androidx.databinding.BindingAdapter
@@ -29,13 +30,6 @@ fun ImageView.loadImage(liveUrl: String?) {
 
 @BindingAdapter("loadImageForMainLists")
 fun ImageView.loadImageForMainLists(url: String?) {
-//    var path: String? = null
-//    when (type) {
-//        is Movie -> path = type.posterPath
-//        is TV -> path = type.posterPath
-//        is Person -> path = type.posterPath
-//    }
-
     Glide
         .with(this)
         .load("${ConfigurationRepository.URL}${ConfigurationRepository.sizeOfPoster}${url}")
@@ -55,6 +49,15 @@ fun ImageView.loadImageForItem(path: String?) {
         .apply(RequestOptions().error(R.drawable.sadunicorn))
         .transition(DrawableTransitionOptions.withCrossFade())
         .into(this)
+}
+
+@BindingAdapter("equalsZero")
+fun ImageView.equalsZero(value: String?) {
+    if (value == "0" || value == "0.0") {
+        this.visibility = View.GONE
+    } else {
+        this.visibility = View.VISIBLE
+    }
 }
 
 @BindingAdapter("hideImage")

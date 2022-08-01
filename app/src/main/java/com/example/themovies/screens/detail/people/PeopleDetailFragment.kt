@@ -55,8 +55,9 @@ class PeopleDetailFragment : Fragment() {
 
         binding.viewModel = viewModel
         binding.lifecycleOwner = this
-        viewModel.getMovieOrTvForKnownPerson(args.customParameters)
         viewModel.getPeople(args.idPeople)
+        viewModel.getCastOfMovie(args.idPeople)
+        viewModel.getCastOfTv(args.idPeople)
         viewModel.isLiked(args.idPeople)
     }
 

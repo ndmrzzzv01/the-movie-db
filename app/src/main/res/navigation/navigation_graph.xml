@@ -61,9 +61,6 @@
         <argument
             android:name="idPeople"
             app:argType="integer" />
-        <argument
-            android:name="customParameters"
-            app:argType="com.example.themovies.screens.people.PeopleFragment$CustomParameters" />
     </fragment>
 
     <fragment

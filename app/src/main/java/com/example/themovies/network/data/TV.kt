@@ -13,5 +13,7 @@ data class TV(
     val status: String? = "",
     @SerializedName("vote_average") val voteAverage: Double? = 0.0,
     val overview: String? = "",
+    var popularity: Double? = 0.0,
+    var character: String? = "",
     @SerializedName("seasons") val seasons: List<Season>? = listOf()
 ) : RecordType()

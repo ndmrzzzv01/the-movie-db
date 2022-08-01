@@ -12,7 +12,9 @@ data class Movie(
     @SerializedName("overview") val description: String = "",
     @SerializedName("poster_path") var posterPath: String? = "",
     @SerializedName("backdrop_path") var backdropPath: String = "",
-    @SerializedName("vote_average") var vote: String? = "",
+    @SerializedName("vote_average") var vote: Double? = 0.0,
+    var popularity: Double? = 0.0,
+    var character: String? = "",
     var runtime: String? = "",
     @SerializedName("belongs_to_collection") val collection: Collection? = null
 ) : RecordType()
