@@ -17,13 +17,14 @@ class PeopleViewModel @Inject constructor(
     private val peopleRepository: PeopleRepository
 ) : BaseListViewModel() {
 
+
     val flow = Pager(PagingConfig(20)) {
         TheMovieDBPagingSource { page ->
             withContext(Dispatchers.IO) {
                 val networkList = peopleRepository.getPopularPeople(page)
                 val list = ArrayList<MediaItemType>(networkList.size)
                 networkList.forEach {
-                    list.add(MediaItemType(it.posterPath, it.name ?: ""))
+                    list.add(MediaItemType(it.id, it.posterPath, it.name ?: "", it.knownFor))
                 }
                 return@withContext list
             }

@@ -13,8 +13,8 @@ import androidx.paging.CombinedLoadStates
 import androidx.paging.LoadState
 import androidx.recyclerview.widget.ConcatAdapter
 import com.example.themovies.databinding.FragmentMainBinding
-import com.example.themovies.network.data.Record
-import com.example.themovies.network.data.RecordClick
+import com.example.themovies.network.MediaItemTypeActionHandler
+import com.example.themovies.network.OnMediaTypeClick
 import com.example.themovies.paging.ListLoadStateAdapter
 import com.example.themovies.screens.RecordAdapter
 import com.example.themovies.screens.activities.Loading
@@ -71,16 +71,16 @@ class TvFragment : Fragment() {
     }
 
     private fun initAdapter(): RecordAdapter {
-        tvAdapter = RecordAdapter(object : RecordClick {
-            override fun onRecordClickListener(id: Int, type: Record, customParameter: Any?) {
-                loading?.showLoading()
-                findNavController().navigate(
-                    TvFragmentDirections.actionTvFragmentToDetailsTvFragment(
-                        id
-                    )
+        val actionHandler = MediaItemTypeActionHandler()
+        actionHandler.onMediaTypeClick = OnMediaTypeClick {
+            loading?.showLoading()
+            findNavController().navigate(
+                TvFragmentDirections.actionTvFragmentToDetailsTvFragment(
+                    it.id ?: 0
                 )
-            }
-        })
+            )
+        }
+        tvAdapter = RecordAdapter(actionHandler)
 
         val loadStateAdapter: (CombinedLoadStates) -> Unit = {
             when (it.refresh) {

@@ -14,9 +14,9 @@ import androidx.paging.CombinedLoadStates
 import androidx.paging.LoadState
 import androidx.recyclerview.widget.ConcatAdapter
 import com.example.themovies.databinding.FragmentMainBinding
+import com.example.themovies.network.MediaItemTypeActionHandler
+import com.example.themovies.network.OnMediaTypeClick
 import com.example.themovies.network.data.KnownForPerson
-import com.example.themovies.network.data.Record
-import com.example.themovies.network.data.RecordClick
 import com.example.themovies.paging.ListLoadStateAdapter
 import com.example.themovies.screens.RecordAdapter
 import com.example.themovies.screens.activities.Loading
@@ -76,19 +76,20 @@ class PeopleFragment : Fragment() {
     }
 
     private fun initAdapter(): RecordAdapter {
-        peopleAdapter = RecordAdapter(object : RecordClick {
-            override fun onRecordClickListener(id: Int, type: Record, customParameter: Any?) {
-                loading?.showLoading()
-                if (customParameter is CustomParameters) {
-                    findNavController().navigate(
-                        PeopleFragmentDirections.actionPeopleFragmentToDetailsPeopleFragment(
-                            id,
-                            customParameter
-                        )
-                    )
-                }
-            }
-        })
+        val actionHandler = MediaItemTypeActionHandler()
+        actionHandler.onMediaTypeClick = OnMediaTypeClick {
+            loading?.showLoading()
+
+//            if (it.customParameter is CustomParameters)
+            findNavController().navigate(
+                PeopleFragmentDirections.actionPeopleFragmentToDetailsPeopleFragment(
+                    it.id ?: 0, CustomParameters(listOf())
+                )
+            )
+
+        }
+
+        peopleAdapter = RecordAdapter(actionHandler)
 
         val loadStateAdapter: (CombinedLoadStates) -> Unit = {
             when (it.refresh) {
@@ -100,8 +101,8 @@ class PeopleFragment : Fragment() {
 
         peopleAdapter.addLoadStateListener(loadStateAdapter)
         return peopleAdapter
-
     }
+
 
     private fun initObservers() {
         lifecycleScope.launch {

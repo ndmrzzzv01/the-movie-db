@@ -1,6 +1,5 @@
 package com.example.themovies.screens.tv
 
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
@@ -24,7 +23,7 @@ class TvViewModel @Inject constructor(
                 val networkList = tvRepository.getPopularTV(page)
                 val list = ArrayList<MediaItemType>(networkList.size)
                 networkList.forEach {
-                    list.add(MediaItemType(it.posterPath, it.name ?: ""))
+                    list.add(MediaItemType(it.id, it.posterPath, it.name ?: ""))
                 }
                 return@withContext list
             }

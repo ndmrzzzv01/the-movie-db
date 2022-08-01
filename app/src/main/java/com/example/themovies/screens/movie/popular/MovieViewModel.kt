@@ -23,7 +23,7 @@ class MovieViewModel @Inject constructor(
                 val networkList = movieRepository.getMovies(page)
                 val list = ArrayList<MediaItemType>(networkList.size)
                 networkList.forEach {
-                    list.add(MediaItemType(it.posterPath, it.name))
+                    list.add(MediaItemType(it.id, it.posterPath, it.name))
                 }
                 return@withContext list
             }

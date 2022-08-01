@@ -4,17 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-        <!--        <variable-->
-        <!--            name="imageUrl"-->
-        <!--            type="String" />-->
-
-        <!--        <variable-->
-        <!--            name="title"-->
-        <!--            type="String" />-->
-
-        <!--        <variable-->
-        <!--            name="type"-->
-        <!--            type="com.example.themovies.network.data.RecordType" />-->
+        <variable
+            name="actionHandler"
+            type="com.example.themovies.network.MediaItemTypeActionHandler" />
 
         <variable
             name="type"
@@ -27,6 +19,7 @@
         android:layout_height="wrap_content"
         android:layout_margin="5dp"
         android:clickable="true"
+        android:onClick="@{() -> actionHandler.onMediaTypeClick.invoke(type)}"
         android:clipToPadding="false"
         android:focusable="true"
         app:cardCornerRadius="10dp"
