@@ -6,6 +6,20 @@ import android.view.View
 import android.widget.TextView
 import androidx.core.view.isVisible
 import androidx.databinding.BindingAdapter
+import com.example.themovies.network.data.Movie
+import com.example.themovies.network.data.Person
+import com.example.themovies.network.data.RecordType
+import com.example.themovies.network.data.TV
+
+
+//@BindingAdapter("setText")
+//fun TextView.setText(type: RecordType?) {
+//    when (type) {
+//        is Movie -> this.text = type.name
+//        is TV -> this.text = type.name
+//        is Person -> this.text = type.name
+//    }
+//}
 
 @BindingAdapter("textOrHideIfEmpty")
 fun TextView.setTextOrHideIfEmpty(value: String?) {

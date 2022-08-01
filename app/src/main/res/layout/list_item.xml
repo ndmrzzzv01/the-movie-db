@@ -4,13 +4,21 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-        <variable
-            name="imageUrl"
-            type="String" />
+        <!--        <variable-->
+        <!--            name="imageUrl"-->
+        <!--            type="String" />-->
+
+        <!--        <variable-->
+        <!--            name="title"-->
+        <!--            type="String" />-->
+
+        <!--        <variable-->
+        <!--            name="type"-->
+        <!--            type="com.example.themovies.network.data.RecordType" />-->
 
         <variable
-            name="title"
-            type="String" />
+            name="type"
+            type="com.example.themovies.network.data.MediaItemType" />
     </data>
 
     <com.google.android.material.card.MaterialCardView
@@ -34,11 +42,11 @@
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 android:scaleType="fitXY"
-                app:loadImageForMainLists="@{imageUrl}"
                 app:layout_constraintDimensionRatio="2:3"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
+                app:loadImageForMainLists="@{type.url}"
                 tools:srcCompat="@tools:sample/avatars" />
 
             <TextView
@@ -50,15 +58,15 @@
                 android:layout_marginEnd="8dp"
                 android:layout_marginBottom="8dp"
                 android:fontFamily="sans-serif"
-                android:text="@{title}"
-                tools:text="Title"
+                android:text="@{type.name}"
                 android:textAlignment="center"
                 android:textColor="@color/text_color"
                 android:textSize="16sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/image" />
+                app:layout_constraintTop_toBottomOf="@+id/image"
+                tools:text="Title" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

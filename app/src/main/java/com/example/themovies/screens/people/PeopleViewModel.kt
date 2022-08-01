@@ -1,10 +1,10 @@
 package com.example.themovies.screens.people
 
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.cachedIn
+import com.example.themovies.network.data.MediaItemType
 import com.example.themovies.paging.TheMovieDBPagingSource
 import com.example.themovies.screens.BaseListViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -18,9 +18,14 @@ class PeopleViewModel @Inject constructor(
 ) : BaseListViewModel() {
 
     val flow = Pager(PagingConfig(20)) {
-        TheMovieDBPagingSource{ page ->
+        TheMovieDBPagingSource { page ->
             withContext(Dispatchers.IO) {
-                peopleRepository.getPopularPeople(page)
+                val networkList = peopleRepository.getPopularPeople(page)
+                val list = ArrayList<MediaItemType>(networkList.size)
+                networkList.forEach {
+                    list.add(MediaItemType(it.posterPath, it.name ?: ""))
+                }
+                return@withContext list
             }
         }
     }.flow.cachedIn(viewModelScope)

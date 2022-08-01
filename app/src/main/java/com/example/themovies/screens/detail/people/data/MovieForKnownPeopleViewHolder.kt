@@ -10,8 +10,8 @@ class MovieForKnownPeopleViewHolder(val binding: ItemPeopleBinding) :
     fun bind(movie: Movie) {
         binding.apply {
             imageString = movie.backdropPath
-            title = movie.title
-            originalTitle = movie.originalTitle
+            title = movie.name
+            originalTitle = movie.originalName
             releaseDate = movie.releaseDate
             vote = movie.vote
             description = movie.description

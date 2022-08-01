@@ -9,6 +9,10 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.bumptech.glide.request.RequestOptions
 import com.example.themovies.R
+import com.example.themovies.network.data.Movie
+import com.example.themovies.network.data.Person
+import com.example.themovies.network.data.RecordType
+import com.example.themovies.network.data.TV
 import com.example.themovies.network.repositories.ConfigurationRepository
 
 @BindingAdapter("loadImage")
@@ -24,10 +28,17 @@ fun ImageView.loadImage(liveUrl: String?) {
 }
 
 @BindingAdapter("loadImageForMainLists")
-fun ImageView.loadImageForMainLists(path: String?) {
+fun ImageView.loadImageForMainLists(url: String?) {
+//    var path: String? = null
+//    when (type) {
+//        is Movie -> path = type.posterPath
+//        is TV -> path = type.posterPath
+//        is Person -> path = type.posterPath
+//    }
+
     Glide
         .with(this)
-        .load("${ConfigurationRepository.URL}${ConfigurationRepository.sizeOfPoster}${path}")
+        .load("${ConfigurationRepository.URL}${ConfigurationRepository.sizeOfPoster}${url}")
         .apply(
             RequestOptions().placeholder(R.drawable.funnyunicorn).error(R.drawable.sadunicorn)
                 .centerCrop()

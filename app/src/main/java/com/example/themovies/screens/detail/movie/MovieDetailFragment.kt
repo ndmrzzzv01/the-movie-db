@@ -57,7 +57,7 @@ class MovieDetailFragment : Fragment() {
             binding.apply {
                 loading?.hideLoading()
 
-                (requireActivity() as AppCompatActivity).supportActionBar?.title = movie.title
+                (requireActivity() as AppCompatActivity).supportActionBar?.title = movie.name
 
                 btnLike.setOnLikeListener(object : OnLikeListener {
                     override fun liked(likeButton: LikeButton?) {
