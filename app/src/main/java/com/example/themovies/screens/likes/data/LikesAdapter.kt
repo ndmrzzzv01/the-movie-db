@@ -16,7 +16,7 @@ class LikesAdapter(
     }
 
     override fun onBindViewHolder(holder: RecordViewHolder, position: Int) {
-        list[position]?.let { holder.bind(it) }
+        holder.bind(list[position] as MediaItemType)
     }
 
     override fun getItemCount(): Int = list.size

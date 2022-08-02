@@ -56,6 +56,7 @@ class LikesFragment : Fragment() {
             binding.apply {
                 rvMovies.layoutManager = GridLayoutManager(requireContext(), 2)
                 if (list.isNotEmpty()) {
+                    rvMovies.visibility = View.VISIBLE
                     val actionHandler = MediaItemTypeActionHandler()
                     adapter = LikesAdapter(list, actionHandler)
                     actionHandler.onMediaTypeClick = OnMediaTypeClick {
@@ -78,7 +79,7 @@ class LikesFragment : Fragment() {
                             2 -> {
                                 findNavController().navigate(
                                     LikesFragmentDirections.actionLikesToDetailsPeopleFragment(
-                                        id
+                                        it.id ?: 0
                                     )
                                 )
                             }
