@@ -138,12 +138,10 @@
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="16dp"
-                android:layout_marginBottom="8dp"
                 android:text="@{viewModel.person.biography}"
                 android:textColor="@color/text_color"
                 android:textSize="16sp"
                 app:hideText="@{viewModel.person.biography}"
-                app:layout_constraintBottom_toTopOf="@id/divider2"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/divider1"
@@ -152,8 +150,7 @@
             <View
                 android:id="@+id/divider2"
                 style="@style/Divider"
-                android:layout_marginBottom="8dp"
-                app:layout_constraintBottom_toTopOf="@id/pagerForKnownPerson"
+                android:layout_marginTop="8dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/tvDescriptionPeople" />
@@ -162,17 +159,17 @@
                 android:id="@+id/pagerForKnownPerson"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:observeList="@{viewModel.listOfMovieAndTV}"
-                app:layout_constraintBottom_toBottomOf="parent"
+                android:layout_marginTop="8dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/divider2" />
+                app:layout_constraintTop_toBottomOf="@+id/divider2"
+                app:observeList="@{viewModel.listOfMovieAndTV}" />
 
             <ImageButton
                 android:id="@+id/btnLeft"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
+                android:layout_marginStart="32dp"
                 android:background="@drawable/roundcorner"
                 android:src="@drawable/ic_baseline_arrow_back"
                 android:visibility="gone"
@@ -185,7 +182,7 @@
                 android:id="@+id/btnRight"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="16dp"
+                android:layout_marginEnd="32dp"
                 android:background="@drawable/roundcorner"
                 android:src="@drawable/ic_baseline_arrow_forward_24"
                 android:visibility="gone"
@@ -193,6 +190,42 @@
                 app:layout_constraintBottom_toBottomOf="@id/pagerForKnownPerson"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="@+id/pagerForKnownPerson" />
+
+            <View
+                android:id="@+id/divider3"
+                style="@style/Divider"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/pagerForKnownPerson" />
+
+            <TextView
+                android:id="@+id/tvTextGallery"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                android:textAlignment="center"
+                android:textColor="@color/text_color"
+                android:textSize="20sp"
+                android:textStyle="italic"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/divider3"
+                app:setTextForGallery="@{viewModel.person.name}"
+                tools:text="Photo gallery of Johnny Depp" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                app:observeList="@{viewModel.listOfGallery}"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tvTextGallery" />
 
             <androidx.constraintlayout.widget.Guideline
                 android:id="@+id/guideline2"

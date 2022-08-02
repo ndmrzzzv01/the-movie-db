@@ -1,4 +1,4 @@
-package com.example.themovies.screens.detail.people.data
+package com.example.themovies.screens.detail.people.data.knownfor
 
 import android.view.LayoutInflater
 import android.view.ViewGroup

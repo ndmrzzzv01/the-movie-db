@@ -1,6 +1,7 @@
 package com.example.themovies.screens.people
 
 import com.example.themovies.api.PeopleApi
+import com.example.themovies.network.data.Gallery
 import com.example.themovies.network.data.Movie
 import com.example.themovies.network.data.Person
 import com.example.themovies.network.data.TV
@@ -38,6 +39,11 @@ class PeopleRepository @Inject constructor(
     suspend fun getCastOfTv(tvId: Int?): List<TV> = withContext(Dispatchers.IO) {
         checkConfiguration()
         peopleApi.getCastForTv(tvId).castOfTv ?: listOf()
+    }
+
+    suspend fun getImages(personId: Int?): List<Gallery> = withContext(Dispatchers.IO) {
+        checkConfiguration()
+        peopleApi.getImages(personId).gallery ?: listOf()
     }
 
     private suspend fun checkConfiguration() {

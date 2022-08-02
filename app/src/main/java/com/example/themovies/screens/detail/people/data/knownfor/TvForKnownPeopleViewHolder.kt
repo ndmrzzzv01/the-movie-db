@@ -1,4 +1,4 @@
-package com.example.themovies.screens.detail.people.data
+package com.example.themovies.screens.detail.people.data.knownfor
 
 import androidx.recyclerview.widget.RecyclerView
 import com.example.themovies.databinding.ItemPeopleBinding

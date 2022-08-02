@@ -74,3 +74,8 @@ fun TextView.setUrl(url: String?) {
 fun TextView.setTextForMinutes(value: String?) {
     this.text = "$value minutes"
 }
+
+@BindingAdapter("setTextForGallery")
+fun TextView.setTextForGallery(value: String?) {
+    this.text = "Photo gallery of $value"
+}

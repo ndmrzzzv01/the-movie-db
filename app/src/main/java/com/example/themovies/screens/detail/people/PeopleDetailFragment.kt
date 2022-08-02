@@ -1,7 +1,6 @@
 package com.example.themovies.screens.detail.people
 
 import android.content.Context
-import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -13,11 +12,9 @@ import androidx.navigation.fragment.navArgs
 import com.example.themovies.database.data.Like
 import com.example.themovies.databinding.FragmentDetailsPeopleBinding
 import com.example.themovies.screens.activities.Loading
-import com.example.themovies.screens.detail.people.data.KnownForAdapter
 import com.like.LikeButton
 import com.like.OnLikeListener
 import dagger.hilt.android.AndroidEntryPoint
-import javax.inject.Inject
 
 @AndroidEntryPoint
 class PeopleDetailFragment : Fragment() {
@@ -58,6 +55,7 @@ class PeopleDetailFragment : Fragment() {
         viewModel.getPeople(args.idPeople)
         viewModel.getCastOfMovie(args.idPeople)
         viewModel.getCastOfTv(args.idPeople)
+        viewModel.getImages(args.idPeople)
         viewModel.isLiked(args.idPeople)
     }
 

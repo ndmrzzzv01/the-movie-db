@@ -1,8 +1,10 @@
 package com.example.themovies.api
 
+import com.example.themovies.network.data.Gallery
 import com.example.themovies.network.data.Person
 import com.example.themovies.network.responses.CastOfMovie
 import com.example.themovies.network.responses.CastOfTv
+import com.example.themovies.network.responses.GalleryResponse
 import com.example.themovies.network.responses.PeopleResponse
 import retrofit2.http.GET
 import retrofit2.http.Path
@@ -29,5 +31,10 @@ interface PeopleApi {
     suspend fun getCastForTv(
         @Path("tv_id", encoded = true) tvId: Int?
     ): CastOfTv
+
+    @GET("person/{person_id}/images")
+    suspend fun getImages(
+        @Path("person_id", encoded = true) personId: Int?
+    ): GalleryResponse
 
 }

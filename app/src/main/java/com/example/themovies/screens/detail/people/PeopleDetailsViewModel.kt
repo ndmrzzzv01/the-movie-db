@@ -4,6 +4,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.themovies.database.data.Like
+import com.example.themovies.network.data.Gallery
 import com.example.themovies.network.data.Person
 import com.example.themovies.network.data.RecordType
 import com.example.themovies.screens.likes.repositories.LikesRepositoryDatabase
@@ -20,6 +21,7 @@ class PeopleDetailsViewModel @Inject constructor(
 
     val person = MutableLiveData<Person>()
     val listOfMovieAndTV = MutableLiveData<List<RecordType?>>()
+    val listOfGallery = MutableLiveData<List<Gallery>>()
     val isLiked = MutableLiveData<Boolean>()
 
     private val list = mutableListOf<RecordType>()
@@ -50,6 +52,13 @@ class PeopleDetailsViewModel @Inject constructor(
                 }
             }
             listOfMovieAndTV.value = list
+        }
+    }
+
+    fun getImages(personId: Int?) {
+        viewModelScope.launch {
+            val itemGallery = peopleRepository.getImages(personId)
+            listOfGallery.value = itemGallery
         }
     }
 

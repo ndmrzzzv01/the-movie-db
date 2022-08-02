@@ -1,5 +1,6 @@
 package com.example.themovies.network.responses
 
+import com.example.themovies.network.data.Gallery
 import com.example.themovies.network.data.Movie
 import com.example.themovies.network.data.Person
 import com.example.themovies.network.data.TV
@@ -18,4 +19,9 @@ class CastOfMovie {
 class CastOfTv {
     @SerializedName("cast")
     var castOfTv: List<TV>? = null
+}
+
+class GalleryResponse {
+    @SerializedName("profiles")
+    var gallery: List<Gallery>? = null
 }
