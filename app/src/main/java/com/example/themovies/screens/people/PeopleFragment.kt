@@ -2,7 +2,6 @@ package com.example.themovies.screens.people
 
 import android.content.Context
 import android.os.Bundle
-import android.os.Parcelable
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -16,7 +15,6 @@ import androidx.recyclerview.widget.ConcatAdapter
 import com.example.themovies.databinding.FragmentMainBinding
 import com.example.themovies.network.MediaItemTypeActionHandler
 import com.example.themovies.network.OnMediaTypeClick
-import com.example.themovies.network.data.KnownForPerson
 import com.example.themovies.paging.ListLoadStateAdapter
 import com.example.themovies.screens.RecordAdapter
 import com.example.themovies.screens.activities.Loading
@@ -24,7 +22,6 @@ import com.example.themovies.utils.ConnectivityTracker
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
-import kotlinx.parcelize.Parcelize
 import javax.inject.Inject
 
 @AndroidEntryPoint

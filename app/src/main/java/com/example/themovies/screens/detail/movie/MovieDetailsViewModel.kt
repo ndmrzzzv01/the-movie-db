@@ -7,7 +7,7 @@ import com.example.themovies.database.data.Like
 import com.example.themovies.network.data.Actor
 import com.example.themovies.network.data.Movie
 import com.example.themovies.screens.likes.repositories.LikesRepositoryDatabase
-import com.example.themovies.screens.movie.popular.MovieRepository
+import com.example.themovies.screens.movie.MovieRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject

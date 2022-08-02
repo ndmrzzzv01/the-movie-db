@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/popular_movie"
-        android:name="com.example.themovies.screens.movie.popular.MovieFragment"
+        android:name="com.example.themovies.screens.movie.MovieFragment"
         android:label="Popular Movie"
         tools:layout="@layout/fragment_main">
         <action

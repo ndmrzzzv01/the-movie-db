@@ -4,6 +4,5 @@ data class MediaItemType(
     val id: Int? = 0,
     val url: String? = null,
     val name: String,
-    val customParameter: Any? = null,
-    val type: Record? = null
+    val type: Int? = 0
 )

@@ -15,7 +15,6 @@ class MovieForKnownPeopleViewHolder(val binding: ItemPeopleBinding) :
             releaseDate = movie.releaseDate
             vote = movie.vote
             character = movie.character
-            description = movie.description
         }
     }
 

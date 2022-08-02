@@ -12,10 +12,8 @@ import androidx.recyclerview.widget.GridLayoutManager
 import com.example.themovies.databinding.FragmentMainBinding
 import com.example.themovies.network.MediaItemTypeActionHandler
 import com.example.themovies.network.OnMediaTypeClick
-import com.example.themovies.network.data.Record
 import com.example.themovies.screens.activities.Loading
 import com.example.themovies.screens.likes.data.LikesAdapter
-import com.example.themovies.screens.people.PeopleFragment
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -23,6 +21,7 @@ class LikesFragment : Fragment() {
 
     private lateinit var binding: FragmentMainBinding
     private val viewModel by viewModels<LikesViewModel>()
+    private lateinit var adapter: LikesAdapter
     var loading: Loading? = null
 
     override fun onAttach(context: Context) {
@@ -48,8 +47,8 @@ class LikesFragment : Fragment() {
     }
 
     private fun showLikes() {
-        initObservers()
         viewModel.getAllLikes()
+        initObservers()
     }
 
     private fun initObservers() {
@@ -58,25 +57,25 @@ class LikesFragment : Fragment() {
                 rvMovies.layoutManager = GridLayoutManager(requireContext(), 2)
                 if (list.isNotEmpty()) {
                     val actionHandler = MediaItemTypeActionHandler()
+                    adapter = LikesAdapter(list, actionHandler)
                     actionHandler.onMediaTypeClick = OnMediaTypeClick {
                         loading?.showLoading()
                         when (it.type) {
-                            Record.Movie -> {
+                            0 -> {
                                 findNavController().navigate(
                                     LikesFragmentDirections.actionLikesToDetailsMovieFragment(
                                         it.id ?: 0
                                     )
                                 )
                             }
-                            Record.TV -> {
+                            1 -> {
                                 findNavController().navigate(
                                     LikesFragmentDirections.actionLikesToDetailsTvFragment(
                                         it.id ?: 0
                                     )
                                 )
                             }
-                            Record.People -> {
-                                //                            if (it.customParameter is PeopleFragment.CustomParameters)
+                            2 -> {
                                 findNavController().navigate(
                                     LikesFragmentDirections.actionLikesToDetailsPeopleFragment(
                                         id
@@ -85,7 +84,8 @@ class LikesFragment : Fragment() {
                             }
                         }
                     }
-                    rvMovies.adapter = LikesAdapter(list, actionHandler)
+                    adapter.updateList(list)
+                    rvMovies.adapter = adapter
                 } else {
                     tvNoLikes.visibility = View.VISIBLE
                 }

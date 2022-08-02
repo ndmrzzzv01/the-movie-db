@@ -1,4 +1,4 @@
-package com.example.themovies.screens.movie.popular
+package com.example.themovies.screens.movie
 
 import android.content.Context
 import android.os.Bundle

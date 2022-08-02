@@ -21,5 +21,8 @@ class LikesAdapter(
 
     override fun getItemCount(): Int = list.size
 
-
+    fun updateList(list: List<MediaItemType?>) {
+        this.list = list
+        notifyItemChanged(list.size - 1)
+    }
 }

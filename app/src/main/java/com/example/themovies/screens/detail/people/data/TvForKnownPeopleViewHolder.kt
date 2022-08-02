@@ -15,7 +15,6 @@ class TvForKnownPeopleViewHolder(val binding: ItemPeopleBinding) :
             releaseDate = tv.releaseDate
             vote = tv.voteAverage
             character = tv.character
-            description = tv.overview
         }
     }
 

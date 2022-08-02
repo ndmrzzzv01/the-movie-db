@@ -1,4 +1,4 @@
-package com.example.themovies.screens.movie.popular
+package com.example.themovies.screens.movie
 
 import androidx.lifecycle.viewModelScope
 import androidx.paging.Pager

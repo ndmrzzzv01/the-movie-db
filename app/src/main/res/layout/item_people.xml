@@ -28,10 +28,6 @@
         <variable
             name="vote"
             type="Double" />
-
-        <variable
-            name="description"
-            type="String" />
     </data>
 
     <com.google.android.material.card.MaterialCardView
@@ -70,6 +66,7 @@
                 android:textAlignment="center"
                 android:textColor="@color/text_color"
                 android:textSize="20sp"
+                android:textStyle="bold|italic"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/image"
@@ -111,44 +108,12 @@
                 android:textAlignment="center"
                 android:textColor="@color/text_color"
                 android:textSize="18sp"
-                app:nullOrEmpty="@{releaseDate}"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/tvOriginalTitle"
+                app:nullOrEmpty="@{releaseDate}"
                 tools:text="Release Date" />
 
-            <TextView
-                android:id="@+id/tvTextCharacter"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="8dp"
-                android:minLines="2"
-                android:text="Character:"
-                android:textAlignment="viewEnd"
-                android:textColor="@color/text_color"
-                android:textSize="18sp"
-                app:layout_constraintEnd_toStartOf="@+id/tvCharacter"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tvReleaseDate"
-                app:nullOrEmpty="@{character}" />
-
-            <TextView
-                android:id="@+id/tvCharacter"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginEnd="16dp"
-                android:minLines="2"
-                android:text="@{character}"
-                android:textColor="@color/text_color"
-                android:textSize="18sp"
-                app:layout_constraintBottom_toBottomOf="@+id/tvTextCharacter"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/tvTextCharacter"
-                app:layout_constraintTop_toTopOf="@+id/tvTextCharacter"
-                app:nullOrEmpty="@{character}"
-                tools:text="Doll" />
 
             <ImageView
                 android:id="@+id/imageStar"
@@ -159,7 +124,7 @@
                 app:equalsZero="@{vote.toString()}"
                 app:layout_constraintEnd_toStartOf="@+id/tvVote"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tvTextCharacter" />
+                app:layout_constraintTop_toBottomOf="@+id/tvReleaseDate" />
 
             <TextView
                 android:id="@+id/tvVote"
@@ -184,31 +149,42 @@
                 app:layout_constraintStart_toEndOf="@+id/image"
                 app:layout_constraintTop_toBottomOf="@+id/imageStar" />
 
-            <androidx.core.widget.NestedScrollView
-                android:layout_width="match_parent"
-                android:layout_height="160dp"
+            <TextView
+                android:id="@+id/tvTextCharacter"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                android:text="Character"
+                android:textAlignment="center"
+                android:textColor="@color/text_color"
+                android:textSize="20sp"
+                android:textStyle="italic"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/view3"
+                app:nullOrEmpty="@{character}" />
+
+            <TextView
+                android:id="@+id/tvCharacter"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginBottom="16dp"
+                android:minLines="2"
+                android:text="@{character}"
+                android:textAlignment="center"
+                android:textColor="@color/text_color"
+                android:textSize="18sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/view3">
-
-                <TextView
-                    android:id="@+id/tvDescription"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginEnd="16dp"
-                    android:layout_marginBottom="16dp"
-                    android:text="@{description}"
-                    android:textAlignment="center"
-                    android:textColor="@color/text_color"
-                    android:textSize="16sp"
-                    app:nullOrEmpty="@{description}"
-                    tools:text="desc" />
-
-            </androidx.core.widget.NestedScrollView>
+                app:layout_constraintTop_toBottomOf="@id/tvTextCharacter"
+                app:nullOrEmpty="@{character}"
+                tools:text="Doll" />
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>
