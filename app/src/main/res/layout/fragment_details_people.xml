@@ -118,7 +118,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/imagePeople"
                 app:layout_constraintTop_toBottomOf="@+id/tvPlaceBirthPeople"
-                app:like_drawable="@drawable/ic_heart_red"
+                app:like_drawable="@drawable/ic_heart_fill"
                 app:unlike_drawable="@drawable/ic_heart" />
 
             <View

@@ -185,7 +185,7 @@
                     app:layout_constraintBottom_toBottomOf="@id/tvStatus"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="@id/tvStatus"
-                    app:like_drawable="@drawable/ic_heart_red"
+                    app:like_drawable="@drawable/ic_heart_fill"
                     app:unlike_drawable="@drawable/ic_heart" />
 
                 <TextView
