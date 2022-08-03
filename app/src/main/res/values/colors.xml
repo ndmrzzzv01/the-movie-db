@@ -3,6 +3,8 @@
     <color name="background">#ffffff</color>
     <color name="text_color">#ff000000</color>
 
+    <color name="back_for_login">#ffffff</color>
+
     <color name="purple_200">#670289</color>
     <color name="purple_500">#670289</color>
     <color name="purple_700">#4B0082</color>

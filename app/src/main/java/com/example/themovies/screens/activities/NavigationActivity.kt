@@ -10,13 +10,13 @@ import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.NavigationUI
 import androidx.navigation.ui.onNavDestinationSelected
 import com.example.themovies.R
-import com.example.themovies.databinding.ActivityMainBinding
+import com.example.themovies.databinding.ActivityNavigationBinding
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class NavigationActivity : AppCompatActivity(), Loading {
 
-    private lateinit var binding: ActivityMainBinding
+    private lateinit var binding: ActivityNavigationBinding
     private lateinit var navController: NavController
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
@@ -25,7 +25,7 @@ class NavigationActivity : AppCompatActivity(), Loading {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_navigation)
         binding.view.setOnClickListener { }
 
         setupNavigationDrawer()
