@@ -1,12 +1,8 @@
 package com.example.themovies.network.di
 
-import com.example.themovies.api.ConfigurationApi
-import com.example.themovies.api.MovieApi
-import com.example.themovies.api.PeopleApi
-import com.example.themovies.api.TvApi
+import com.example.themovies.api.*
 import com.example.themovies.network.interceptor.ApiKeyInterceptor
 import com.example.themovies.network.repositories.ConfigurationRepository
-import com.example.themovies.utils.ConnectivityTracker
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -61,6 +57,12 @@ object NetworkModule {
     @Singleton
     fun providePeopleApi(retrofit: Retrofit): PeopleApi {
         return retrofit.create(PeopleApi::class.java)
+    }
+
+    @Provides
+    @Singleton
+    fun provideAuthenticationApi(retrofit: Retrofit): AuthenticationApi {
+        return retrofit.create(AuthenticationApi::class.java)
     }
 
     @Provides
