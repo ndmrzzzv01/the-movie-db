@@ -1,4 +1,4 @@
-package com.example.themovies.screens.registration
+package com.example.themovies.screens.registration.activities
 
 import android.content.Intent
 import android.os.Bundle
@@ -7,6 +7,7 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import com.example.themovies.databinding.ActivityMainBinding
 import com.example.themovies.screens.activities.NavigationActivity
+import com.example.themovies.screens.registration.AuthorizationViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint

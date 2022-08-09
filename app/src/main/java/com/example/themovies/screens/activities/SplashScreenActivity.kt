@@ -13,7 +13,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.setPadding
 import androidx.lifecycle.lifecycleScope
 import com.example.themovies.databinding.ActivitySplashBinding
-import com.example.themovies.screens.registration.AuthorizationActivity
+import com.example.themovies.screens.registration.activities.AuthorizationActivity
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 

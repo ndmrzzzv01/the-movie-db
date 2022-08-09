@@ -1,4 +1,4 @@
-package com.example.themovies.screens.registration
+package com.example.themovies.screens.registration.activities
 
 import android.content.Intent
 import android.os.Bundle

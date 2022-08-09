@@ -14,7 +14,7 @@ import androidx.navigation.ui.onNavDestinationSelected
 import com.example.themovies.R
 import com.example.themovies.databinding.ActivityNavigationBinding
 import com.example.themovies.screens.activities.data.NavigationViewModel
-import com.example.themovies.screens.registration.SignUpActivity
+import com.example.themovies.screens.registration.activities.SignUpActivity
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
