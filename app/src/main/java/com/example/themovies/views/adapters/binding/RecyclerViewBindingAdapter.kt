@@ -4,9 +4,8 @@ import android.view.View
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.themovies.network.data.Actor
 import com.example.themovies.network.data.RecordType
-import com.example.themovies.screens.InnerItemsAdapter
+import com.example.themovies.views.adapters.InnerItemsAdapter
 
 @BindingAdapter("observeList")
 fun RecyclerView.observeList(list: List<RecordType>?) {

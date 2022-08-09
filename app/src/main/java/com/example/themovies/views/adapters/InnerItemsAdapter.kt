@@ -1,4 +1,4 @@
-package com.example.themovies.screens
+package com.example.themovies.views.adapters
 
 import android.view.LayoutInflater
 import android.view.ViewGroup

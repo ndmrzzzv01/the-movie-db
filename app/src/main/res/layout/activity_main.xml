@@ -6,7 +6,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".screens.activities.AuthorizationActivity">
+        tools:context=".screens.registration.AuthorizationActivity">
 
         <ImageView
             android:id="@+id/imageView"
@@ -104,12 +104,12 @@
                 app:layout_constraintTop_toBottomOf="@+id/btnAuthorization" />
 
             <Button
-                android:id="@+id/btnSgnUpLikeGuest"
+                android:id="@+id/btnSignInLikeGuest"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="32dp"
                 android:background="@drawable/button_back"
-                android:text="Sign Up like Guest"
+                android:text="Sign In like Guest"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/tvOr"

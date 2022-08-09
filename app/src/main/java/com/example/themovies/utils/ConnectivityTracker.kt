@@ -1,11 +1,9 @@
 package com.example.themovies.utils
 
 import android.content.Context
-import android.net.ConnectivityManager
-import android.view.View
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.themovies.screens.RecordAdapter
+import com.example.themovies.views.adapters.RecordAdapter
 
 class ConnectivityTracker {
 

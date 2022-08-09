@@ -3,23 +3,21 @@ package com.example.themovies.api
 import com.example.themovies.screens.registration.data.Session
 import com.example.themovies.screens.registration.data.Token
 import com.example.themovies.screens.registration.data.User
-import retrofit2.http.Body
-import retrofit2.http.GET
-import retrofit2.http.POST
-import retrofit2.http.Path
+import retrofit2.http.*
 
 interface AuthenticationApi {
 
     @GET("authentication/token/new")
     suspend fun getRequestToken(): Token
 
+    @FormUrlEncoded
     @POST("authentication/session/new")
     suspend fun createSession(
-        @Body token: String?
+        @Field("request_token") token: String?
     ): Session
 
-    @GET("account?session_id={session_id}")
+    @GET("account")
     suspend fun getDetailsAboutAccount(
-        @Path("session_id", encoded = true) sessionId: String?
+        @Query("session_id", encoded = true) sessionId: String?
     ): User
 }

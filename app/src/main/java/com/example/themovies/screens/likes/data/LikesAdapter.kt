@@ -4,7 +4,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.themovies.network.MediaItemTypeActionHandler
 import com.example.themovies.network.data.MediaItemType
-import com.example.themovies.screens.RecordViewHolder
+import com.example.themovies.views.viewholders.RecordViewHolder
 
 class LikesAdapter(
     var list: List<MediaItemType?>,

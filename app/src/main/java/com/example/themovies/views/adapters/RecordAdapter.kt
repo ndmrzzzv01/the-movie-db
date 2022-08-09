@@ -1,10 +1,11 @@
-package com.example.themovies.screens
+package com.example.themovies.views.adapters
 
 import android.view.ViewGroup
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import com.example.themovies.network.MediaItemTypeActionHandler
 import com.example.themovies.network.data.MediaItemType
+import com.example.themovies.views.viewholders.RecordViewHolder
 
 class RecordAdapter(
     private val actionHandler: MediaItemTypeActionHandler

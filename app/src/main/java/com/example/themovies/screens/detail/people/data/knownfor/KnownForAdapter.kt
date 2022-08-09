@@ -7,7 +7,7 @@ import com.example.themovies.databinding.ItemPeopleBinding
 import com.example.themovies.network.data.Movie
 import com.example.themovies.network.data.RecordType
 import com.example.themovies.network.data.TV
-import com.example.themovies.screens.RecordAdapter
+import com.example.themovies.views.adapters.RecordAdapter
 
 class KnownForAdapter(var list: List<RecordType?>) :
     RecyclerView.Adapter<RecyclerView.ViewHolder>() {

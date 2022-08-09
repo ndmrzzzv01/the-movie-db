@@ -25,7 +25,7 @@
         </activity>
 
         <activity
-            android:name=".screens.activities.AuthorizationActivity"
+            android:name=".screens.registration.AuthorizationActivity"
             android:exported="true" />
 
         <activity
@@ -33,7 +33,7 @@
             android:exported="true" />
 
         <activity
-            android:name=".screens.activities.SignUpActivity"
+            android:name=".screens.registration.SignUpActivity"
             android:exported="true" />
     </application>
 
