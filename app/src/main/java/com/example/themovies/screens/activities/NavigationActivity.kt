@@ -14,7 +14,7 @@ import androidx.navigation.ui.onNavDestinationSelected
 import com.example.themovies.R
 import com.example.themovies.databinding.ActivityNavigationBinding
 import com.example.themovies.screens.activities.data.NavigationViewModel
-import com.example.themovies.screens.registration.activities.SignUpActivity
+import com.example.themovies.screens.registration.activities.SignInActivity
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -33,7 +33,7 @@ class NavigationActivity : AppCompatActivity(), Loading {
         binding = DataBindingUtil.setContentView(this, R.layout.activity_navigation)
         binding.view.setOnClickListener { }
 
-        val token = intent.getStringExtra(SignUpActivity.TOKEN)
+        val token = intent.getStringExtra(SignInActivity.TOKEN)
 
         viewModel.createSession(token)
 

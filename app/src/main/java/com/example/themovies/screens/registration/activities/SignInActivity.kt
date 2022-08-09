@@ -9,7 +9,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.example.themovies.databinding.ActivitySignupBinding
 import com.example.themovies.screens.activities.NavigationActivity
 
-class SignUpActivity : AppCompatActivity() {
+class SignInActivity : AppCompatActivity() {
 
     companion object {
         const val TOKEN = "token"
@@ -33,7 +33,7 @@ class SignUpActivity : AppCompatActivity() {
             ): Boolean {
                 val url = request?.url
                 if (url.toString().contains("https://nadyasmoviedb.com")) {
-                    val intent = Intent(this@SignUpActivity, NavigationActivity::class.java)
+                    val intent = Intent(this@SignInActivity, NavigationActivity::class.java)
                     intent.putExtra(TOKEN, token)
                     startActivity(intent)
                     finish()

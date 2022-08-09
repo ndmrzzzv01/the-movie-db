@@ -33,7 +33,7 @@
             android:exported="true" />
 
         <activity
-            android:name=".screens.registration.activities.SignUpActivity"
+            android:name=".screens.registration.activities.SignInActivity"
             android:exported="true" />
     </application>
 

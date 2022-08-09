@@ -1,8 +1,9 @@
-package com.example.themovies.screens.registration
+package com.example.themovies.screens.registration.viewmodels
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.themovies.screens.registration.AuthenticationRepository
 import com.example.themovies.screens.registration.data.Token
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch

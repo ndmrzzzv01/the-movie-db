@@ -7,7 +7,7 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import com.example.themovies.databinding.ActivityMainBinding
 import com.example.themovies.screens.activities.NavigationActivity
-import com.example.themovies.screens.registration.AuthorizationViewModel
+import com.example.themovies.screens.registration.viewmodels.AuthorizationViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -41,7 +41,7 @@ class AuthorizationActivity : AppCompatActivity() {
 
     private fun initViews() {
         binding.apply {
-            val intent = Intent(this@AuthorizationActivity, SignUpActivity::class.java)
+            val intent = Intent(this@AuthorizationActivity, SignInActivity::class.java)
             viewModel.token.observe(this@AuthorizationActivity) {
                 intent.putExtra(TOKEN, it?.token)
             }
