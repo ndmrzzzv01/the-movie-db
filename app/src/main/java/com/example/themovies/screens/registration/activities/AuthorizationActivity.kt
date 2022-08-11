@@ -38,7 +38,6 @@ class AuthorizationActivity : AppCompatActivity() {
             }
 
             btnSignInLikeGuest.setOnClickListener {
-//                TODO: sign in like a guest
                 startActivity(Intent(this@AuthorizationActivity, NavigationActivity::class.java))
             }
 

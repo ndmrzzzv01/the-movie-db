@@ -1,5 +1,6 @@
 package com.example.themovies.api
 
+import com.example.themovies.screens.registration.data.DeletedSession
 import com.example.themovies.screens.registration.data.Session
 import com.example.themovies.screens.registration.data.Token
 import com.example.themovies.screens.registration.data.User
@@ -20,4 +21,9 @@ interface AuthenticationApi {
     suspend fun getDetailsAboutAccount(
         @Query("session_id", encoded = true) sessionId: String?
     ): User
+
+    @DELETE("authentication/session")
+    suspend fun deleteSession(
+        @Query("session_id") sessionId: String
+    ): DeletedSession
 }
