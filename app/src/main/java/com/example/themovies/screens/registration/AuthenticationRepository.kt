@@ -14,11 +14,11 @@ class AuthenticationRepository @Inject constructor(
     private val authenticationApi: AuthenticationApi
 ) {
 
-    suspend fun getRequestToken(): Token = withContext(Dispatchers.IO) {
+    suspend fun getRequestToken(): Token? = withContext(Dispatchers.IO) {
         authenticationApi.getRequestToken()
     }
 
-    suspend fun createSession(token: String?): Session = withContext(Dispatchers.IO) {
+    suspend fun createSession(token: String): Session? = withContext(Dispatchers.IO) {
         authenticationApi.createSession(token)
     }
 

@@ -15,6 +15,7 @@ import com.example.themovies.R
 import com.example.themovies.databinding.ActivityNavigationBinding
 import com.example.themovies.screens.activities.data.NavigationViewModel
 import com.example.themovies.screens.registration.activities.SignInActivity
+import com.example.themovies.screens.registration.data.Session
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -33,15 +34,7 @@ class NavigationActivity : AppCompatActivity(), Loading {
         binding = DataBindingUtil.setContentView(this, R.layout.activity_navigation)
         binding.view.setOnClickListener { }
 
-        val token = intent.getStringExtra(SignInActivity.TOKEN)
 
-        viewModel.createSession(token)
-
-        viewModel.session.observe(this) {
-            if (it?.success == true) {
-                viewModel.getDetails(it.id)
-            }
-        }
 
         setupNavigationDrawer()
         setNameInNavigationHeader()
@@ -78,11 +71,21 @@ class NavigationActivity : AppCompatActivity(), Loading {
     }
 
     private fun setNameInNavigationHeader() {
+        val session = intent.getSerializableExtra(SignInActivity.SESSION) as? Session
+
         val header = binding.navigationView.getHeaderView(0)
         val name = header.findViewById<TextView>(R.id.tvNameHeader)
-        viewModel.user.observe(this) {
-            name.text = it?.username
+
+        if (session?.success == true) {
+            viewModel.getDetails(session.id)
+        } else {
+            name.text = "guest!"
         }
+
+        viewModel.user.observe(this) {
+            name.text = it?.username + "!"
+        }
+
     }
 
 }

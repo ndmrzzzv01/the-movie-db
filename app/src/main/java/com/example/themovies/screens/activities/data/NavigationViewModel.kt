@@ -15,14 +15,7 @@ class NavigationViewModel @Inject constructor(
     private val authenticationRepository: AuthenticationRepository
 ) : ViewModel() {
 
-    val session = MutableLiveData<Session?>()
     val user = MutableLiveData<User?>()
-
-    fun createSession(token: String?) {
-        viewModelScope.launch {
-            session.value = authenticationRepository.createSession(token)
-        }
-    }
 
     fun getDetails(sessionId: String?) {
         viewModelScope.launch {

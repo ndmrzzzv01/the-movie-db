@@ -76,12 +76,12 @@
                 app:layout_constraintVertical_bias="0" />
 
             <Button
-                android:id="@+id/btnAuthorization"
+                android:id="@+id/btnSignIn"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="32dp"
                 android:background="@drawable/button_back"
-                android:text="Authorization"
+                android:text="Sign In"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/tvInfo"
@@ -101,7 +101,7 @@
                 android:textSize="20sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/btnAuthorization" />
+                app:layout_constraintTop_toBottomOf="@+id/btnSignIn" />
 
             <Button
                 android:id="@+id/btnSignInLikeGuest"

@@ -8,13 +8,13 @@ import retrofit2.http.*
 interface AuthenticationApi {
 
     @GET("authentication/token/new")
-    suspend fun getRequestToken(): Token
+    suspend fun getRequestToken(): Token?
 
     @FormUrlEncoded
     @POST("authentication/session/new")
     suspend fun createSession(
-        @Field("request_token") token: String?
-    ): Session
+        @Field("request_token") token: String
+    ): Session?
 
     @GET("account")
     suspend fun getDetailsAboutAccount(
