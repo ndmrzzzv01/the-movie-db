@@ -1,6 +1,7 @@
 package com.example.themovies.screens.activities
 
 import android.content.Intent
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
@@ -18,15 +19,18 @@ import com.example.themovies.databinding.ActivityNavigationBinding
 import com.example.themovies.screens.activities.data.NavigationViewModel
 import com.example.themovies.screens.registration.activities.AuthorizationActivity
 import com.example.themovies.screens.registration.activities.SignInActivity
-import com.example.themovies.screens.registration.data.Session
 import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class NavigationActivity : AppCompatActivity(), Loading {
 
+    @Inject
+    lateinit var sharedPreferences: SharedPreferences
     private lateinit var binding: ActivityNavigationBinding
     private lateinit var navController: NavController
-    private var session: Session? = null
+    private var sessionId: String? = null
+    private var sessionSuccess: Boolean? = null
     private val viewModel by viewModels<NavigationViewModel>()
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -36,7 +40,9 @@ class NavigationActivity : AppCompatActivity(), Loading {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         if (item.itemId == R.id.exit) {
-            viewModel.deleteSession(session?.id ?: "")
+            viewModel.deleteSession(sessionId ?: "")
+            sharedPreferences.edit().putBoolean(SplashScreenActivity.CHANGED_ACTIVITY, false)
+                .commit()
         }
         return item.onNavDestinationSelected(navController) || super.onOptionsItemSelected(item)
     }
@@ -45,7 +51,8 @@ class NavigationActivity : AppCompatActivity(), Loading {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_navigation)
         binding.view.setOnClickListener { }
-        session = intent.getSerializableExtra(SignInActivity.SESSION) as? Session
+        sessionId = sharedPreferences.getString(SignInActivity.ID, "")
+        sessionSuccess = sharedPreferences.getBoolean(SignInActivity.SUCCESS, false)
 
         setupNavigationDrawer()
         setNameInNavigationHeader()
@@ -94,8 +101,8 @@ class NavigationActivity : AppCompatActivity(), Loading {
         val header = binding.navigationView.getHeaderView(0)
         val name = header.findViewById<TextView>(R.id.tvNameHeader)
 
-        if (session?.success == true) {
-            viewModel.getDetails(session?.id)
+        if (sessionSuccess == true) {
+            viewModel.getDetails(sessionId ?: "")
         } else {
             name.text = "guest!"
         }

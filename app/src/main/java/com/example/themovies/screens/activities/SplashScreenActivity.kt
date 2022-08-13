@@ -5,6 +5,7 @@ import android.animation.ObjectAnimator
 import android.animation.ValueAnimator
 import android.annotation.SuppressLint
 import android.content.Intent
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.View
 import android.view.WindowManager
@@ -14,13 +15,23 @@ import androidx.core.view.setPadding
 import androidx.lifecycle.lifecycleScope
 import com.example.themovies.databinding.ActivitySplashBinding
 import com.example.themovies.screens.registration.activities.AuthorizationActivity
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
 @SuppressLint("CustomSplashScreen")
+@AndroidEntryPoint
 class SplashScreenActivity : AppCompatActivity() {
 
+    companion object {
+        const val CHANGED_ACTIVITY = "changed activity"
+    }
+
     private lateinit var binding: ActivitySplashBinding
+
+    @Inject
+    lateinit var sharedPreferences: SharedPreferences
 
     override fun onStart() {
         super.onStart()
@@ -37,12 +48,19 @@ class SplashScreenActivity : AppCompatActivity() {
             WindowManager.LayoutParams.FLAG_FULLSCREEN
         )
         supportActionBar?.hide()
+
+        val value = sharedPreferences.getBoolean(CHANGED_ACTIVITY, false)
+
         lifecycleScope.launch {
             delay(2000L)
+            if (value) {
+                startActivity(Intent(this@SplashScreenActivity, NavigationActivity::class.java))
+                finish()
+            } else {
+                startActivity(Intent(this@SplashScreenActivity, AuthorizationActivity::class.java))
+                finish()
+            }
 
-            val intent = Intent(this@SplashScreenActivity, AuthorizationActivity::class.java)
-            startActivity(intent)
-            finish()
         }
 
     }

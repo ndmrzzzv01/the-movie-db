@@ -1,6 +1,7 @@
 package com.example.themovies.screens.registration.activities
 
 import android.content.Intent
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.webkit.WebResourceRequest
 import android.webkit.WebView
@@ -9,21 +10,22 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import com.example.themovies.databinding.ActivitySignupBinding
 import com.example.themovies.screens.activities.NavigationActivity
-import com.example.themovies.screens.registration.data.Session
-import com.example.themovies.screens.registration.data.Token
+import com.example.themovies.screens.activities.SplashScreenActivity
 import com.example.themovies.screens.registration.viewmodels.SignInViewModel
 import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class SignInActivity : AppCompatActivity() {
 
     companion object {
-        const val SESSION = "session"
+        const val ID = "id"
+        const val SUCCESS = "success"
     }
 
+    @Inject
+    lateinit var sharedPreferences: SharedPreferences
     private lateinit var binding: ActivitySignupBinding
-    private var session: Session? = null
-    private var token: Token? = null
     private val viewModel by viewModels<SignInViewModel>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -48,9 +50,12 @@ class SignInActivity : AppCompatActivity() {
 
                     viewModel.session.observe(this@SignInActivity) {
                         if (it?.success == true) {
-                            val intent = Intent(this@SignInActivity, NavigationActivity::class.java)
-                            intent.putExtra(SESSION, it)
-                            startActivity(intent)
+                            sharedPreferences.edit()
+                                .putBoolean(SplashScreenActivity.CHANGED_ACTIVITY, true)
+                                .putString(ID, it.id)
+                                .putBoolean(SUCCESS, it.success)
+                                .commit()
+                            startActivity(Intent(this@SignInActivity, NavigationActivity::class.java))
                             finish()
                         }
                     }
