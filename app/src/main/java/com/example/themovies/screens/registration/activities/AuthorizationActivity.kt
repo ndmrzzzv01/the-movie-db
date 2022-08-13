@@ -1,16 +1,20 @@
 package com.example.themovies.screens.registration.activities
 
 import android.content.Intent
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.WindowManager
 import androidx.appcompat.app.AppCompatActivity
 import com.example.themovies.databinding.ActivityMainBinding
 import com.example.themovies.screens.activities.NavigationActivity
 import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class AuthorizationActivity : AppCompatActivity() {
 
+    @Inject
+    lateinit var sharedPreferences: SharedPreferences
     private lateinit var binding: ActivityMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -38,7 +42,9 @@ class AuthorizationActivity : AppCompatActivity() {
             }
 
             btnSignInLikeGuest.setOnClickListener {
+                sharedPreferences.edit().putBoolean(SignInActivity.SUCCESS, false).commit()
                 startActivity(Intent(this@AuthorizationActivity, NavigationActivity::class.java))
+                finish()
             }
 
         }
